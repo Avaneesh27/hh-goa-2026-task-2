@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-08-16 09:53:14 UTC",
+  "total_evaluated_queries": 75,
+  "strategies_comparison": {
+    "Dense Only (Vector Search)": {
+      "Recall@5": 49.33,
+      "Recall@10": 60.0,
+      "Recall@20": 72.0,
+      "MRR": 0.2937,
+      "Precision@5": 10.4
+    },
+    "BM25 Only (Keyword Search)": {
+      "Recall@5": 56.0,
+      "Recall@10": 68.0,
+      "Recall@20": 72.0,
+      "MRR": 0.3394,
+      "Precision@5": 11.73
+    },
+    "Hybrid RRF (Dense + BM25)": {
+      "Recall@5": 68.0,
+      "Recall@10": 76.0,
+      "Recall@20": 84.0,
+      "MRR": 0.3544,
+      "Precision@5": 14.4
+    },
+    "Hybrid RRF + Reranker (Top 5)": {
+      "Recall@5": 73.33,
+      "Recall@10": 73.33,
+      "Recall@20": 73.33,
+      "MRR": 0.4687,
+      "Precision@5": 15.2
+    }
+  },
+  "benchmark_duration_sec": 142.97
+}

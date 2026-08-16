@@ -1,0 +1,223 @@
+{
+  "dataset_name": "ai4bharat/MSMARCO-XI",
+  "split_inspected": "validation/hinval.parquet",
+  "total_examples_in_split": 97941,
+  "inspection_timestamp": "2026-08-16 09:34:41 UTC",
+  "inspection_duration_sec": 7.01,
+  "dataset_level_info": {
+    "splits": {
+      "train": {
+        "num_examples": 10080140,
+        "num_bytes": 129888900480
+      },
+      "validation": {
+        "num_examples": 1371174,
+        "num_bytes": 16749366641
+      }
+    },
+    "fields_summary": {
+      "source_lang": "Flores/NLLB source language code (e.g. 'eng_Latn')",
+      "target_lang": "Target Indic language code (e.g. 'hin_Deva')",
+      "query_id": "Unique integer query ID from MS MARCO",
+      "query_type": "Classification string (DESCRIPTION, NUMERIC, ENTITY, LOCATION, PERSON)",
+      "query": "Translated query string in target_lang (Hindi in hin_Deva)",
+      "Eng_Query": "Original English query string",
+      "Answer": "Translated ground truth answer in target_lang",
+      "Eng_Answer": "Original English ground truth answer",
+      "passages.English_passages": "List of ~10 passage strings in English",
+      "passages.Translated_passages": "List of ~10 passage strings translated into target_lang",
+      "passages.is_selected": "List of binary labels (0/1) indicating which passage answers the query",
+      "meta": "Metadata dictionary containing generation hyperparameters (model_name, temperature, top_p, etc.)"
+    }
+  },
+  "sample_statistics": {
+    "total_queries_sampled": 5000,
+    "total_passages_analyzed": 49985,
+    "target_language": "hin_Deva (Hindi in Devanagari script)",
+    "query_type_distribution": {
+      "DESCRIPTION": 3297,
+      "NUMERIC": 1153,
+      "ENTITY": 348,
+      "PERSON": 129,
+      "LOCATION": 73
+    },
+    "passages_per_query_distribution": {
+      "10": 4993,
+      "9": 3,
+      "7": 2,
+      "6": 1,
+      "8": 1
+    },
+    "selected_passages_per_query": {
+      "1": 3104,
+      "0": 1778,
+      "2": 104,
+      "3": 11,
+      "5": 2,
+      "4": 1
+    }
+  },
+  "hindi_statistics": {
+    "query_char_length": {
+      "min": 4,
+      "p25": 23,
+      "p50": 31,
+      "p75": 41,
+      "p90": 52,
+      "p99": 84,
+      "max": 7783,
+      "mean": 39.28
+    },
+    "query_word_length": {
+      "min": 1,
+      "p25": 4,
+      "p50": 6,
+      "p75": 8,
+      "p90": 10,
+      "p99": 16,
+      "max": 1756,
+      "mean": 7.63
+    },
+    "passage_char_length": {
+      "min": 1,
+      "p25": 233,
+      "p50": 290,
+      "p75": 347,
+      "p90": 452,
+      "p99": 706,
+      "max": 12278,
+      "mean": 318.2
+    },
+    "passage_word_length": {
+      "min": 1,
+      "p25": 43,
+      "p50": 54,
+      "p75": 66,
+      "p90": 86,
+      "p99": 136,
+      "max": 4056,
+      "mean": 59.38
+    },
+    "duplicate_queries_in_sample": 4
+  },
+  "english_statistics": {
+    "query_char_length": {
+      "min": 8,
+      "p25": 23,
+      "p50": 31,
+      "p75": 40,
+      "p90": 51,
+      "p99": 88,
+      "max": 174,
+      "mean": 33.22
+    },
+    "query_word_length": {
+      "min": 2,
+      "p25": 4,
+      "p50": 5,
+      "p75": 7,
+      "p90": 9,
+      "p99": 15,
+      "max": 30,
+      "mean": 5.92
+    },
+    "passage_char_length": {
+      "min": 3,
+      "p25": 240,
+      "p50": 294,
+      "p75": 341,
+      "p90": 458,
+      "p99": 680,
+      "max": 1283,
+      "mean": 306.07
+    },
+    "passage_word_length": {
+      "min": 1,
+      "p25": 39,
+      "p50": 48,
+      "p75": 58,
+      "p90": 76,
+      "p99": 116,
+      "max": 249,
+      "mean": 50.69
+    }
+  },
+  "noise_and_quality_audit": {
+    "empty_passages": 0,
+    "short_passages_under_20_chars": 2,
+    "long_passages_over_1500_chars": 117,
+    "html_noisy_passages": 87,
+    "url_passages": 457,
+    "sample_duplicate_passages_detected": 1057
+  },
+  "sample_records": [
+    {
+      "query_id": 1102432,
+      "query_type": "DESCRIPTION",
+      "hindi_query": "कॉर्पोरेशन क्या है?",
+      "english_query": ". what is a corporation?",
+      "hindi_answer": "निगम एक कंपनी या लोगों का समूह होता है जो एक एकल इकाई के रूप में कार्य करने के लिए अधिकृत होता है और कानून में इस प्रकार से मान्यता प्राप्त होती है।",
+      "english_answer": "A corporation is a company or group of people authorized to act as a single entity and recognized as such in law.",
+      "passage_count": 10,
+      "selected_indices": [
+        5
+      ],
+      "sample_hindi_passage": "एक कंपनी एक विशिष्ट देश में निगमित होती है, अक्सर उस देश के एक छोटे उपसमूह, जैसे कि एक राज्य या प्रांत, की सीमाओं के भीतर। निगम तब उस राज्य में निगमन के कानूनों द्वारा शासित होता है। एक निगम या तो निज",
+      "sample_english_passage": "A company is incorporated in a specific nation, often within the bounds of a smaller subset of that nation, such as a state or province. The corporation is then governed by the laws of incorporation i"
+    },
+    {
+      "query_id": 1102431,
+      "query_type": "DESCRIPTION",
+      "hindi_query": "रेचल कार्सन ने क्यों एक दायित्व बर्दाश्त करने के लिए लिखा",
+      "english_query": "why did rachel carson write an obligation to endure",
+      "hindi_answer": "रेचल कार्सन ने लिखा है कि \"द ओब्लिगेशन टू एंड्योर\" क्योंकि उनका मानना है कि जैसे-जैसे आदमी अवांछित कीड़ों और खरपतवारों को खत्म करने की कोशिश करता है, वैसे-वैसे वह वास्तव में पर्यावरण को प्रदूषित करके और अधिक समस्याएं पैदा कर रहा है।",
+      "english_answer": "Rachel Carson writes The Obligation to Endure because believes that as man tries to eliminate unwanted insects and weeds, however he is actually causing more problems by polluting the environment.",
+      "passage_count": 10,
+      "selected_indices": [
+        4,
+        5
+      ],
+      "sample_hindi_passage": "पढ़ने के लिए - पुस्तकों के प्रति प्रेम विकसित करें (भले ही यह एक कॉमिक पुस्तक हो) एक तर्क को अनुच्छेदों में व्यवस्थित करें, शब्दों [जो] एक सामान्य उद्देश्य के लिए एक साथ काम करते हैं वॉकर: मॉडल का उपय",
+      "sample_english_passage": "Read to write - grow a love of books (even if it's a comic book) Organizing an argument into paragraphs, words [that] worked together for a common purpose Walker: Using models - read other research pa"
+    },
+    {
+      "query_id": 90836,
+      "query_type": "ENTITY",
+      "hindi_query": "पोटेशियम में कम खाद्य पदार्थों का चार्ट।",
+      "english_query": "chart for foods low in potassium.",
+      "hindi_answer": "कोई उत्तर नहीं मिला।",
+      "english_answer": "No Answer Present.",
+      "passage_count": 10,
+      "selected_indices": [],
+      "sample_hindi_passage": "निम्न सोडियम निम्न पोटेशियम खाद्य पदार्थों की सूची। इस पृष्ठ पर हम स्वस्थ आहार के लिए हजारों खाद्य पदार्थों पर पोषण संबंधी आंकड़ों का एक खोज योग्य संग्रह प्रदान करते हैं। स्वस्थ भोजन न केवल वजन घटाने ",
+      "sample_english_passage": "Low Sodium Low Potassium Foods List. On this page we offer a searchable collection of nutritional data on thousands of foods for healthy diet. Healthy eating is not only beneficial to weight loss, but"
+    },
+    {
+      "query_id": 55665,
+      "query_type": "DESCRIPTION",
+      "hindi_query": "मालवाहक जहाज़ के नीचे की तरफ",
+      "english_query": "bottom front of a cargo ship",
+      "hindi_answer": "कोई उत्तर नहीं मिला।",
+      "english_answer": "No Answer Present.",
+      "passage_count": 10,
+      "selected_indices": [],
+      "sample_hindi_passage": "शिप्ड के माध्यम से नियमित रूप से प्रस्तुत होने वाले शानदार अवसरों का लाभ उठाएं। फ्लैट बॉटम टैंकरों के अलावा, आपको नदी की नौकाओं से लेकर नौकाएं, टैंकर, रासायनिक तेल टैंकर, या सूखे मालवाहक जहाज तक कुछ भ",
+      "sample_english_passage": "Take advantage of great opportunities that regularly present themselves through Shipned. Besides flat bottom tankers you will find anything from river barges to ferries, tankers, chemical oil tankers,"
+    },
+    {
+      "query_id": 205107,
+      "query_type": "DESCRIPTION",
+      "hindi_query": "ईमानदारी या सच्चाई की परिभाषा",
+      "english_query": "honesty or integrity definition",
+      "hindi_answer": "ईमानदारी: ईमानदार होने की स्थिति। \nनिष्ठा: ईमानदारी के संबंध में या उसके अतिरिक्त व्यक्ति का मूल्य और नैतिकता।",
+      "english_answer": "Honesty: The condition of being honest. \nIntegrity: The value and morals of a individual in relation or in addition to honesty.",
+      "passage_count": 10,
+      "selected_indices": [
+        2,
+        4
+      ],
+      "sample_hindi_passage": "ईमानदारी आचरण के बारे में है; ईमानदारी तथ्यों के पालन के बारे में है। जो व्यक्ति बिना किसी विफलता के हर सप्ताह अपनी बिलियर्ड की प्रत्येक सप्ताह में जमा करता है, और यदि उसे कुछ समय कैसे लेना है इसके बा",
+      "sample_english_passage": "Integrity is about conduct; honesty is about adherence to the facts. The person who without fail submits his timesheet every week, seeking clarification if unsure how to charge some time, is acting wi"
+    }
+  ]
+}

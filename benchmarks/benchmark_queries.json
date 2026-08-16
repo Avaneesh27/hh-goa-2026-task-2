@@ -1,0 +1,1942 @@
+[
+  {
+    "query_id": 1102432,
+    "query": "कॉर्पोरेशन क्या है?",
+    "english_query": ". what is a corporation?",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "निगम एक कंपनी या लोगों का समूह होता है जो एक एकल इकाई के रूप में कार्य करने के लिए अधिकृत होता है और कानून में इस प्रकार से मान्यता प्राप्त होती है।",
+    "ground_truth_doc_ids": [
+      "doc_1102432_5_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1102431,
+    "query": "रेचल कार्सन ने क्यों एक दायित्व बर्दाश्त करने के लिए लिखा",
+    "english_query": "why did rachel carson write an obligation to endure",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "रेचल कार्सन ने लिखा है कि \"द ओब्लिगेशन टू एंड्योर\" क्योंकि उनका मानना है कि जैसे-जैसे आदमी अवांछित कीड़ों और खरपतवारों को खत्म करने की कोशिश करता है, वैसे-वैसे वह वास्तव में पर्यावरण को प्रदूषित करके और अधिक समस्याएं पैदा कर रहा है।",
+    "ground_truth_doc_ids": [
+      "doc_1102431_4_hi",
+      "doc_1102431_5_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 90836,
+    "query": "पोटेशियम में कम खाद्य पदार्थों का चार्ट।",
+    "english_query": "chart for foods low in potassium.",
+    "language": "hi",
+    "intent": "entity",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 55665,
+    "query": "मालवाहक जहाज़ के नीचे की तरफ",
+    "english_query": "bottom front of a cargo ship",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 205107,
+    "query": "ईमानदारी या सच्चाई की परिभाषा",
+    "english_query": "honesty or integrity definition",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "ईमानदारी: ईमानदार होने की स्थिति। \nनिष्ठा: ईमानदारी के संबंध में या उसके अतिरिक्त व्यक्ति का मूल्य और नैतिकता।",
+    "ground_truth_doc_ids": [
+      "doc_205107_2_hi",
+      "doc_205107_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060386,
+    "query": "लिंकन में अब वायुमंडलीय दबाव क्या है?",
+    "english_query": "what is barometric pressure in lincoln ne now?",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090356,
+    "query": "स्ट्रूथर्स शहर स्कूल जिला राज्य संख्या",
+    "english_query": "struthers city school district state number",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 168868,
+    "query": "क्या चिकित्सीय मारिजुआना मदत करता है?",
+    "english_query": "does medical marijuana help with ptsd",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 300122,
+    "query": "फ्रैंक गिफोर्ड ने कितनी महिलाओं से शादी की",
+    "english_query": "how many women did frank gifford marry",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "फ्रैंक गिफोर्ड ने तीन महिलाओं से शादी की।",
+    "ground_truth_doc_ids": [
+      "doc_300122_1_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 290643,
+    "query": "कितनी ट्रम्प प्रशासन की जांच चल रही हैं",
+    "english_query": "how many ongoing trump administration investigations",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 197590,
+    "query": "वॉव पर अनुयायियों को कैसे इकट्ठा किया जाए, इसका मार्गदर्शक",
+    "english_query": "guide to how to collect followers on wow",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 265552,
+    "query": "ज़ेल्स कितने समय तक दूर रहना पड़ता है",
+    "english_query": "how long is zales layaway",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 227261,
+    "query": "प्रदूषण के कारण मानव आबादी कैसे बढ़ती है",
+    "english_query": "how does pollution increase human population",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "क्या आप किसी के काम के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किस क के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किस क के काम को करने के लिए किसी के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करन",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 227029,
+    "query": "एन.एच.एल. प्लेऑफ़ सीडिंग कैसे काम करती है",
+    "english_query": "how does nhl playoff seeding work",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 166290,
+    "query": "क्या गंदगी के कारण दाद होता है?",
+    "english_query": "does filth cause ringworm?",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 316415,
+    "query": "एक ताज को फिर से बनाने की कीमत कितनी होती है",
+    "english_query": "how much does it cost to recement a crown",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060370,
+    "query": "बैरल ओ स्लाइम क्या है?",
+    "english_query": "what is barrel o slime?",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 233826,
+    "query": "बाज़ कितनी तेजी से यात्रा करता है",
+    "english_query": "how fast does an eagle travel",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "30 से 55 मील प्रति घंटा की रफ्तार से",
+    "ground_truth_doc_ids": [
+      "doc_233826_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090355,
+    "query": "स्टबहब टोल फ्री नंबर",
+    "english_query": "stubhub toll free number",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "स्टबहब का टोल मुक्त नंबर 866-788-2482 है।",
+    "ground_truth_doc_ids": [
+      "doc_1090355_7_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 287284,
+    "query": "सौर शहर के पैनल कितना कि.डब्ल्यू उत्पादन करते हैं",
+    "english_query": "how many kw do solar city panels produce",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 187378,
+    "query": "पहली रक्षा नाक फ़िल्टर बिक्री संख्या",
+    "english_query": "first defense nasal filter sales numbers",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 361332,
+    "query": "विंडोज 8 पर स्पष्ट डेस्कटॉप आइकन कैसे प्राप्त करें",
+    "english_query": "how to get clear desktop icon on windows 8",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 165349,
+    "query": "क्या डेल्टा बैंगलोर के लिए उड़ान भरता है?",
+    "english_query": "does delta fly to bangalore",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "सहमत हैं तो",
+    "ground_truth_doc_ids": [
+      "doc_165349_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 260880,
+    "query": "कैंटालूप को कितने समय तक परिपक्व होना है",
+    "english_query": "how long for cantaloupe to mature",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "90 दिनों का समय।",
+    "ground_truth_doc_ids": [
+      "doc_260880_7_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 110842,
+    "query": "परिवर्तक को परीक्षण पाइप से बदलने की लागत",
+    "english_query": "cost to replace converter with test pipe",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 116898,
+    "query": "परिभाषा मनमानी है",
+    "english_query": "defination arbitrary",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई कार्रवाई या निर्णय जो तर्क या निर्णय पर आधारित नहीं है, बल्कि नियमों या मानकों की परवाह किए बिना व्यक्तिगत इच्छा या विवेक पर आधारित है।",
+    "ground_truth_doc_ids": [
+      "doc_116898_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 237853,
+    "query": "स्नातक डिग्री की डिग्री के लिए समय की गणना कैसे की जाती है",
+    "english_query": "how is time to degree calculated graduate degrees",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060361,
+    "query": "किन्ना पारस्परिक आदान-प्रदान होता है और इसकी समस्याएं क्या हैं",
+    "english_query": "what is barter system and its problems",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "बार्टर एक प्रकार का व्यापार है जहां वस्तुओं या सेवाओं का आदान-प्रदान अन्य वस्तुओं या सेवाओं की एक निश्चित मात्रा के लिए किया जाता है; लेन-देन में कोई पैसा शामिल नहीं होता है। और अर्थशास्त्र में बार्टर प्रणाली की सबसे बड़ी समस्या यह है कि आदिम बार्टर के लिए जिनके साथ आप व्यापार करना चाहते हैं उनमें से किसी के पास आपकी आवश्यकता की कुछ वस्तु होनी चाहिए।",
+    "ground_truth_doc_ids": [
+      "doc_1060361_1_hi",
+      "doc_1060361_9_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 144943,
+    "query": "क्या रोब्लॉक्स में पावर रेंजर इवेंट होता था?",
+    "english_query": "did roblox have a power ranger event",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090353,
+    "query": "जलवायु मौसम का अध्ययन",
+    "english_query": "study of climate weather",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "मौसम किसी क्षेत्र में वायुमंडल की दैनिक स्थिति और इसकी अल्पकालिक भिन्नताएँ हैं, जबकि जलवायु को सांख्यिकीय मौसम सूचना के रूप में परिभाषित किया गया है जो एक निर्दिष्ट अंतराल के लिए किसी दिए गए स्थान पर मौसम की भिन्नता का वर्णन करती है।",
+    "ground_truth_doc_ids": [
+      "doc_1090353_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 368321,
+    "query": "तेल मिश्रित जड़ी-बूटी का संक्षेपण कैसे बनाएं",
+    "english_query": "how to make an oil infused herbal infusion",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 113570,
+    "query": "समाजशास्त्र की परिभाषा की संस्कृति",
+    "english_query": "culture of sociology definition",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "संस्कृति का व्यवस्थित विश्लेषण, जिसे आमतौर पर समाज के सदस्यों द्वारा उपयोग किए जाने वाले प्रतीकात्मक संकेतों के समूह के रूप में समझा जाता है, जैसा कि यह समाज में प्रकट होता है।",
+    "ground_truth_doc_ids": [
+      "doc_113570_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 126172,
+    "query": "मूलगामी गर्दन को परिभाषित करें",
+    "english_query": "define radical neck",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "यह एक शल्य चिकित्सा प्रक्रिया है जिसका उपयोग सिर या गर्दन में कैंसरयुक्त ऊतकों या वृद्धि को हटाने के लिए किया जाता है।",
+    "ground_truth_doc_ids": [
+      "doc_126172_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 198064,
+    "query": "आधा कप में कितने औंस होते हैं",
+    "english_query": "half cup how many ounces",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 129220,
+    "query": "कार्यदिवस को परिभाषित करें।",
+    "english_query": "define workday",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 331047,
+    "query": "कितने खर्च होते हैं यू.एस.एक्स. गेम्स?",
+    "english_query": "how much xbox games cost",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "80 डॉलर से 250 डॉलर तक",
+    "ground_truth_doc_ids": [
+      "doc_331047_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 63220,
+    "query": "क्या एक हस्ताक्षरित विनिर्णय को रद्द किया जा सकता है?",
+    "english_query": "can a signed stipulation be overturned",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 74039,
+    "query": "कांच के पैनल पर आ रहे तनाव का समाधान किया जा सकता है",
+    "english_query": "can stress crack on glass pane be remedied",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060359,
+    "query": "आधारभूत क्या है जीने में?",
+    "english_query": "what is basal in dna",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "सिस-अभिनय डी.एन.ए. अनुक्रम आर.एन.ए. पोलीमरेज़ और प्रोटीन के समूह से जुड़ने वाले जो सीधे इस पर परस्पर क्रिया करते हैं, उन्हें बेसल ट्रांसक्रिप्शन उपकरण कहा जाता है।",
+    "ground_truth_doc_ids": [
+      "doc_1060359_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 229231,
+    "query": "बोनिवा कितना प्रभावी है",
+    "english_query": "how effective is boniva",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 267380,
+    "query": "आपको कितने समय तक कार्ब चक्र लगाना चाहिए",
+    "english_query": "how long should you carb cycle",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "दो और आठ सप्ताह",
+    "ground_truth_doc_ids": [
+      "doc_267380_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090352,
+    "query": "स्टाई कारण होता है",
+    "english_query": "sty causes",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "गुहांजनी पलक में तेल की ग्रंथियों के संक्रमण या स्टैफिलोकोकस जीवाणु के कारण होती है।",
+    "ground_truth_doc_ids": [
+      "doc_1090352_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 202891,
+    "query": "रेडिंग का उच्चतम रिकॉर्ड तापमान",
+    "english_query": "highest record temperature for redding ca",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "118 फ़ॉर्मations, 118 फ़ॉर्मations, 118 फ़ॉर्मations.",
+    "ground_truth_doc_ids": [
+      "doc_202891_8_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 112025,
+    "query": "दो बहनों के ब्रंच की कीमत",
+    "english_query": "court of two sisters brunch price",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 317450,
+    "query": "मैट लॉयर एक साल में कितना कमाता है",
+    "english_query": "how much does matt lauer make a year",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "20 मिलियन डॉलर",
+    "ground_truth_doc_ids": [
+      "doc_317450_8_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 58871,
+    "query": "कैलिफोर्निया के घरेलू हिंसा के कानून",
+    "english_query": "california domestic violence leave laws",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 373460,
+    "query": "एक 'एक्सेल शीट' कैसे प्रिंट करें",
+    "english_query": "how to print an excel sheet",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "चरण 1. रिबन बार में FILE टैब पर क्लिक करके माइक्रोसॉफ्ट एक्सेल के प्रिंट फॉर्म में जाएं। चरण 2. फिर FILE मेनू में प्रिंट पर बाएं माउस क्लिक करें। चरण 3. प्रिंट फॉर्म पर, आप देख सकते हैं कि हमारी एक्सेल शीट तीन पृष्ठों पर फैली हुई है। पेज सेटअप पर क्लिक करें। चरण 4. पेज सेटअप संवाद दिखाई देगा। पेज टैब पर क्लिक करें और स्केलिंग अनुभाग देखें। फिट टू नामक एक विकल्प है, उस विकल्प को चुनने के लिए क्लिक करें।",
+    "ground_truth_doc_ids": [
+      "doc_373460_9_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 116095,
+    "query": "डेथ हेड यूनिट्स की परिभाषा",
+    "english_query": "death head units definition",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "डेथ्स हेड यूनिट जो अंततः सभी यातना शिविरों के संतरियों को बनाता था। अपने टोपी पर, वे खोपड़ी का एक चांदी का प्रतीक पहनते थे, वही प्रतीक जो वाफेन-एस.एस. द्वारा पहना जाता था। डेथ्स हेड का मतलब यह था कि वे मृत्यु के प्रति वफादार थे, न कि वे हत्यारे थे।",
+    "ground_truth_doc_ids": [
+      "doc_116095_5_hi",
+      "doc_116095_6_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 21860,
+    "query": "मक्का का भोजन और मक्का का आटा एक जैसा ही है।",
+    "english_query": "are corn meal and corn flour the same",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "हाँ, मक्का का आटा और मक्का का भोजन एक जैसा होता है।",
+    "ground_truth_doc_ids": [
+      "doc_21860_3_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060348,
+    "query": "क्या बुनियादी है?",
+    "english_query": "what is basic? uni",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "बेसिक सामान्य-उद्देश्य वाली, उच्च-स्तरीय प्रोग्रामिंग भाषाओं का एक परिवार है जिसका डिजाइन दर्शन उपयोग में आसानी पर जोर देता है।",
+    "ground_truth_doc_ids": [
+      "doc_1060348_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 180855,
+    "query": "तत्वों की एंट्रॉपी",
+    "english_query": "entropy of elements",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 158720,
+    "query": "क्या लाल स्वादिष्ट सेब अच्छी सेब की चटनी बनाते हैं?",
+    "english_query": "do red delicious apples make good applesauce",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई नहीं",
+    "ground_truth_doc_ids": [
+      "doc_158720_3_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 330463,
+    "query": "एक टिकट कवर कितना वजन करता है",
+    "english_query": "how much weight does a stamp cover",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "13 औंस",
+    "ground_truth_doc_ids": [
+      "doc_330463_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090350,
+    "query": "वयस्कों में विस्थापन में सीमावर्ती व्यक्तित्व विकार के लक्षण",
+    "english_query": "borderline personality disorder symptoms in adults displacement",
+    "language": "hi",
+    "intent": "entity",
+    "ground_truth_answer": "सीमावर्ती व्यक्तित्व विकार के लक्षणों में अन्य लक्षणों के अलावा रिश्तों में अस्थिरता की पुनरावृत्ति होना, परित्याग से बचने के प्रयास, पहचान में गड़बड़ी, आवेगशीलता, भावनात्मक अस्थिरता और पुरानी खालीपन की भावनाएँ शामिल हैं।",
+    "ground_truth_doc_ids": [
+      "doc_1090350_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 190327,
+    "query": "विटामिन डी की मदद करने वाले खाद्य पदार्थ",
+    "english_query": "foods to help vitamin d",
+    "language": "hi",
+    "intent": "entity",
+    "ground_truth_answer": "वसायुक्त मछली का मांस, मछली के यकृत का तेल, गोमांस का यकृत, पनीर और अंडे की जर्दी।",
+    "ground_truth_doc_ids": [
+      "doc_190327_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 44760,
+    "query": "कैरेबियन में दिसंबर का औसत तापमान",
+    "english_query": "average temp in the caribbean december",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "औसत न्यूनतम 73.3 डिग्री से लेकर औसत अधिकतम 82.9 डिग्री तक।",
+    "ground_truth_doc_ids": [
+      "doc_44760_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 271597,
+    "query": "मकई के एक कण को माइक्रोवेव में कितने समय तक पकाना है?",
+    "english_query": "how long to microwave an ear of corn?",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "4 से 5 मिनट के लिए 3-5 मिनट के लिए केवल 1 या 2 मिनट के लिए, 3 या 4 मिनट के लिए 4 मिनट।",
+    "ground_truth_doc_ids": [
+      "doc_271597_5_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 15344,
+    "query": "अल्डी ऑस्ट्रेलिया के खुलने के समय",
+    "english_query": "aldi australia opening hours",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 187928,
+    "query": "शिकागो से रोनाल्ड रीगन हवाई अड्डे के लिए उड़ानें",
+    "english_query": "flights from chicago to ronald reagan airport",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 131336,
+    "query": "स्थानीय डिस्क की परिभाषा",
+    "english_query": "definition local disk",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कंप्यूटर के अंदर एक डेटा संग्रहण उपकरण जो ऑपरेटिंग सिस्टम; सॉफ्टवेयर; और फाइलें, जैसे कि छवियाँ, संगीत, फिल्में और दस्तावेज़ रखता है।",
+    "ground_truth_doc_ids": [
+      "doc_131336_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060343,
+    "query": "बैटमैन हवेली का नाम क्या है",
+    "english_query": "what is batman mansion name",
+    "language": "hi",
+    "intent": "entity",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 220865,
+    "query": "वाईफ़ाई टैबलेट कैसे काम करते हैं",
+    "english_query": "how do wifi tablets work",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 336352,
+    "query": "रोमन एटवुड कितना पुराना है",
+    "english_query": "how old is roman atwood",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 264507,
+    "query": "कंधे की रिकवरी कितने समय तक चलती है",
+    "english_query": "how long is shoulder recovery",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "छह सप्ताह",
+    "ground_truth_doc_ids": [
+      "doc_264507_7_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1101287,
+    "query": "क्या भारतीय लोग चावल खाते हैं?",
+    "english_query": "do indians eat rice",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "हाँ, भारतीय लोग चावल खाते हैं।",
+    "ground_truth_doc_ids": [
+      "doc_1101287_3_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090349,
+    "query": "सब स्लैब परिभाषा",
+    "english_query": "sub slab definition",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "उप-स्लैब अवदाबन या उप-स्लैब निचोड़ शायद सबसे विश्वसनीय और प्रभावी रेडॉन शमन तकनीक है।",
+    "ground_truth_doc_ids": [
+      "doc_1090349_1_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 9671,
+    "query": "आस्त माबा",
+    "english_query": "aast mba",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 232017,
+    "query": "फिलाडेल्फिया लैंकेस्टर से कितनी दूर है",
+    "english_query": "how far is philadelphia from lancaster pa",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "80 मील या 129 कि.मी.",
+    "ground_truth_doc_ids": [
+      "doc_232017_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 58928,
+    "query": "कैलिफोर्निया नशीले पदार्थ कानून",
+    "english_query": "california narcotic laws",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 328321,
+    "query": "कवनसोलॉपर के गोदाम के लिए पर्यवेक्षक की वेतन दर कितनी है",
+    "english_query": "how much supervisor pay rate for cvs warehouse",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "91,520 डॉलर से 135,200 डॉलर तक।",
+    "ground_truth_doc_ids": [
+      "doc_328321_5_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 59804,
+    "query": "छोटे खीरे में कैलोरी की मात्रा",
+    "english_query": "calories in a small cucumber",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "19 कैलोरी (पील्ड)।",
+    "ground_truth_doc_ids": [
+      "doc_59804_7_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060342,
+    "query": "बैटरी का जीवन क्या है",
+    "english_query": "what is battery life f",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "बैटरी के चार्ज होने से पहले आपके उपकरण कितने समय तक चलता है, यह \"बैटरी लाइफ\" है।",
+    "ground_truth_doc_ids": [
+      "doc_1060342_3_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 81945,
+    "query": "साइट्रिक्स ज़ेनैप सर्वर से कनेक्ट नहीं कर सकता है",
+    "english_query": "cannot connect to citrix xenapp server",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "माइक्रोसॉफ्ट मैनेजमेंट कंसोल टर्मिनल सेवा विन्यास खोलें, आई.सी.ए.-टी.सी.पी. श्रोत पर दाएं क्लिक करें और डिलीट पर क्लिक करें, हां पर क्लिक करें, एक्शन मेनू का विस्तार करें और क्रिएट न्यू कनेक्शन पर क्लिक करें।",
+    "ground_truth_doc_ids": [
+      "doc_81945_7_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 370050,
+    "query": "एक्सकॉम 2 को ज्यादा सुचारू रूप से चलाने का तरीका",
+    "english_query": "how to make xcom 2 run smoother",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 336062,
+    "query": "मेरा क्या खयाल है मायरा, मुझे तो बस यही सोच-सोचकर घबराहट हो रही है।",
+    "english_query": "how old is myra summers",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 113649,
+    "query": "कर्ब इवेंट सेंटर",
+    "english_query": "curb event center",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "यह बेलमोंट की दक्षिण-पूर्व के सबसे मजबूत व्यापक विश्वविद्यालयों में से एक के रूप में स्थिति की पुष्टि करता है।",
+    "ground_truth_doc_ids": [
+      "doc_113649_6_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 129807,
+    "query": "परिभाषित करें: थ्रूपुट",
+    "english_query": "define: throughput",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "यह एक माप है कि कोई प्रणाली एक निश्चित समय में कितनी इकाइयों की जानकारी का संसाधन कर सकती है।",
+    "ground_truth_doc_ids": [
+      "doc_129807_3_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090347,
+    "query": "सुबारू हेड गैसकेट लक्षण",
+    "english_query": "subaru head gasket symptoms",
+    "language": "hi",
+    "intent": "entity",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 92849,
+    "query": "स्कॉट्सडेल रीसाइक्लिंग कार्यक्रम का शहर",
+    "english_query": "city of scottsdale recycling schedule",
+    "language": "hi",
+    "intent": "location",
+    "ground_truth_answer": "स्कॉट्सडेल इलेक्ट्रॉनिक्स रीसाइक्लिंग इवेंट पर: 8 अक्टूबर 2016 - 7:30 बजे से 2:00 बजे तक अपने अवांछित इलेक्ट्रॉनिक्स को शहर के इलेक्ट्रॉनिक्स रीसाइक्लिंग कलेक्शन डे शनिवार, 8 अक्टूबर के लिए इकट्ठा करें। स्कॉट्सडेल निवासी शहर के कॉर्पोरेशन यार्ड, 9191 ई. सैन सल्वाडोर ड्राइव पर सुबह 7:30 बजे से दोपहर 2 बजे तक वस्तुओं को छोड़ सकते हैं।",
+    "ground_truth_doc_ids": [
+      "doc_92849_8_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 70489,
+    "query": "जापानी पोकेमॉन कोलोसियम सेलेबी चमकदार हो सकता है",
+    "english_query": "can japanese pokemon colosseum celebi be shiny",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 134646,
+    "query": "गंभीर अपराध के आरोपों की परिभाषा",
+    "english_query": "definition of felony charges",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 62459,
+    "query": "क्या उच्च टी.एस. स्तर एक नकारात्मक गर्भावस्था परीक्षण का कारण बन सकता है?",
+    "english_query": "can a higher tsh level cause a negative pregnancy test",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1100338,
+    "query": "गैलेंटाइन परिभाषा",
+    "english_query": "galantine definition",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "गलैंटाइन एक फ्रांसीसी व्यंजन है जिसमें हड्डियाँ नहीं होती और मांस भरा होता है।",
+    "ground_truth_doc_ids": [
+      "doc_1100338_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 81586,
+    "query": "रद्द की गई जाँच की परिभाषा",
+    "english_query": "canceled check definition",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "रद्द किया गया चेक वह चेक है जो जमाकर्ता के खाते से साफ हो गया है और बैंक द्वारा रद्द कर दिया गया है।",
+    "ground_truth_doc_ids": [
+      "doc_81586_7_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 91452,
+    "query": "जब मैं निगलता हूँ तो छाती में ऊपरी दाहिनी तरफ दर्द होता है जैसे कि वहाँ कुछ फंस गया है।",
+    "english_query": "chest pain upper right side feels like something is stuck there when i swallow",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 190844,
+    "query": "फोरेंसिक प्रमाण तकनीशियन स्कूली शिक्षा",
+    "english_query": "forensic evidence technician schooling",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 229215,
+    "query": "सुगंधित पानी कितना प्रभावी है",
+    "english_query": "how effective are sassy water",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "इस जादुई पानी का पाचन तंत्र पर अद्भुत प्रभाव पड़ता है और यह सूजन को काफी हद तक कम करता है।",
+    "ground_truth_doc_ids": [
+      "doc_229215_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 211441,
+    "query": "आपका चेकिंग खाता आपके क्रेडिट अंक को कैसे प्रभावित कर सकता है",
+    "english_query": "how can your checking account affect your credit score",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "एक कठोर जाँच का उपयोग किया जाता है; हालाँकि यह आपके स्कोर को नकारात्मक रूप से प्रभावित कर सकता है, लेकिन यह आम तौर पर पाँच अंकों से अधिक नहीं होता है।",
+    "ground_truth_doc_ids": [
+      "doc_211441_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 330054,
+    "query": "कितना पानी एक बहते हुए शौचालय के कचरे में जा सकता है",
+    "english_query": "how much water can a running toilet waste",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090346,
+    "query": "अवकशेषीय तंतुमय अर्थात्",
+    "english_query": "subchondral fibrocystic meaning",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 265717,
+    "query": "कितने समय तक आई.आर.एस. रिकॉर्ड रखें",
+    "english_query": "how long keep IRS records",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "तीन साल",
+    "ground_truth_doc_ids": [
+      "doc_265717_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 326813,
+    "query": "पूर्ण सेट दंत चिकित्सक कितना विकिरण करता है",
+    "english_query": "how much radiation full set dentist",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 185914,
+    "query": "संघीय ठेकेदार की परिभाषा",
+    "english_query": "federal contractor definition",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "वे व्यक्ति या नियोक्ता हैं जो एक विशिष्ट कार्य करने, श्रम और सामग्री की आपूर्ति करने, या उत्पादों और सेवाओं की बिक्री के लिए संयुक्त राज्य अमेरिका के साथ अनुबंध में प्रवेश करते हैं।",
+    "ground_truth_doc_ids": [
+      "doc_185914_3_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060341,
+    "query": "बट्टी क्या है",
+    "english_query": "what is batti",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "चीर बट्टी एक प्रकार की भूतिया रोशनी है जिसकी रिपोर्ट बन्नी घास के मैदानों में की गई है।",
+    "ground_truth_doc_ids": [
+      "doc_1060341_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 106218,
+    "query": "पोर्टेबल रंगीन टीवी वीडियोकॉन की लागत",
+    "english_query": "cost of portable color tv videocon",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 126636,
+    "query": "नियमित गतिविधि को परिभाषित करें।",
+    "english_query": "define routine activity",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "अपराध के अवसर सिद्धांत का एक उपक्षेत्र जो अपराध की स्थितियों पर केंद्रित है।",
+    "ground_truth_doc_ids": [
+      "doc_126636_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 53335,
+    "query": "दुनिया की सबसे बड़ी ओरिगामी",
+    "english_query": "biggest origami in the world",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "निंजा स्टार कैमडेन स्कोबे: कैमडेन एस",
+    "ground_truth_doc_ids": [
+      "doc_53335_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 129959,
+    "query": "एरे में सेल को परिभाषित करना",
+    "english_query": "defining cell in array",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 160108,
+    "query": "क्या आप ठंडी शराब पी रहे हैं?",
+    "english_query": "do you chill wine",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "हाँ, बेहतर परिणामों के लिए 40-150 मिनट के लिए रेफ्रिजरेटर में ठंडी वाइन रखें।",
+    "ground_truth_doc_ids": [
+      "doc_160108_5_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 191749,
+    "query": "फ्रांसीसी अनुवाद: जहाँ है",
+    "english_query": "french translation for where is",
+    "language": "hi",
+    "intent": "entity",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090345,
+    "query": "बोर्गाटा बुफे की कीमत",
+    "english_query": "borgata buffet price",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 171646,
+    "query": "क्या स्प्रे डिओडोरेंट काम करता है",
+    "english_query": "does spray deodorant work",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 157359,
+    "query": "इसे खुद से साफ करें।",
+    "english_query": "do it yourself grout cleaning",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "ग्राउट की सफाई के लिए पानी और क्लोरीन ब्लीच का घोल लगाएँ।",
+    "ground_truth_doc_ids": [
+      "doc_157359_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 43115,
+    "query": "कार्यालय प्रबंधक का औसत वेतन बंधक ऋण",
+    "english_query": "average salary of a office manager mortgage lending",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "115,776 डॉलर",
+    "ground_truth_doc_ids": [
+      "doc_43115_1_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060335,
+    "query": "बे क्रेस्ट पार्टनर्स क्या हैं",
+    "english_query": "what is bay crest partners",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "बे क्रेस्ट पार्टनर्स, एल.एल.सी. केवल एक एजेंसी दलाल है जो व्यापार निष्पादन और बाजार रणनीति में विशेषज्ञता प्रदान करता है।",
+    "ground_truth_doc_ids": [
+      "doc_1060335_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 322201,
+    "query": "काउंटी जेल में बंद रहते हुए प्रतिदिन कितना खर्च आता है?",
+    "english_query": "how much is it per day when locked up in county jail",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "28.00 डॉलर प्रति दिन।",
+    "ground_truth_doc_ids": [
+      "doc_322201_8_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 100359,
+    "query": "उपहार प्राप्त सुरक्षा के लिए लागत आधार",
+    "english_query": "cost basis for gifted security",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 353047,
+    "query": "नए ड्राइव पर सिस्टम को कॉपी करने का तरीका",
+    "english_query": "how to copy system to new drive",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 252638,
+    "query": "दरार वाली पसलियों को ठीक होने में कितना समय लगता है",
+    "english_query": "how long does it take cracked ribs to heal",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "तीन से छह सप्ताह।",
+    "ground_truth_doc_ids": [
+      "doc_252638_7_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 167532,
+    "query": "क्या फुलाने योग्य गर्दन का कर्षण काम करता है",
+    "english_query": "does inflatable neck traction work",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "हाँ, यह गर्दन दर्द सहित सभी प्रकार के ऊपरी शरीर के दर्द के लिए सहायक है।",
+    "ground_truth_doc_ids": [
+      "doc_167532_5_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 137339,
+    "query": "प्राथमिक देखभाल की परिभाषा अमेरिकी परिवार चिकित्सकों की अकादमी",
+    "english_query": "definition of primary care american academy of family physicians",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "यह अमेरिकी परिवार के डॉक्टरों के लिए एक पेशेवर समाज है। यह कहता है कि: अमेरिकन एकेडमी ऑफ फैमिली फिजिशियन परिवार के डॉक्टरों का राष्ट्रीय संघ है।",
+    "ground_truth_doc_ids": [
+      "doc_137339_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 218882,
+    "query": "मैं चेरी की कैसे गिरविट करूँ।",
+    "english_query": "how do i pit cherries",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "1. उपयुक्त आकार का एक तृण ढूंढें। 2. चेरी को धो लें और उसका निरीक्षण करें। 3. अपनी पहली दो उंगलियों और अंगूठे के बीच चेरी को पकड़ें, लेकिन उसे निचोड़ें नहीं। 4. तृण को तने के चारों ओर नीचे तक धकेलें जब तक कि वह 1 चेरी तक न पहुंच जाए। 5. तने और 2 गड्ढे को त्यागें। 6. तैयार हो गया।",
+    "ground_truth_doc_ids": [
+      "doc_218882_2_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090344,
+    "query": "अवटालतानिका पट्टी विषमदृष्टिता के लक्षण",
+    "english_query": "subcortical band heterotopia symptoms",
+    "language": "hi",
+    "intent": "entity",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 312512,
+    "query": "एक एनिमेटर को ग्लासडोर पर कितना भुगतान मिलता है।",
+    "english_query": "how much does an animator get paid glassdoor",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 329976,
+    "query": "इंटेल एच.डी. 3000 में कितना व्रैम है।",
+    "english_query": "how much vram in intel hd 3000",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 26745,
+    "query": "सेना ज्ञापन टेम्पलेट भरने योग्य पी.डी.एफ.",
+    "english_query": "army memorandum template fillable pdf",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060323,
+    "query": "बेयर्न म्यूनिख क्या है",
+    "english_query": "what is bayern munich",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "एफ.सी. बायर्न म्यूनिख, म्यूनिख, बवेरिया में स्थित एक जर्मन खेल क्लब है। यह अपनी पेशेवर फुटबॉल टीम के लिए सबसे ज्यादा जाना जाता है।",
+    "ground_truth_doc_ids": [
+      "doc_1060323_3_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 114458,
+    "query": "पर्दा हुक प्रकार",
+    "english_query": "curtain hooks types",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "फूल पर्दा हुक, अनोखा पर्दा हुक, कांस्य पर्दा हुक, चुंबकीय पर्दा हुक, अमेरिकी पर्दा हुक, फिटिंग पर्दा हुक, स्टेनलेस पर्दा हुक, सुंदर पर्दा हुक पर्दा हुक के प्रकार हैं।",
+    "ground_truth_doc_ids": [
+      "doc_114458_6_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 211952,
+    "query": "गर्भावस्था के दौरान रक्तस्राव कितना आम है",
+    "english_query": "how common is bleeding during pregnancy",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "प्रारंभिक गर्भावस्था में निम्नलिखित कारकों के कारण रक्तस्राव हो सकता हैः प्रत्यारोपण रक्तस्राव संभावित गर्भधारण के 6-12 दिनों के बाद कहीं भी हो सकता है।",
+    "ground_truth_doc_ids": [
+      "doc_211952_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 188714,
+    "query": "खाद्य पदार्थ और रक्त शर्करा को कम करने के लिए पूरक आहार",
+    "english_query": "foods and supplements to lower blood sugar",
+    "language": "hi",
+    "intent": "entity",
+    "ground_truth_answer": "दालचीनी, स्प्रिंकल, प्रिकली पर्ल / नोपल, अंगूर, कार्बोहाइड्रेट, कुछ विटामिन।",
+    "ground_truth_doc_ids": [
+      "doc_188714_1_hi",
+      "doc_188714_6_hi",
+      "doc_188714_9_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 14449,
+    "query": "जब दांत गिरते हैं तब",
+    "english_query": "age when teeth fall out",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "छह से सात साल की उम्र।",
+    "ground_truth_doc_ids": [
+      "doc_14449_3_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 194890,
+    "query": "जी.आई.डी.ए. डेलॉरन की कुल संपत्ति",
+    "english_query": "giDa delauran net worth",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "15 मिलियन डॉलर",
+    "ground_truth_doc_ids": [
+      "doc_194890_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 273892,
+    "query": "मैं कितने समय तक रक्षा में कुमारिका को बेचने के लिए बाध्य रहूंगा।",
+    "english_query": "how long would i be obligated to sell damsel in defense",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 66881,
+    "query": "क्या कान के संक्रमण से बिल्लियों में दौरे पड़ सकते हैं?",
+    "english_query": "can ear infections cause seizures in cats?",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "नहीं, कान के संक्रमण से बिल्लियों में दौरे नहीं पड़ते।",
+    "ground_truth_doc_ids": [
+      "doc_66881_3_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 277559,
+    "query": "मार्शमैलो सलाद में कितनी कैलोरी होती है जिसमें मेवे शामिल होते हैं।",
+    "english_query": "how many calories in marshmallow salad with nuts",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1090343,
+    "query": "वश मानने वाले संचार की परिभाषा",
+    "english_query": "submissive communication definition",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 147373,
+    "query": "गैप और आई.एफ.आर.एस. बॉन्ड जारी करने की लागत के बीच अंतर",
+    "english_query": "difference between gaap and ifrs bond issue costs",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 1060308,
+    "query": "सुरक्षा में बी.बी.एस. क्या है",
+    "english_query": "what is bbs in safety",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "व्यवहार-आधारित सुरक्षा वास्तविक दुनिया की समस्याओं में व्यवहार परिवर्तन के विज्ञान का अनुप्रयोग है।",
+    "ground_truth_doc_ids": [
+      "doc_1060308_3_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 291248,
+    "query": "एक गैलन में कितना तरल होता है",
+    "english_query": "how many ounces of liquid is in one gallon",
+    "language": "hi",
+    "intent": "numeric",
+    "ground_truth_answer": "1 अमेरिकी गैलन में 128 तरल औंस और 1 यूके गैलन में 160 तरल औंस।",
+    "ground_truth_doc_ids": [
+      "doc_291248_7_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": 183155,
+    "query": "उत्साहित परिभाषित करें",
+    "english_query": "excited define",
+    "language": "hi",
+    "intent": "description",
+    "ground_truth_answer": "उत्तेजित की परिभाषा किसी ऐसे व्यक्ति या वस्तु से है जिसमें उत्साह है या भावनात्मक रूप से उत्तेजित है।",
+    "ground_truth_doc_ids": [
+      "doc_183155_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_hindi"
+  },
+  {
+    "query_id": "en_1102432",
+    "query": ". what is a corporation?",
+    "english_query": ". what is a corporation?",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "निगम एक कंपनी या लोगों का समूह होता है जो एक एकल इकाई के रूप में कार्य करने के लिए अधिकृत होता है और कानून में इस प्रकार से मान्यता प्राप्त होती है।",
+    "ground_truth_doc_ids": [
+      "doc_1102432_5_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_1102431",
+    "query": "why did rachel carson write an obligation to endure",
+    "english_query": "why did rachel carson write an obligation to endure",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "रेचल कार्सन ने लिखा है कि \"द ओब्लिगेशन टू एंड्योर\" क्योंकि उनका मानना है कि जैसे-जैसे आदमी अवांछित कीड़ों और खरपतवारों को खत्म करने की कोशिश करता है, वैसे-वैसे वह वास्तव में पर्यावरण को प्रदूषित करके और अधिक समस्याएं पैदा कर रहा है।",
+    "ground_truth_doc_ids": [
+      "doc_1102431_4_hi",
+      "doc_1102431_5_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_90836",
+    "query": "chart for foods low in potassium.",
+    "english_query": "chart for foods low in potassium.",
+    "language": "en",
+    "intent": "entity",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_55665",
+    "query": "bottom front of a cargo ship",
+    "english_query": "bottom front of a cargo ship",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_205107",
+    "query": "honesty or integrity definition",
+    "english_query": "honesty or integrity definition",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "ईमानदारी: ईमानदार होने की स्थिति। \nनिष्ठा: ईमानदारी के संबंध में या उसके अतिरिक्त व्यक्ति का मूल्य और नैतिकता।",
+    "ground_truth_doc_ids": [
+      "doc_205107_2_hi",
+      "doc_205107_4_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_1060386",
+    "query": "what is barometric pressure in lincoln ne now?",
+    "english_query": "what is barometric pressure in lincoln ne now?",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_1090356",
+    "query": "struthers city school district state number",
+    "english_query": "struthers city school district state number",
+    "language": "en",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_168868",
+    "query": "does medical marijuana help with ptsd",
+    "english_query": "does medical marijuana help with ptsd",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_300122",
+    "query": "how many women did frank gifford marry",
+    "english_query": "how many women did frank gifford marry",
+    "language": "en",
+    "intent": "numeric",
+    "ground_truth_answer": "फ्रैंक गिफोर्ड ने तीन महिलाओं से शादी की।",
+    "ground_truth_doc_ids": [
+      "doc_300122_1_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_290643",
+    "query": "how many ongoing trump administration investigations",
+    "english_query": "how many ongoing trump administration investigations",
+    "language": "en",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_197590",
+    "query": "guide to how to collect followers on wow",
+    "english_query": "guide to how to collect followers on wow",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_265552",
+    "query": "how long is zales layaway",
+    "english_query": "how long is zales layaway",
+    "language": "en",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_227261",
+    "query": "how does pollution increase human population",
+    "english_query": "how does pollution increase human population",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "क्या आप किसी के काम के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किस क के काम को करने के लिए किसी के काम को करने के लिए किसी के काम को करने के लिए किस क के काम को करने के लिए किसी के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस क के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करने के लिए किस के काम को करन",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_227029",
+    "query": "how does nhl playoff seeding work",
+    "english_query": "how does nhl playoff seeding work",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_166290",
+    "query": "does filth cause ringworm?",
+    "english_query": "does filth cause ringworm?",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_316415",
+    "query": "how much does it cost to recement a crown",
+    "english_query": "how much does it cost to recement a crown",
+    "language": "en",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_1060370",
+    "query": "what is barrel o slime?",
+    "english_query": "what is barrel o slime?",
+    "language": "en",
+    "intent": "description",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_233826",
+    "query": "how fast does an eagle travel",
+    "english_query": "how fast does an eagle travel",
+    "language": "en",
+    "intent": "numeric",
+    "ground_truth_answer": "30 से 55 मील प्रति घंटा की रफ्तार से",
+    "ground_truth_doc_ids": [
+      "doc_233826_0_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_1090355",
+    "query": "stubhub toll free number",
+    "english_query": "stubhub toll free number",
+    "language": "en",
+    "intent": "numeric",
+    "ground_truth_answer": "स्टबहब का टोल मुक्त नंबर 866-788-2482 है।",
+    "ground_truth_doc_ids": [
+      "doc_1090355_7_hi"
+    ],
+    "has_ground_truth": true,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "en_287284",
+    "query": "how many kw do solar city panels produce",
+    "english_query": "how many kw do solar city panels produce",
+    "language": "en",
+    "intent": "numeric",
+    "ground_truth_answer": "कोई उत्तर नहीं मिला।",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "in_corpus_english"
+  },
+  {
+    "query_id": "hinglish_0",
+    "query": "Corporation kya hota hai?",
+    "english_query": "Corporation kya hota hai?",
+    "language": "hinglish",
+    "intent": "definition",
+    "ground_truth_answer": "",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": true,
+    "category": "hinglish"
+  },
+  {
+    "query_id": "hinglish_1",
+    "query": "Rachel Carson ne konsi book likhi thi?",
+    "english_query": "Rachel Carson ne konsi book likhi thi?",
+    "language": "hinglish",
+    "intent": "factual",
+    "ground_truth_answer": "",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": true,
+    "category": "hinglish"
+  },
+  {
+    "query_id": "hinglish_2",
+    "query": "Low potassium food ka chart batao",
+    "english_query": "Low potassium food ka chart batao",
+    "language": "hinglish",
+    "intent": "factual",
+    "ground_truth_answer": "",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "hinglish"
+  },
+  {
+    "query_id": "hinglish_3",
+    "query": "Broadcom corporation kis field ki company thi?",
+    "english_query": "Broadcom corporation kis field ki company thi?",
+    "language": "hinglish",
+    "intent": "factual",
+    "ground_truth_answer": "",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": true,
+    "category": "hinglish"
+  },
+  {
+    "query_id": "unsupported_0",
+    "query": "Who won the 2026 Mars Olympics marathon?",
+    "english_query": "Who won the 2026 Mars Olympics marathon?",
+    "language": "en",
+    "intent": "unsupported",
+    "ground_truth_answer": "No Answer Present",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "out_of_domain_unsupported"
+  },
+  {
+    "query_id": "unsupported_1",
+    "query": "What is the average flight speed of an alien spacecraft on Jupiter?",
+    "english_query": "What is the average flight speed of an alien spacecraft on Jupiter?",
+    "language": "en",
+    "intent": "unsupported",
+    "ground_truth_answer": "No Answer Present",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "out_of_domain_unsupported"
+  },
+  {
+    "query_id": "unsupported_2",
+    "query": "How do I create a nuclear reactor in my kitchen backyard?",
+    "english_query": "How do I create a nuclear reactor in my kitchen backyard?",
+    "language": "en",
+    "intent": "unsupported",
+    "ground_truth_answer": "No Answer Present",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "out_of_domain_unsupported"
+  },
+  {
+    "query_id": "unsupported_3",
+    "query": "What is the secret recipe of Coca Cola in the year 3000?",
+    "english_query": "What is the secret recipe of Coca Cola in the year 3000?",
+    "language": "en",
+    "intent": "unsupported",
+    "ground_truth_answer": "No Answer Present",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "out_of_domain_unsupported"
+  },
+  {
+    "query_id": "unsupported_4",
+    "query": "who was the president of the moon in 1845?",
+    "english_query": "who was the president of the moon in 1845?",
+    "language": "en",
+    "intent": "unsupported",
+    "ground_truth_answer": "No Answer Present",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "out_of_domain_unsupported"
+  },
+  {
+    "query_id": "unsupported_5",
+    "query": "मंगल ग्रह पर पहला क्रिकेट मैच किसने जीता था?",
+    "english_query": "मंगल ग्रह पर पहला क्रिकेट मैच किसने जीता था?",
+    "language": "hi",
+    "intent": "unsupported",
+    "ground_truth_answer": "No Answer Present",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "out_of_domain_unsupported"
+  },
+  {
+    "query_id": "unsupported_6",
+    "query": "टाइम मशीन बनाने के आसान घरेलू उपाय क्या हैं?",
+    "english_query": "टाइम मशीन बनाने के आसान घरेलू उपाय क्या हैं?",
+    "language": "hi",
+    "intent": "unsupported",
+    "ground_truth_answer": "No Answer Present",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "out_of_domain_unsupported"
+  },
+  {
+    "query_id": "unsupported_7",
+    "query": "जादू की छड़ी से सोने के सिक्के कैसे बनाएं?",
+    "english_query": "जादू की छड़ी से सोने के सिक्के कैसे बनाएं?",
+    "language": "hi",
+    "intent": "unsupported",
+    "ground_truth_answer": "No Answer Present",
+    "ground_truth_doc_ids": [],
+    "has_ground_truth": false,
+    "category": "out_of_domain_unsupported"
+  }
+]

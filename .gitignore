@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+venv/
+ENV/
+.pytest_cache/
+reports/*.tmp
+frontend/.next/
+frontend/node_modules/
+frontend/out/
+.git/
+.DS_Store
+*.lock
