@@ -87,25 +87,40 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
         throw new Error("Microphone recording is not supported in this browser.");
       }
 
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          echoCancellation: true,
-          noiseSuppression: true,
-          autoGainControl: true,
-        },
-      });
+      let stream: MediaStream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true,
+          },
+        });
+      } catch (constraintsErr) {
+        console.warn("Retrying with simple audio constraints:", constraintsErr);
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      }
       streamRef.current = stream;
 
       // 1. Setup Web Audio API Analyser for live visualizer
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-      const audioContext = new AudioCtx();
-      audioContextRef.current = audioContext;
+      try {
+        const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+        if (AudioCtx) {
+          const audioContext = new AudioCtx();
+          if (audioContext.state === "suspended") {
+            await audioContext.resume();
+          }
+          audioContextRef.current = audioContext;
 
-      const source = audioContext.createMediaStreamSource(stream);
-      const analyser = audioContext.createAnalyser();
-      analyser.fftSize = 64;
-      source.connect(analyser);
-      analyserRef.current = analyser;
+          const source = audioContext.createMediaStreamSource(stream);
+          const analyser = audioContext.createAnalyser();
+          analyser.fftSize = 64;
+          source.connect(analyser);
+          analyserRef.current = analyser;
+        }
+      } catch (actxErr) {
+        console.warn("AudioContext visualizer initialization notice:", actxErr);
+      }
 
       // 2. Setup Live In-Browser Speech Recognition (for immediate live voice feedback)
       const SpeechRecognition =
@@ -115,7 +130,7 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
           const recognition = new SpeechRecognition();
           recognition.continuous = true;
           recognition.interimResults = true;
-          // Determine language for speech recognition
+          
           const langMap: Record<string, string> = {
             hi: "hi-IN",
             en: "en-IN",
@@ -148,34 +163,38 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
               }
             }
             if (final) {
-              finalTranscriptRef.current += " " + final;
+              finalTranscriptRef.current = (finalTranscriptRef.current + " " + final).trim();
             }
             const currentTranscript = (finalTranscriptRef.current + " " + interim).trim();
             setLiveTranscript(currentTranscript);
           };
 
           recognition.onerror = (e: any) => {
-            console.warn("Live speech recognition event:", e.error);
+            console.warn("Live speech recognition notice:", e.error);
           };
 
           recognition.start();
           speechRecognitionRef.current = recognition;
         } catch (recErr) {
-          console.warn("Could not start live speech recognition:", recErr);
+          console.warn("Could not start in-browser speech recognition:", recErr);
         }
       }
 
-      // 3. Setup MediaRecorder for backend audio stream
-      let mimeType = "audio/webm";
-      if (MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) {
-        mimeType = "audio/webm;codecs=opus";
-      } else if (MediaRecorder.isTypeSupported("audio/mp4")) {
-        mimeType = "audio/mp4";
-      } else if (MediaRecorder.isTypeSupported("audio/ogg")) {
-        mimeType = "audio/ogg";
+      // 3. Setup MediaRecorder for audio stream
+      let mimeType = "";
+      if (typeof MediaRecorder !== "undefined") {
+        if (MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) {
+          mimeType = "audio/webm;codecs=opus";
+        } else if (MediaRecorder.isTypeSupported("audio/webm")) {
+          mimeType = "audio/webm";
+        } else if (MediaRecorder.isTypeSupported("audio/mp4")) {
+          mimeType = "audio/mp4";
+        } else if (MediaRecorder.isTypeSupported("audio/ogg")) {
+          mimeType = "audio/ogg";
+        }
       }
 
-      const recorder = new MediaRecorder(stream, { mimeType });
+      const recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
       mediaRecorderRef.current = recorder;
 
       recorder.ondataavailable = (event) => {
@@ -185,10 +204,11 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
       };
 
       recorder.onstop = () => {
-        const finalBlob = new Blob(audioChunksRef.current, { type: mimeType });
+        const finalType = recorder.mimeType || mimeType || "audio/webm";
+        const finalBlob = new Blob(audioChunksRef.current, { type: finalType });
         setAudioBlob(finalBlob);
-        cleanup();
         setIsRecording(false);
+        cleanup();
       };
 
       recorder.start(100);
@@ -205,13 +225,15 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
       }, 1000);
 
       // Start audio level visualizer
-      animationFrameRef.current = requestAnimationFrame(updateAudioLevel);
+      if (analyserRef.current) {
+        animationFrameRef.current = requestAnimationFrame(updateAudioLevel);
+      }
     } catch (err: any) {
       cleanup();
       setIsRecording(false);
       setError(
         err.name === "NotAllowedError" || err.name === "PermissionDeniedError"
-          ? "Microphone access was denied. Please allow microphone permissions in your browser bar."
+          ? "Microphone access was denied. Please click the camera/mic icon in your browser address bar to allow microphone access."
           : err.message || "Failed to initialize microphone recording."
       );
     }
@@ -224,9 +246,10 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
       } catch (_) {}
     }
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
-      mediaRecorderRef.current.stop();
+      try {
+        mediaRecorderRef.current.stop();
+      } catch (_) {}
     }
-    setIsRecording(false);
   }, []);
 
   useEffect(() => {

@@ -218,6 +218,7 @@ export default function HomePage() {
               isLoading={isLoading}
               loadingStage={loadingStage}
               languageName={SUPPORTED_LANGUAGES.find(l => l.code === selectedLanguage)?.name || "Auto (Browser)"}
+              liveTranscript={liveTranscript}
               error={recorderError || apiError}
               onStartRecording={startRecording}
               onStopRecording={stopRecording}

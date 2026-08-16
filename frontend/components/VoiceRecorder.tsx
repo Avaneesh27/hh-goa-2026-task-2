@@ -8,6 +8,7 @@ interface VoiceRecorderProps {
   isLoading: boolean;
   loadingStage: string;
   languageName?: string;
+  liveTranscript?: string;
   error: string | null;
   onStartRecording: () => void;
   onStopRecording: () => void;
@@ -20,6 +21,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   isLoading,
   loadingStage,
   languageName = "Auto",
+  liveTranscript = "",
   error,
   onStartRecording,
   onStopRecording,
@@ -84,9 +86,10 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         )}
 
         <button
+          type="button"
           onClick={isRecording ? onStopRecording : onStartRecording}
           disabled={isLoading}
-          className={`relative z-10 w-24 h-24 sm:w-28 sm:h-28 rounded-full flex flex-col items-center justify-center gap-1 shadow-xl transition-all duration-300 transform active:scale-95 ${
+          className={`relative z-10 w-24 h-24 sm:w-28 sm:h-28 rounded-full flex flex-col items-center justify-center gap-1 shadow-xl transition-all duration-300 transform active:scale-95 cursor-pointer ${
             isRecording
               ? "bg-gradient-to-tr from-rose-600 to-red-500 text-white shadow-rose-500/40 ring-4 ring-rose-400/30"
               : isLoading
@@ -141,9 +144,17 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
             </div>
 
             {/* Live speech preview if speech detected */}
-            <p className="text-[11px] text-center text-rose-300 font-medium animate-pulse">
-              🔴 Click "Stop" when done speaking
-            </p>
+            {liveTranscript ? (
+              <div className="p-2 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
+                <p className="text-xs text-brand-300 font-medium italic">
+                  "{liveTranscript}"
+                </p>
+              </div>
+            ) : (
+              <p className="text-[11px] text-center text-rose-300 font-medium animate-pulse">
+                🔴 Listening... Speak clearly into your mic, then click "Stop"
+              </p>
+            )}
           </div>
         ) : (
           <p className="text-xs text-slate-400 text-center font-medium">
@@ -162,3 +173,4 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
     </div>
   );
 };
+
