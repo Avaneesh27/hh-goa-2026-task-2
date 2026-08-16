@@ -11,11 +11,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
-    # API Keys & Endpoints
+    # Local Dataset Synthesis & Generation (Zero Gemini/External API dependencies required)
     SARVAM_API_KEY: str = os.getenv("SARVAM_API_KEY", "")
     LLM_API_KEY: str = os.getenv("LLM_API_KEY", "")
-    LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "gemini")  # "groq", "gemini", "openai", "ollama", "local"
-    LLM_MODEL: str = os.getenv("LLM_MODEL", "gemini-1.5-flash")
+    LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "local")  # "local", "ollama", "groq", "gemini", "openai"
+    LLM_MODEL: str = os.getenv("LLM_MODEL", "local")
     LLM_BASE_URL: Optional[str] = os.getenv("LLM_BASE_URL", None)
 
     # Embeddings & Reranker
