@@ -60,32 +60,34 @@ class MultilingualReranker:
         encoder = self._get_cross_encoder()
         reranked = []
 
+        q_emb = np.array(embedding_manager.embed_query(query))
+        doc_texts = [c.get("text", "") for c in candidates]
+        doc_embs = embedding_manager.embed_documents(doc_texts, batch_size=len(doc_texts))
+
         if encoder is not None:
             pairs = [[query, c.get("text", "")] for c in candidates]
             raw_scores = encoder.predict(pairs, show_progress_bar=False)
             
-            for c, raw_score in zip(candidates, raw_scores):
+            for c, raw_score, d_emb in zip(candidates, raw_scores, doc_embs):
                 r_val = float(raw_score)
-                # Calibrated sigmoid: raw score > 0 means relevant, raw score < -2 means irrelevant
-                norm_score = round(1.0 / (1.0 + np.exp(-r_val)), 4)
+                norm_score = float(1.0 / (1.0 + np.exp(-r_val)))
+                cos_sim = float(np.dot(q_emb, d_emb))
+                # Hybrid semantic blend: Cross-Encoder + Multilingual Dense Embedding
+                blended_score = round(0.55 * norm_score + 0.45 * max(0.0, cos_sim), 4)
                 item = dict(c)
-                item["rerank_score"] = norm_score
+                item["rerank_score"] = blended_score
                 item["raw_rerank_score"] = round(r_val, 3)
-                item["score"] = norm_score
+                item["score"] = blended_score
                 reranked.append(item)
         else:
             # Fast embedding-based cross-scoring fallback
-            q_emb = np.array(embedding_manager.embed_query(query))
-            doc_texts = [c.get("text", "") for c in candidates]
-            doc_embs = embedding_manager.embed_documents(doc_texts, batch_size=len(doc_texts))
-            
             for c, d_emb in zip(candidates, doc_embs):
                 cos_sim = float(np.dot(q_emb, d_emb))
-                # Combine RRF rank bonus with semantic score
                 rrf_score = c.get("rrf_score", 0.0)
                 blended_score = round(0.7 * cos_sim + 0.3 * (rrf_score * 30), 4)
                 item = dict(c)
                 item["rerank_score"] = blended_score
+                item["raw_rerank_score"] = round(cos_sim * 2.0, 3)
                 item["score"] = blended_score
                 reranked.append(item)
 

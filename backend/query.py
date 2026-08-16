@@ -1,10 +1,10 @@
 """
-Deterministic Query Processing Module for Hindi, English, and Hinglish.
+Deterministic Query Processing Module for 14 Indian Languages, English, and Hinglish.
 Implements:
   1. Unicode NFKC & whitespace normalization
-  2. Deterministic language detection (Hindi Devanagari vs English vs Hinglish)
-  3. Deterministic intent classification via keywords dictionary
-  4. Keyword & entity extraction for BM25 boosting
+  2. Deterministic multilingual language detection (14 Indic scripts + Hinglish/Latin)
+  3. Deterministic intent classification via multilingual keyword patterns
+  4. Salient keyword & entity extraction for BM25 boosting across all Indic languages
   5. Retrieval query compilation (preserving original query)
 """
 
@@ -16,6 +16,11 @@ from typing import List, Dict, Any, Tuple, Optional, Set
 from backend.keywords import (
     INTENT_KEYWORDS,
     HINGLISH_KEYWORDS,
+    MARATHI_MARKERS,
+    NEPALI_MARKERS,
+    SANSKRIT_MARKERS,
+    ASSAMESE_MARKERS,
+    MULTILINGUAL_STOPWORDS,
     HINDI_STOPWORDS,
     ENGLISH_STOPWORDS,
     UNSAFE_PATTERNS
@@ -38,7 +43,7 @@ class QueryProcessor:
             "Arabic": (re.compile(r"[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]"), "ur"),
             "Latin": (re.compile(r"[a-zA-Z]"), "en")
         }
-        self.token_pattern = re.compile(r"[\w\u0600-\u06FF\u0900-\u0D7F]+", re.UNICODE)
+        self.token_pattern = re.compile(r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+", re.UNICODE)
         self.extra_spaces_pattern = re.compile(r"\s+")
 
     def normalize_query(self, query: str) -> str:
@@ -55,18 +60,18 @@ class QueryProcessor:
 
     def detect_language(self, query: str) -> str:
         """
-        Deterministically detects language across 14 Indic scripts:
-          - Devanagari (Hindi/Marathi/Nepali/Sanskrit) -> "hi"
-          - Bengali/Assamese -> "bn" / "as"
-          - Gurmukhi -> "pa"
-          - Gujarati -> "gu"
-          - Odia -> "or"
-          - Tamil -> "ta"
-          - Telugu -> "te"
-          - Kannada -> "kn"
-          - Malayalam -> "ml"
-          - Arabic/Perso-Arabic -> "ur"
-          - Latin (English vs Hinglish) -> "en" / "hinglish"
+        Deterministically detects language across 14 Indic scripts + English/Hinglish:
+          - Devanagari -> Hindi ("hi") / Marathi ("mr") / Nepali ("ne") / Sanskrit ("sa")
+          - Bengali -> Bengali ("bn") / Assamese ("as")
+          - Gurmukhi -> Punjabi ("pa")
+          - Gujarati -> Gujarati ("gu")
+          - Odia -> Odia ("or")
+          - Tamil -> Tamil ("ta")
+          - Telugu -> Telugu ("te")
+          - Kannada -> Kannada ("kn")
+          - Malayalam -> Malayalam ("ml")
+          - Arabic -> Urdu ("ur")
+          - Latin -> English ("en") / Hinglish ("hinglish")
         """
         if not query:
             return "unknown"
@@ -82,10 +87,29 @@ class QueryProcessor:
 
         top_script, (count, code) = max(script_counts.items(), key=lambda x: x[1][0])
 
+        words = set(query.lower().split())
+
+        if top_script == "Devanagari":
+            # Check for Marathi specific vocabulary markers
+            if any(w in MARATHI_MARKERS for w in words):
+                return "mr"
+            # Check for Nepali markers
+            if any(w in NEPALI_MARKERS for w in words):
+                return "ne"
+            # Check for Sanskrit markers
+            if any(w in SANSKRIT_MARKERS for w in words):
+                return "sa"
+            return "hi"
+
+        if top_script == "Bengali":
+            # Check for Assamese markers
+            if any(w in ASSAMESE_MARKERS for w in words):
+                return "as"
+            return "bn"
+
         if top_script == "Latin":
-            words = query.lower().split()
             hinglish_match_count = sum(1 for w in words if w in HINGLISH_KEYWORDS)
-            if hinglish_match_count >= 1 or (len(words) <= 4 and hinglish_match_count >= 1):
+            if hinglish_match_count >= 1:
                 return "hinglish"
             return "en"
 
@@ -130,7 +154,7 @@ class QueryProcessor:
         Extracts salient non-stopword tokens and entities for BM25 keyword boosting.
         """
         tokens = self.token_pattern.findall(query)
-        stopwords = HINDI_STOPWORDS if language in ("hi", "hinglish") else ENGLISH_STOPWORDS
+        stopwords = MULTILINGUAL_STOPWORDS.get(language, MULTILINGUAL_STOPWORDS.get("hi" if language == "hinglish" else "en", ENGLISH_STOPWORDS))
         
         extracted = []
         for t in tokens:
@@ -147,19 +171,24 @@ class QueryProcessor:
         """
         Constructs the optimized retrieval query string without mutating original query.
         """
-        # For standard queries, normalized query is primary; keywords aid BM25
         return normalized_query
 
-    def process(self, raw_query: str, filter_language: Optional[str] = None) -> QueryProcessingOutput:
+    def process(
+        self,
+        raw_query: str,
+        language: Optional[str] = None,
+        filter_language: Optional[str] = None
+    ) -> QueryProcessingOutput:
         """
         Executes full deterministic query processing pipeline.
         """
         start_time = time.perf_counter()
 
         normalized = self.normalize_query(raw_query)
-        lang = self.detect_language(normalized)
+        detected_lang = self.detect_language(normalized)
+        effective_lang = language.lower().strip() if language and language.strip() else detected_lang
         intent = self.classify_intent(normalized)
-        keywords = self.extract_keywords(normalized, lang)
+        keywords = self.extract_keywords(normalized, effective_lang)
         retrieval_q = self.build_retrieval_query(normalized, keywords)
 
         filters = {}
@@ -172,7 +201,7 @@ class QueryProcessor:
             original_query=raw_query,
             normalized_query=normalized,
             retrieval_query=retrieval_q,
-            language=lang,
+            language=effective_lang,
             intent=intent,
             keywords=keywords,
             metadata_filters=filters,

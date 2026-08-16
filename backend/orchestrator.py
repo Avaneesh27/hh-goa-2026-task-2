@@ -50,9 +50,9 @@ class RAGOrchestrator:
 
         # 1. Query Processing
         timer.start("query_processing")
-        q_proc = self.query_processor.process(query, filter_language=filter_language)
+        q_proc = self.query_processor.process(query, language=language, filter_language=filter_language)
         timer.stop("query_processing")
-        detected_lang = language or q_proc.language
+        detected_lang = q_proc.language
         execution_trace.append(f"✓ Language detected: {detected_lang.upper()} ({q_proc.intent} intent)")
         execution_trace.append(f"✓ Query normalized & {len(q_proc.keywords)} keywords extracted")
 

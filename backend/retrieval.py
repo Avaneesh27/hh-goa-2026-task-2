@@ -27,17 +27,27 @@ from backend.embeddings import embedding_manager
 # =============================================================================
 class MultilingualTokenizer:
     def __init__(self):
-        # Regex matching words across Latin and Devanagari Unicode blocks
-        self.word_pattern = re.compile(r"[\w\u0900-\u097F]+", re.UNICODE)
+        # Regex matching words across Latin, Arabic/Urdu, and all 14 Indic scripts
+        self.word_pattern = re.compile(
+            r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+",
+            re.UNICODE
+        )
         
-        # Common Hindi and English stopwords
+        # Stopwords across Hindi, Marathi, Bengali, Tamil, Telugu, and English
         self.stopwords = {
             # English
             "a", "an", "the", "in", "on", "at", "of", "to", "is", "was", "are", "were",
             "and", "or", "for", "with", "by", "from", "it", "this", "that", "what", "which",
-            # Hindi
+            # Hindi / Marathi
             "है", "हैं", "था", "थी", "थे", "का", "के", "की", "को", "में", "पर", "से",
-            "और", "या", "ने", "एक", "यह", "वह", "जो", "तो", "भी", "ही", "कि"
+            "और", "या", "ने", "एक", "यह", "वह", "जो", "तो", "भी", "ही", "कि",
+            "आहे", "आहेत", "होता", "होती", "होते", "चा", "ची", "चे", "च्या",
+            # Bengali
+            "হয়", "হলো", "ছিল", "এর", "কে", "এবং", "বা", "এই", "সেই",
+            # Tamil
+            "ஆகும்", "இருந்தது", "உள்ளது", "மற்றும்", "அல்லது", "ஒரு", "இந்த",
+            # Telugu
+            "ఉంది", "ఉన్నారు", "మరియు", "లేదా", "ఒక", "ఈ", "ఆ"
         }
 
     def tokenize(self, text: str) -> List[str]:

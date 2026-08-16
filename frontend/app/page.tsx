@@ -54,7 +54,7 @@ export default function HomePage() {
     startRecording,
     stopRecording,
     clearAudio
-  } = useAudioRecorder(30, selectedLanguage || "hi");
+  } = useAudioRecorder(30, selectedLanguage);
 
   // Poll health on mount
   useEffect(() => {
