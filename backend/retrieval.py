@@ -83,19 +83,26 @@ class BM25SearchEngine:
         else:
             self.bm25 = None
 
-    def build_index(self, chunks: List[Dict[str, Any]], save_path: Optional[str] = None):
-        """Builds BM25 index from chunk list and serializes to disk."""
-        print(f"[*] Building BM25 index for {len(chunks)} chunks...")
+    def build_index(self, chunks: List[Dict[str, Any]], save_path: Optional[str] = None, append: bool = False):
+        """Builds BM25 index from chunk list and serializes to disk, with optional incremental appending."""
         start = time.perf_counter()
-        self.corpus_chunks = chunks
-        tokenized_corpus = [self.tokenizer.tokenize(c.get("text", "")) for c in chunks]
+        if append and self.corpus_chunks:
+            existing_ids = {c.get("chunk_id") for c in self.corpus_chunks}
+            new_chunks = [c for c in chunks if c.get("chunk_id") not in existing_ids]
+            all_chunks = self.corpus_chunks + new_chunks
+        else:
+            all_chunks = chunks
+
+        print(f"[*] Building BM25 index for {len(all_chunks)} chunks...")
+        self.corpus_chunks = all_chunks
+        tokenized_corpus = [self.tokenizer.tokenize(c.get("text", "")) for c in all_chunks]
         self.bm25 = BM25Okapi(tokenized_corpus)
 
         save_path = save_path or self.index_path
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
         with open(save_path, "wb") as f:
             pickle.dump({"chunks": self.corpus_chunks, "bm25": self.bm25}, f)
-        print(f"[+] Built and saved BM25 index to {save_path} in {(time.perf_counter() - start):.2f}s")
+        print(f"[+] Built and saved BM25 index ({len(all_chunks)} total chunks) to {save_path} in {(time.perf_counter() - start):.2f}s")
 
     def search(
         self,

@@ -25,9 +25,9 @@ services:
       - "8000:8000"
     environment:
       - SARVAM_API_KEY=${SARVAM_API_KEY}
-      - LLM_API_KEY=${LLM_API_KEY}
-      - LLM_PROVIDER=${LLM_PROVIDER:-gemini}
-      - LLM_MODEL=${LLM_MODEL:-gemini-1.5-flash}
+      - LLM_API_KEY=${LLM_API_KEY:-}
+      - LLM_PROVIDER=${LLM_PROVIDER:-local}
+      - LLM_MODEL=${LLM_MODEL:-local}
       - EMBEDDING_MODEL=sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
       - RERANKER_MODEL=BAAI/bge-reranker-base
       - USE_LOCAL_QDRANT_STORAGE=false

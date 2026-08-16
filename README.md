@@ -142,10 +142,16 @@ cp .env.example .env
 ```
 Key variables in `.env`:
 ```ini
+# Dataset & Local RAG Training Configuration (AI4Bharat MSMARCO-XI)
+# Zero external proprietary API keys required. Runs 100% locally on MSMARCO-XI dataset.
+LLM_PROVIDER=local        # Options: local, ollama, groq, gemini, openai
+LLM_API_KEY=
+LLM_MODEL=local
+
+# Speech-To-Text (Optional: Sarvam API for microphone transcription, or browser Web Speech)
 SARVAM_API_KEY=your_sarvam_api_key_here
-LLM_API_KEY=your_llm_api_key_here
-LLM_PROVIDER=gemini       # Options: gemini, groq, openai, ollama, local
-LLM_MODEL=gemini-1.5-flash
+
+# Embeddings & Reranker (Runs 100% locally on CPU)
 EMBEDDING_MODEL=sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
 RERANKER_MODEL=BAAI/bge-reranker-base
 USE_LOCAL_QDRANT_STORAGE=true
@@ -154,9 +160,13 @@ LOCAL_QDRANT_PATH=data/qdrant_db
 
 ### 3. Run Offline Dataset Ingestion (One-Time)
 ```bash
+# Ingest single language (e.g. Hindi)
 python ingestion/run_ingestion.py 1000
+
+# Ingest all 14 Indian languages from MSMARCO-XI
+python ingestion/ingest_multilingual.py 200 all
 ```
-This cleans, chunks, embeds, and indexes 1,000 MSMARCO-XI records (~10,700 chunks) into local Qdrant and builds the BM25 index.
+This cleans, chunks, embeds, and indexes MSMARCO-XI records into local Qdrant vector store and compiles the multilingual BM25 index.
 
 ### 4. Run Automated Test Suite
 ```bash

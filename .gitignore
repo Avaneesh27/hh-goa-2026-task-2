@@ -15,3 +15,6 @@ frontend/out/
 .DS_Store
 *.lock
 scratch/
+data/checkpoint_*.json
+data/ingestion_checkpoint.json
+data/qdrant_db/

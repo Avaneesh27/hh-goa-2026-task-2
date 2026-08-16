@@ -97,7 +97,8 @@ class IngestionPipeline:
         self,
         max_records: int = 1000,
         batch_size: int = 64,
-        resume: bool = True
+        resume: bool = True,
+        append: bool = False
     ) -> Dict[str, Any]:
         """
         Executes end-to-end ingestion:
@@ -107,7 +108,7 @@ class IngestionPipeline:
         print(f"\n========================================================")
         print(f"[*] Starting Ingestion Pipeline for {self.dataset_name}")
         print(f"[*] Target File: {self.data_file}, Target Lang: {self.target_lang}")
-        print(f"[*] Max Records: {max_records}, Batch Size: {batch_size}")
+        print(f"[*] Max Records: {max_records}, Batch Size: {batch_size}, Append: {append}")
         print(f"========================================================\n")
 
         start_index = self.load_checkpoint() if resume else 0
@@ -180,8 +181,8 @@ class IngestionPipeline:
             print(f"    Indexed {min(i + batch_size, total_chunks)} / {total_chunks} chunks...")
 
         # 3. Build & Save BM25 Index
-        print(f"[*] Building and saving BM25 keyword index...")
-        self.bm25_engine.build_index(unique_chunks, save_path=settings.BM25_INDEX_PATH)
+        print(f"[*] Building and saving BM25 keyword index (append={append})...")
+        self.bm25_engine.build_index(unique_chunks, save_path=settings.BM25_INDEX_PATH, append=append)
 
         # 4. Save checkpoint
         self.save_checkpoint(end_index, total_chunks)

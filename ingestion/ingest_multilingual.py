@@ -69,7 +69,7 @@ def run_multilingual_ingestion(records_per_lang: int = 200, languages: str = "hi
                 target_lang=target_lang,
                 checkpoint_file=f"data/checkpoint_{target_lang}.json"
             )
-            pipeline.run(max_records=records_per_lang, batch_size=64, resume=False)
+            pipeline.run(max_records=records_per_lang, batch_size=64, resume=False, append=(idx > 1))
             print(f"[+] Completed ingestion for {target_lang.upper()}.")
         except Exception as e:
             print(f"[!] Error ingesting {target_lang.upper()} ({file_path}): {e}")
