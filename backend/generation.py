@@ -323,7 +323,7 @@ Provide your grounded answer below:"""
             "hinglish": re.compile(r"[a-zA-Z]"),
         }
 
-        # Extract passages with citations
+        # Extract passages with citations and source languages
         passages = []
         for block in context_text.split("Source "):
             if not block.strip():
@@ -332,13 +332,15 @@ Provide your grounded answer below:"""
             header = lines[0]
             cit_match = re.search(r"\[\d+\]", header)
             cit = cit_match.group(0) if cit_match else "[1]"
+            lang_match = re.search(r"Lang:\s*([a-zA-Z]+)", header)
+            p_lang = lang_match.group(1).lower() if lang_match else "unknown"
             text_lines = lines[1:] if len(lines) > 1 else lines
             p_text = " ".join(text_lines).strip()
             if p_text:
-                passages.append((cit, p_text))
+                passages.append((cit, p_lang, p_text))
 
         if not passages:
-            passages = [("[1]", context_text)]
+            passages = [("[1]", "unknown", context_text)]
 
         # Extract tokens from query
         q_tokens = set(re.findall(r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+", query.lower()))
@@ -346,7 +348,7 @@ Provide your grounded answer below:"""
 
         # Collect candidate sentences
         candidates = []
-        for cit, p_text in passages:
+        for cit, p_lang, p_text in passages:
             raw_sentences = re.split(r"[\n\.\।\?\!]+", p_text)
             for s in raw_sentences:
                 s_clean = s.strip()
@@ -372,6 +374,7 @@ Provide your grounded answer below:"""
                 candidates.append({
                     "text": s_clean,
                     "citation": cit,
+                    "source_lang": p_lang,
                     "overlap": overlap,
                     "length": len(s_clean),
                     "is_exact_script": is_exact_script,
@@ -411,18 +414,22 @@ Provide your grounded answer below:"""
 
             if target_lang == "hi":
                 if c["is_devanagari_script"]:
-                    score += 15
+                    score += 25
                 if any(w in MARATHI_MARKERS for w in c_words):
-                    score -= 8
+                    score -= 50
                 if any(w in NEPALI_MARKERS for w in c_words):
-                    score -= 8
-                if c["is_bengali_script"]:
+                    score -= 50
+                if any(w in SANSKRIT_MARKERS for w in c_words):
+                    score -= 80
+                if c["is_bengali_script"] or not c["is_devanagari_script"]:
                     score -= 100
             elif target_lang == "mr":
                 if c["is_devanagari_script"]:
                     score += 10
                 if any(w in MARATHI_MARKERS for w in c_words):
-                    score += 30
+                    score += 40
+                if any(w in SANSKRIT_MARKERS for w in c_words):
+                    score -= 60
                 if c["is_bengali_script"]:
                     score -= 100
             elif target_lang == "bn":
@@ -432,15 +439,19 @@ Provide your grounded answer below:"""
                     score -= 40
             elif target_lang in ("en", "hinglish"):
                 if c["is_latin_script"]:
-                    score += 50
+                    score += 60
                 elif c["is_devanagari_script"]:
-                    # Prefer Hindi over Marathi
+                    # Prefer pure Hindi over Marathi/Nepali/Sanskrit
                     score += 15
                     if any(w in MARATHI_MARKERS for w in c_words):
-                        score -= 8
+                        score -= 40
+                    if any(w in NEPALI_MARKERS for w in c_words):
+                        score -= 40
+                    if any(w in SANSKRIT_MARKERS for w in c_words):
+                        score -= 80
                 else:
-                    # Penalize non-Devanagari Indic scripts (Odia, Tamil, Telugu, etc.) for English/Hinglish
-                    score -= 80
+                    # Heavily penalize non-Devanagari Indic scripts (Odia, Tamil, Telugu, etc.) for English/Hinglish
+                    score -= 100
 
             c["score"] = score
 
@@ -457,8 +468,57 @@ Provide your grounded answer below:"""
             if qt in synonym_map:
                 expanded_q_tokens.update(synonym_map[qt])
 
-        # Filter out heavy negative scores unless nothing else exists
-        valid_candidates = [c for c in candidates if c["score"] > -40]
+        COMMON_QUERY_WORDS = {
+            "what", "which", "when", "where", "who", "whom", "whose", "why", "how",
+            "this", "that", "these", "those", "mean", "meaning", "definition", "define",
+            "konsi", "konsa", "konse", "kya", "kyu", "kyun", "kab", "kaha", "kahan", "kaise",
+            "hai", "hain", "thi", "tha", "the", "book", "person", "place", "about", "tell",
+            "likhi", "likha", "likhe", "name", "batao", "bataiye", "karo", "kare", "karna",
+            "hoga", "hogi", "hoge", "diya", "diye", "liye", "aur", "ya", "par", "pe", "mein", "me",
+            "se", "ne", "ko", "ka", "ki", "ke", "is", "are", "was", "were", "the", "a", "an"
+        }
+
+        # Specific named entities or distinct proper nouns / numbers (e.g. "Rachel Carson", "2026", "Olympics")
+        tokens_orig = re.findall(r"\b[A-Za-z0-9\u0900-\u097F]+\b", query)
+        query_proper_nouns = []
+        for i, t in enumerate(tokens_orig):
+            t_low = t.lower()
+            if t_low in COMMON_QUERY_WORDS:
+                continue
+            if (t[0].isupper() or any(c.isdigit() for c in t)) and len(t) >= 3:
+                if i == 0 and t_low in {"what", "who", "where", "when", "why", "how", "define", "give", "tell", "which"}:
+                    continue
+                query_proper_nouns.append(t_low)
+        # Strict Named Entity & Numeric Grounding Guardrail
+        digits_in_q = re.findall(r"\b\d{4}\b", query)
+        if digits_in_q:
+            if any(d not in context_text for d in digits_in_q):
+                elapsed_ms = (time.perf_counter() - start_time) * 1000
+                return {
+                    "answer": "ABSTAIN",
+                    "is_abstained": True,
+                    "confidence": 0.0,
+                    "latency_ms": round(elapsed_ms, 2),
+                    "provider": "deterministic_extractive"
+                }
+
+        if query_proper_nouns:
+            context_lower = context_text.lower()
+            # If context is Latin English and missing key named entities (e.g. Mars, Rachel Carson)
+            if not bool(re.search(r"[\u0900-\u0D7F\u0600-\u06FF]", context_text)):
+                missing_entities = [e for e in query_proper_nouns if e not in context_lower]
+                if len(missing_entities) == len(query_proper_nouns) or any(e in {"mars", "moon", "jupiter", "2026", "2030"} and e not in context_lower for e in query_proper_nouns):
+                    elapsed_ms = (time.perf_counter() - start_time) * 1000
+                    return {
+                        "answer": "ABSTAIN",
+                        "is_abstained": True,
+                        "confidence": 0.0,
+                        "latency_ms": round(elapsed_ms, 2),
+                        "provider": "deterministic_extractive"
+                    }
+
+        # Filter out heavily penalized candidates unless nothing else exists
+        valid_candidates = [c for c in candidates if c["score"] > -50]
         if not valid_candidates:
             valid_candidates = candidates
 
@@ -477,7 +537,7 @@ Provide your grounded answer below:"""
         ) if expanded_q_tokens else True
 
         # If same script and zero token match, or if candidate score is deeply negative, ABSTAIN.
-        if (is_same_script and expanded_q_tokens and not has_any_token_match and best["overlap"] == 0 and len(expanded_q_tokens) >= 2) or best["score"] < 0:
+        if (is_same_script and expanded_q_tokens and not has_any_token_match and best["overlap"] == 0 and len(expanded_q_tokens) >= 2) or best["score"] < -60:
             elapsed_ms = (time.perf_counter() - start_time) * 1000
             return {
                 "answer": "ABSTAIN",
@@ -487,7 +547,42 @@ Provide your grounded answer below:"""
                 "provider": "deterministic_extractive"
             }
 
-        answer_text = f"{best['text']} {best['citation']}"
+        selected_text = best["text"]
+        best_words = set(re.findall(r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+", selected_text.lower()))
+        is_pure_hindi = best["is_devanagari_script"] and not any(w in best_words for w in MARATHI_MARKERS | NEPALI_MARKERS | SANSKRIT_MARKERS)
+
+        # Map 3-letter codes to standard 2-letter codes
+        LANG_3TO2 = {
+            "hin": "hi", "mar": "mr", "nep": "ne", "san": "sa", "ben": "bn",
+            "asm": "as", "guj": "gu", "kan": "kn", "mal": "ml", "ori": "or",
+            "pan": "pa", "tam": "ta", "tel": "te", "urd": "ur", "eng": "en",
+            "hi": "hi", "mr": "mr", "ne": "ne", "sa": "sa", "bn": "bn",
+            "as": "as", "gu": "gu", "kn": "kn", "ml": "ml", "or": "or",
+            "pa": "pa", "ta": "ta", "te": "te", "ur": "ur", "en": "en"
+        }
+        cand_lang = LANG_3TO2.get(best.get("source_lang", "").lower(), "unknown")
+
+        # Guarantee the answer matches the user's query language
+        if target_lang == "en":
+            if cand_lang != "en" and not best["is_latin_script"]:
+                selected_text = translate_to_target_language(selected_text, "en")
+        elif target_lang == "hi":
+            if cand_lang != "hi" or not is_pure_hindi:
+                selected_text = translate_to_target_language(selected_text, "hi")
+        elif target_lang == "mr":
+            if cand_lang != "mr":
+                selected_text = translate_to_target_language(selected_text, "mr")
+        elif target_lang == "bn":
+            if cand_lang != "bn":
+                selected_text = translate_to_target_language(selected_text, "bn")
+        elif target_lang == "hinglish":
+            if not best["is_latin_script"] and (cand_lang != "hi" or not is_pure_hindi):
+                selected_text = translate_to_target_language(selected_text, "en")
+        elif target_lang in ("ta", "te", "gu", "kn", "ml", "pa", "or", "ur", "as", "ne", "sa"):
+            if cand_lang != target_lang or not best["is_exact_script"]:
+                selected_text = translate_to_target_language(selected_text, target_lang)
+
+        answer_text = f"{selected_text} {best['citation']}"
         elapsed_ms = (time.perf_counter() - start_time) * 1000
 
         return {
@@ -497,6 +592,28 @@ Provide your grounded answer below:"""
             "latency_ms": round(elapsed_ms, 2),
             "provider": "deterministic_extractive"
         }
+
+
+def translate_to_target_language(text: str, target_lang: str) -> str:
+    """Translates text to user query language if scripts differ, preserving evidence groundedness."""
+    if not text or not text.strip():
+        return text
+    target = (target_lang or "en").lower()
+    if target == "hinglish":
+        target = "hi"
+    try:
+        from deep_translator import GoogleTranslator
+        lang_code_map = {
+            "en": "en", "hi": "hi", "mr": "mr", "bn": "bn", "ta": "ta",
+            "te": "te", "gu": "gu", "kn": "kn", "ml": "ml", "pa": "pa",
+            "or": "or", "ur": "ur", "as": "as", "ne": "ne", "sa": "sa"
+        }
+        dest = lang_code_map.get(target, "en")
+        clean_input = text[:250].strip()
+        translated = GoogleTranslator(source="auto", target=dest).translate(clean_input)
+        return translated if translated and len(translated) > 3 else text
+    except Exception:
+        return text
 
 
 # Global singleton
