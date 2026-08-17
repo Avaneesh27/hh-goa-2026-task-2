@@ -56,15 +56,16 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               ? t("tts.paused")
               : t("tts.listen")}
           </span>
+          {/* Mini audio waveform equalizer */}
           {isPlaying && (
-            <div className="flex items-center gap-1 mt-0.5">
-              {[...Array(5)].map((_, i) => (
+            <div className="flex items-center gap-1 mt-1">
+              {[...Array(6)].map((_, i) => (
                 <span
                   key={i}
-                  className="w-1 rounded-full bg-brand-400 animate-pulse"
+                  className="w-1 rounded-full bg-gradient-to-t from-brand-500 via-indigo-400 to-cyan-300 animate-pulse shadow-[0_0_8px_rgba(168,85,247,0.8)]"
                   style={{
-                    height: `${6 + (i % 3) * 4}px`,
-                    animationDelay: `${i * 150}ms`,
+                    height: `${7 + (i % 3) * 5}px`,
+                    animationDelay: `${i * 120}ms`,
                   }}
                 />
               ))}
