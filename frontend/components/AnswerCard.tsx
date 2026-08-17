@@ -1,12 +1,34 @@
+"use client";
+
 import React, { useState } from "react";
-import { Copy, Check, ShieldCheck, AlertOctagon, Sparkles, Volume2 } from "lucide-react";
+import { Copy, Check, ShieldCheck, AlertOctagon, Sparkles, Volume2, Award } from "lucide-react";
 import { RAGResponse } from "@/types/rag";
+import { useTranslation } from "@/lib/i18n";
+import { AudioPlayerBar } from "@/components/AudioPlayerBar";
+import { TTSStatus } from "@/hooks/useTTS";
 
 interface AnswerCardProps {
   response: RAGResponse;
+  ttsStatus: TTSStatus;
+  onPlayTTS: () => void;
+  onPauseTTS: () => void;
+  onResumeTTS: () => void;
+  onReplayTTS: () => void;
+  onStopTTS: () => void;
+  isTTSSupported: boolean;
 }
 
-export const AnswerCard: React.FC<AnswerCardProps> = ({ response }) => {
+export const AnswerCard: React.FC<AnswerCardProps> = ({
+  response,
+  ttsStatus,
+  onPlayTTS,
+  onPauseTTS,
+  onResumeTTS,
+  onReplayTTS,
+  onStopTTS,
+  isTTSSupported,
+}) => {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -19,104 +41,103 @@ export const AnswerCard: React.FC<AnswerCardProps> = ({ response }) => {
 
   return (
     <div
-      className={`rounded-3xl p-6 border backdrop-blur-xl shadow-2xl transition-all duration-500 ${
+      className={`rounded-3xl p-6 sm:p-7 border backdrop-blur-2xl shadow-2xl transition-all duration-500 ${
         isAbstained
-          ? "bg-slate-900/80 border-amber-500/40 shadow-amber-500/10"
-          : "bg-slate-900/80 border-brand-500/30 shadow-brand-500/10"
+          ? "glass-panel border-amber-500/35 shadow-amber-500/10"
+          : "glass-panel-elevated border-brand-500/35 shadow-brand-500/15"
       }`}
     >
-      {/* Transcript Header */}
-      <div className="border-b border-slate-800/80 pb-4 mb-4">
-        <div className="flex items-center justify-between gap-2 mb-1">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Transcribed Query
-          </span>
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-800 border border-slate-700 text-brand-300">
-            {response.language.toUpperCase()}
-          </span>
+      {/* Header & Badges */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 mb-5">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-brand-500/15 border border-brand-500/30 flex items-center justify-center text-brand-400">
+            <Sparkles className="w-4 h-4" />
+          </div>
+          <div>
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-200">
+              {isAbstained ? t("answer.decision") : t("answer.title")}
+            </h3>
+            <span className="text-[11px] text-slate-400 font-medium">
+              {response.language.toUpperCase()} • {t("answer.confidence")}: {Math.round(response.confidence * 100)}%
+            </span>
+          </div>
         </div>
-        <p className="text-base sm:text-lg font-semibold text-slate-100 leading-snug">
-          "{response.transcript}"
-        </p>
+
+        <div className="flex items-center gap-2">
+          {/* Grounded vs Abstained Status Pill */}
+          {isAbstained ? (
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+              <AlertOctagon className="w-3.5 h-3.5" />
+              {t("answer.abstainedBadge")}
+            </span>
+          ) : (
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              {t("answer.groundedBadge")}
+            </span>
+          )}
+
+          {/* Copy Button */}
+          <button
+            onClick={handleCopy}
+            className="p-2 rounded-xl glass-button text-slate-300 hover:text-white"
+            title={t("answer.copy")}
+            aria-label={t("answer.copy")}
+          >
+            {copied ? (
+              <Check className="w-4 h-4 text-emerald-400" />
+            ) : (
+              <Copy className="w-4 h-4" />
+            )}
+          </button>
+        </div>
       </div>
 
-      {/* Answer Body */}
+      {/* Answer Core Body */}
       <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-brand-400" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
-              {isAbstained ? "System Decision" : "Grounded Answer"}
-            </h3>
-          </div>
-
-          <div className="flex items-center gap-2">
-            {/* Grounded / Abstained Pill */}
-            {isAbstained ? (
-              <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30">
-                <AlertOctagon className="w-3.5 h-3.5" />
-                Abstained (No Hallucination)
-              </span>
-            ) : (
-              <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                Grounded in MSMARCO-XI
-              </span>
-            )}
-
-            {/* Copy Button */}
-            <button
-              onClick={handleCopy}
-              className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
-              title="Copy Answer"
-            >
-              {copied ? (
-                <Check className="w-4 h-4 text-emerald-400" />
-              ) : (
-                <Copy className="w-4 h-4" />
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Answer Text */}
         <div
-          className={`p-5 rounded-2xl border text-sm sm:text-base leading-relaxed ${
+          className={`p-5 sm:p-6 rounded-2xl border text-sm sm:text-base leading-relaxed tracking-normal font-normal ${
             isAbstained
-              ? "bg-amber-950/20 border-amber-800/40 text-amber-100"
-              : "bg-slate-800/40 border-slate-700/60 text-slate-100 font-normal"
+              ? "bg-amber-950/20 border-amber-500/25 text-amber-100"
+              : "bg-slate-900/60 border-white/10 text-slate-100 shadow-inner"
           }`}
         >
           {response.answer}
         </div>
 
         {/* Abstention Reason Note if applicable */}
-        {isAbstained && response.abstention_reason && (
-          <p className="text-xs text-amber-400/80 italic">
-            Reason: {response.abstention_reason}
+        {isAbstained && (response.abstention_reason || response.answer.includes("ABSTAIN")) && (
+          <p className="text-xs text-amber-300/85 italic px-1">
+            {t("answer.abstentionReason")}: {response.abstention_reason || t("answer.abstentionDefault")}
           </p>
         )}
 
-        {/* Confidence & Latency Summary Pill Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 text-xs text-slate-400 border-t border-slate-800/60">
-          <div className="flex items-center gap-4">
-            <div>
-              <span className="text-slate-500">Confidence: </span>
-              <span className="font-semibold text-slate-200">
-                {Math.round(response.confidence * 100)}%
-              </span>
-            </div>
-            <div>
-              <span className="text-slate-500">Retrieval: </span>
-              <span className="font-semibold text-slate-200">
-                Dense {response.retrieval.dense_count} | BM25 {response.retrieval.bm25_count} | Fused {response.retrieval.fused_count}
-              </span>
-            </div>
+        {/* Integrated Audio Voice Narration Bar */}
+        <AudioPlayerBar
+          status={ttsStatus}
+          onPlay={onPlayTTS}
+          onPause={onPauseTTS}
+          onResume={onResumeTTS}
+          onReplay={onReplayTTS}
+          onStop={onStopTTS}
+          isSupported={isTTSSupported}
+        />
+
+        {/* Meta summary footer */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 text-xs text-slate-400 border-t border-white/5">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1 text-slate-400">
+              <Award className="w-3.5 h-3.5 text-brand-400" />
+              {t("answer.retrieval")}:{" "}
+              <strong className="text-slate-200 font-mono">
+                {response.retrieval.selected_count || response.retrieval.reranked_count} {t("evidence.sources")}
+              </strong>
+            </span>
           </div>
 
-          <div>
-            <span className="text-slate-500">Total Latency: </span>
-            <span className="font-mono font-bold text-brand-400">
+          <div className="flex items-center gap-1.5">
+            <span className="text-slate-400">{t("answer.totalLatency")}:</span>
+            <span className="font-mono font-bold text-brand-300 px-2 py-0.5 rounded-md glass-pill">
               {response.latency.end_to_end_ms} ms
             </span>
           </div>
