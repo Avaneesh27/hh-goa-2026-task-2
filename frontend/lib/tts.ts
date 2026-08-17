@@ -57,18 +57,23 @@ class TTSManager {
     }
     const targetLang = (langCode || "en").toLowerCase();
 
-    // Specific locale mappings
+    // Specific locale mappings for all 15 languages
     const preferredLocales: Record<string, string[]> = {
-      hi: ["hi-IN", "hi_IN", "hi"],
       en: ["en-IN", "en_IN", "en-GB", "en-US", "en"],
-      mr: ["mr-IN", "mr_IN", "hi-IN", "hi"],
+      as: ["as-IN", "as_IN", "bn-IN", "hi-IN", "en-IN"],
       bn: ["bn-IN", "bn_IN", "bn-BD", "hi-IN"],
-      ta: ["ta-IN", "ta_IN", "ta"],
-      te: ["te-IN", "te_IN", "te"],
-      gu: ["gu-IN", "gu_IN", "gu"],
-      kn: ["kn-IN", "kn_IN", "kn"],
-      ml: ["ml-IN", "ml_IN", "ml"],
-      pa: ["pa-IN", "pa_IN", "pa"],
+      gu: ["gu-IN", "gu_IN", "gu", "hi-IN"],
+      hi: ["hi-IN", "hi_IN", "hi"],
+      kn: ["kn-IN", "kn_IN", "kn", "hi-IN"],
+      ml: ["ml-IN", "ml_IN", "ml", "hi-IN"],
+      mr: ["mr-IN", "mr_IN", "hi-IN", "hi"],
+      ne: ["ne-NP", "ne_NP", "hi-IN", "hi"],
+      or: ["or-IN", "or_IN", "or", "hi-IN"],
+      pa: ["pa-IN", "pa_IN", "pa", "hi-IN"],
+      sa: ["sa-IN", "sa_IN", "hi-IN", "hi"],
+      ta: ["ta-IN", "ta_IN", "ta", "hi-IN"],
+      te: ["te-IN", "te_IN", "te", "hi-IN"],
+      ur: ["ur-IN", "ur_IN", "ur-PK", "ur", "hi-IN"],
     };
 
     const targets = preferredLocales[targetLang] || [targetLang, "en-IN", "en-US"];

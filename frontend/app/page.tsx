@@ -29,10 +29,14 @@ import { SettingsModal } from "@/components/SettingsModal";
 import { HowItWorksModal } from "@/components/HowItWorksModal";
 
 const SAMPLE_QUERIES = [
-  { text: "कॉर्पोरेशन क्या है?", lang: "hi", label: "हिंदी" },
+  { text: "कॉर्पोरेशन क्या है?", lang: "hi", label: "हिन्दी" },
   { text: "What is a corporation?", lang: "en", label: "English" },
-  { text: "Rachel Carson ne konsi book likhi thi?", lang: "hi", label: "Hinglish" },
-  { text: "Who won the 2026 Mars Olympics marathon?", lang: "en", label: "Ungrounded" },
+  { text: "কর্পোরেশন কি?", lang: "bn", label: "বাংলা" },
+  { text: "कॉर्पोरेशन म्हणजे काय?", lang: "mr", label: "मराठी" },
+  { text: "கார்ப்பரேஷன் என்றால் என்ன?", lang: "ta", label: "தமிழ்" },
+  { text: "కార్పొరేషన్ అంటే ఏమిటి?", lang: "te", label: "తెలుగు" },
+  { text: "کارپوریشن کیا ہے؟", lang: "ur", label: "اردو" },
+  { text: "Who won the 2026 Mars Olympics marathon?", lang: "en", label: "Abstain" },
 ];
 
 export default function HomePage() {

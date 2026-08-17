@@ -159,3 +159,29 @@ async def get_public_config():
         "min_rerank_score": settings.MIN_RERANK_SCORE,
         "max_audio_seconds": settings.MAX_AUDIO_SECONDS
     }
+
+
+@router.get("/api/languages")
+async def get_supported_languages():
+    """Returns the centralized catalog of all 15 supported languages and dataset mappings."""
+    from backend.languages import DATASET_LANGUAGE_MAP
+    return {"languages": DATASET_LANGUAGE_MAP}
+
+
+@router.post("/api/translate-ui")
+async def handle_translate_ui(payload: Dict[str, Any]):
+    """
+    Translates UI strings on the backend using Google Translator without exposing credentials.
+    Request body: { sourceLanguage: "en", targetLanguage: "mr", keys: { "app.title": "..." } }
+    """
+    from backend.translation import translate_ui_keys
+    source_lang = payload.get("sourceLanguage", "en")
+    target_lang = payload.get("targetLanguage", "hi")
+    keys_dict = payload.get("keys", {})
+
+    if not keys_dict:
+        return {"translations": {}}
+
+    translations = translate_ui_keys(keys_dict, target_lang=target_lang, source_lang=source_lang)
+    return {"translations": translations}
+

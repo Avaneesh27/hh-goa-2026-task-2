@@ -29,7 +29,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   onStopRecording,
   onClearError,
 }) => {
-  const { t, currentLocale } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -78,7 +78,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           </div>
 
           <span className="text-[11px] font-bold px-2.5 py-1 rounded-full glass-pill text-brand-300 border border-brand-500/20">
-            {t("voice.micBadge")}: {currentLocale.nativeName}
+            {t("voice.micBadge")}: {currentLanguage.nativeName}
           </span>
         </div>
 

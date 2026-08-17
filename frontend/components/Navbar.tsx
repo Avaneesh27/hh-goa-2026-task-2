@@ -18,7 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenHowItWorks,
   disabled = false,
 }) => {
-  const { t, selectedLanguage, setLanguage, locales } = useTranslation();
+  const { t, selectedLanguage, setLanguage, languages } = useTranslation();
 
   return (
     <header className="border-b border-white/5 bg-[#030712]/75 backdrop-blur-2xl sticky top-0 z-40 transition-all duration-300">
@@ -76,13 +76,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="bg-transparent text-xs font-semibold text-slate-200 focus:outline-none cursor-pointer pr-1"
               aria-label={t("settings.language")}
             >
-              {locales.map((loc) => (
+              {languages.map((lang) => (
                 <option
-                  key={loc.code}
-                  value={loc.code}
+                  key={lang.code}
+                  value={lang.code}
                   className="bg-slate-900 text-slate-100 font-medium py-1"
                 >
-                  {loc.nativeName} ({loc.name})
+                  {lang.nativeName} ({lang.name})
                 </option>
               ))}
             </select>
