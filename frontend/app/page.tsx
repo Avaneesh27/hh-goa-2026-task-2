@@ -92,7 +92,7 @@ export default function HomePage() {
 
       // If backend was unable to transcribe audio but we captured the user's speech text in browser
       if (
-        (result.transcript === "(audio unrecognizable)" || result.transcript === "कॉर्पोरेशन क्या है?") &&
+        result.transcript === "(audio unrecognizable)" &&
         spokenText &&
         spokenText !== result.transcript
       ) {

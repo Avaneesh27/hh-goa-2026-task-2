@@ -132,11 +132,20 @@ INTENT_KEYWORDS: Dict[str, List[str]] = {
     ]
 }
 
-# Hinglish Romanized Indicators
+# Distinctive Hinglish Romanized Keywords (excluding ambiguous English words like 'is', 'me', 'to', 'in', 'us')
 HINGLISH_KEYWORDS: Set[str] = {
-    "kya", "hai", "hain", "ka", "ki", "ke", "ko", "se", "me", "mein", "par",
-    "batao", "bataiye", "kaise", "kahan", "kab", "kaun", "kitna", "kitne",
-    "hota", "hoti", "hote", "karen", "karo", "aur", "ya", "nahi", "nahin"
+    "kya", "hai", "hain", "kaise", "kahan", "kab", "kaun", "kitna", "kitne", "kitni",
+    "hota", "hoti", "hote", "batao", "bataiye", "bolo", "karen", "karo", "karna", "kare",
+    "konsi", "kaunsi", "likhi", "likha", "thi", "tha", "the", "kisne", "kisko", "kiske",
+    "hua", "hui", "hue", "waala", "wali", "wale", "nahin", "nahi", "kyun", "kyu",
+    "ka", "ki", "ke", "ko", "se", "mein", "par", "aur", "ya"
+}
+
+# Strong distinctive Hinglish markers (uniquely Indic)
+HINGLISH_STRONG_MARKERS: Set[str] = {
+    "kya", "hai", "hain", "kaise", "kahan", "kab", "kaun", "kitna", "kitne", "kitni",
+    "hota", "hoti", "hote", "batao", "bataiye", "bolo", "karen", "karo", "karna",
+    "konsi", "kaunsi", "likhi", "likha", "kisne", "kisko", "kiske", "nahin", "kyun", "kyu"
 }
 
 # Multilingual Stopwords for Keyword Extraction

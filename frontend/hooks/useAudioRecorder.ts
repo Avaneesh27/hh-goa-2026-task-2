@@ -6,10 +6,82 @@ export interface AudioRecorderState {
   audioBlob: Blob | null;
   audioLevel: number;
   liveTranscript: string;
+  finalTranscript: string;
   error: string | null;
 }
 
-export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: string = "hi-IN") {
+// Helpers for WAV generation
+function writeString(view: DataView, offset: number, str: string) {
+  for (let i = 0; i < str.length; i++) {
+    view.setUint8(offset + i, str.charCodeAt(i));
+  }
+}
+
+function downsampleBuffer(
+  buffer: Float32Array,
+  inputSampleRate: number,
+  outputSampleRate: number = 16000
+): Float32Array {
+  if (inputSampleRate === outputSampleRate) {
+    return buffer;
+  }
+  const sampleRateRatio = inputSampleRate / outputSampleRate;
+  const newLength = Math.round(buffer.length / sampleRateRatio);
+  const result = new Float32Array(newLength);
+  let offsetResult = 0;
+  let offsetBuffer = 0;
+  while (offsetResult < result.length) {
+    const nextOffsetBuffer = Math.round((offsetResult + 1) * sampleRateRatio);
+    let accum = 0;
+    let count = 0;
+    for (let i = offsetBuffer; i < nextOffsetBuffer && i < buffer.length; i++) {
+      accum += buffer[i];
+      count++;
+    }
+    result[offsetResult] = count > 0 ? accum / count : 0;
+    offsetResult++;
+    offsetBuffer = nextOffsetBuffer;
+  }
+  return result;
+}
+
+function encodeWAV(samples: Float32Array, sampleRate: number = 16000): Blob {
+  const buffer = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(buffer);
+
+  // RIFF chunk descriptor
+  writeString(view, 0, "RIFF");
+  view.setUint32(4, 36 + samples.length * 2, true);
+  writeString(view, 8, "WAVE");
+
+  // fmt sub-chunk
+  writeString(view, 12, "fmt ");
+  view.setUint32(16, 16, true); // SubChunk1Size (16 for PCM)
+  view.setUint16(20, 1, true); // AudioFormat (1 = PCM)
+  view.setUint16(22, 1, true); // NumChannels (1 = Mono)
+  view.setUint32(24, sampleRate, true); // SampleRate
+  view.setUint32(28, sampleRate * 2, true); // ByteRate (SampleRate * NumChannels * BitsPerSample/8)
+  view.setUint16(32, 2, true); // BlockAlign (NumChannels * BitsPerSample/8)
+  view.setUint16(34, 16, true); // BitsPerSample (16 bits)
+
+  // data sub-chunk
+  writeString(view, 36, "data");
+  view.setUint32(40, samples.length * 2, true);
+
+  // Write PCM samples
+  let offset = 44;
+  for (let i = 0; i < samples.length; i++, offset += 2) {
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+  }
+
+  return new Blob([buffer], { type: "audio/wav" });
+}
+
+export function useAudioRecorder(
+  maxDurationSeconds: number = 30,
+  languageCode: string = ""
+) {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
@@ -17,16 +89,17 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
   const [liveTranscript, setLiveTranscript] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
+  const processorRef = useRef<ScriptProcessorNode | null>(null);
+  const audioInputRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const animationFrameRef = useRef<number | null>(null);
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const silenceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const audioChunksRef = useRef<Blob[]>([]);
+  const pcmChunksRef = useRef<Float32Array[]>([]);
   const streamRef = useRef<MediaStream | null>(null);
   const speechRecognitionRef = useRef<any>(null);
   const finalTranscriptRef = useRef<string>("");
+  const isStoppingRef = useRef<boolean>(false);
 
   const cleanup = useCallback(() => {
     if (animationFrameRef.current) {
@@ -37,15 +110,23 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
       clearInterval(timerIntervalRef.current);
       timerIntervalRef.current = null;
     }
-    if (silenceTimeoutRef.current) {
-      clearTimeout(silenceTimeoutRef.current);
-      silenceTimeoutRef.current = null;
-    }
     if (speechRecognitionRef.current) {
       try {
         speechRecognitionRef.current.stop();
       } catch (_) {}
       speechRecognitionRef.current = null;
+    }
+    if (processorRef.current) {
+      try {
+        processorRef.current.disconnect();
+      } catch (_) {}
+      processorRef.current = null;
+    }
+    if (audioInputRef.current) {
+      try {
+        audioInputRef.current.disconnect();
+      } catch (_) {}
+      audioInputRef.current = null;
     }
     if (audioContextRef.current && audioContextRef.current.state !== "closed") {
       audioContextRef.current.close().catch(() => {});
@@ -74,13 +155,50 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
     animationFrameRef.current = requestAnimationFrame(updateAudioLevel);
   }, [isRecording]);
 
+  const stopRecording = useCallback(() => {
+    if (isStoppingRef.current) return;
+    isStoppingRef.current = true;
+
+    // 1. Flush speech recognition
+    if (speechRecognitionRef.current) {
+      try {
+        speechRecognitionRef.current.stop();
+      } catch (_) {}
+    }
+
+    // 2. Generate standard 16kHz WAV from accumulated PCM samples
+    try {
+      const chunks = pcmChunksRef.current;
+      if (chunks.length > 0 && audioContextRef.current) {
+        const totalLength = chunks.reduce((acc, c) => acc + c.length, 0);
+        const merged = new Float32Array(totalLength);
+        let offset = 0;
+        for (const chunk of chunks) {
+          merged.set(chunk, offset);
+          offset += chunk.length;
+        }
+
+        const inputSampleRate = audioContextRef.current.sampleRate || 44100;
+        const downsampled = downsampleBuffer(merged, inputSampleRate, 16000);
+        const wavBlob = encodeWAV(downsampled, 16000);
+        setAudioBlob(wavBlob);
+      }
+    } catch (wavErr) {
+      console.warn("WAV encoding notice:", wavErr);
+    }
+
+    setIsRecording(false);
+    cleanup();
+  }, [cleanup]);
+
   const startRecording = useCallback(async () => {
     setError(null);
     setAudioBlob(null);
     setLiveTranscript("");
     finalTranscriptRef.current = "";
     setRecordingTime(0);
-    audioChunksRef.current = [];
+    pcmChunksRef.current = [];
+    isStoppingRef.current = false;
 
     try {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -97,32 +215,42 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
           },
         });
       } catch (constraintsErr) {
-        console.warn("Retrying with simple audio constraints:", constraintsErr);
+        console.warn("Retrying with standard audio constraints:", constraintsErr);
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       }
       streamRef.current = stream;
 
-      // 1. Setup Web Audio API Analyser for live visualizer
-      try {
-        const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-        if (AudioCtx) {
-          const audioContext = new AudioCtx();
-          if (audioContext.state === "suspended") {
-            await audioContext.resume();
-          }
-          audioContextRef.current = audioContext;
-
-          const source = audioContext.createMediaStreamSource(stream);
-          const analyser = audioContext.createAnalyser();
-          analyser.fftSize = 64;
-          source.connect(analyser);
-          analyserRef.current = analyser;
+      // 1. Setup AudioContext, Analyser and ScriptProcessor for PCM WAV capture
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (AudioCtx) {
+        const audioContext = new AudioCtx();
+        if (audioContext.state === "suspended") {
+          await audioContext.resume();
         }
-      } catch (actxErr) {
-        console.warn("AudioContext visualizer initialization notice:", actxErr);
+        audioContextRef.current = audioContext;
+
+        const source = audioContext.createMediaStreamSource(stream);
+        audioInputRef.current = source;
+
+        const analyser = audioContext.createAnalyser();
+        analyser.fftSize = 64;
+        source.connect(analyser);
+        analyserRef.current = analyser;
+
+        // Script processor for raw PCM capture (bufferSize=4096, 1 input channel, 1 output channel)
+        const processor = audioContext.createScriptProcessor(4096, 1, 1);
+        processor.onaudioprocess = (e) => {
+          if (isStoppingRef.current) return;
+          const inputData = e.inputBuffer.getChannelData(0);
+          // Copy float32 array
+          pcmChunksRef.current.push(new Float32Array(inputData));
+        };
+        source.connect(processor);
+        processor.connect(audioContext.destination);
+        processorRef.current = processor;
       }
 
-      // 2. Setup Live In-Browser Speech Recognition (for immediate live voice feedback)
+      // 2. Setup In-Browser Speech Recognition (for immediate live voice feedback)
       const SpeechRecognition =
         (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       if (SpeechRecognition) {
@@ -130,7 +258,7 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
           const recognition = new SpeechRecognition();
           recognition.continuous = true;
           recognition.interimResults = true;
-          
+
           const langMap: Record<string, string> = {
             hi: "hi-IN",
             en: "en-IN",
@@ -149,7 +277,13 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
             sa: "sa-IN",
             ne: "ne-NP",
           };
-          const resolvedLang = langMap[languageCode] || (typeof navigator !== "undefined" && navigator.language ? navigator.language : "en-IN");
+
+          const targetCode = languageCode ? languageCode.toLowerCase().trim() : "";
+          const resolvedLang =
+            langMap[targetCode] ||
+            (typeof navigator !== "undefined" && navigator.language
+              ? navigator.language
+              : "en-IN");
           recognition.lang = resolvedLang;
 
           recognition.onresult = (event: any) => {
@@ -163,10 +297,20 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
               }
             }
             if (final) {
-              finalTranscriptRef.current = (finalTranscriptRef.current + " " + final).trim();
+              finalTranscriptRef.current = (
+                finalTranscriptRef.current +
+                " " +
+                final
+              ).trim();
             }
-            const currentTranscript = (finalTranscriptRef.current + " " + interim).trim();
-            setLiveTranscript(currentTranscript);
+            const currentTranscript = (
+              finalTranscriptRef.current +
+              " " +
+              interim
+            ).trim();
+            if (currentTranscript) {
+              setLiveTranscript(currentTranscript);
+            }
           };
 
           recognition.onerror = (e: any) => {
@@ -180,38 +324,6 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
         }
       }
 
-      // 3. Setup MediaRecorder for audio stream
-      let mimeType = "";
-      if (typeof MediaRecorder !== "undefined") {
-        if (MediaRecorder.isTypeSupported("audio/webm;codecs=opus")) {
-          mimeType = "audio/webm;codecs=opus";
-        } else if (MediaRecorder.isTypeSupported("audio/webm")) {
-          mimeType = "audio/webm";
-        } else if (MediaRecorder.isTypeSupported("audio/mp4")) {
-          mimeType = "audio/mp4";
-        } else if (MediaRecorder.isTypeSupported("audio/ogg")) {
-          mimeType = "audio/ogg";
-        }
-      }
-
-      const recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
-      mediaRecorderRef.current = recorder;
-
-      recorder.ondataavailable = (event) => {
-        if (event.data && event.data.size > 0) {
-          audioChunksRef.current.push(event.data);
-        }
-      };
-
-      recorder.onstop = () => {
-        const finalType = recorder.mimeType || mimeType || "audio/webm";
-        const finalBlob = new Blob(audioChunksRef.current, { type: finalType });
-        setAudioBlob(finalBlob);
-        setIsRecording(false);
-        cleanup();
-      };
-
-      recorder.start(100);
       setIsRecording(true);
 
       // Start elapsed timer
@@ -237,20 +349,7 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
           : err.message || "Failed to initialize microphone recording."
       );
     }
-  }, [cleanup, languageCode, maxDurationSeconds, updateAudioLevel]);
-
-  const stopRecording = useCallback(() => {
-    if (speechRecognitionRef.current) {
-      try {
-        speechRecognitionRef.current.stop();
-      } catch (_) {}
-    }
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
-      try {
-        mediaRecorderRef.current.stop();
-      } catch (_) {}
-    }
-  }, []);
+  }, [cleanup, languageCode, maxDurationSeconds, stopRecording, updateAudioLevel]);
 
   useEffect(() => {
     return () => {
@@ -272,6 +371,8 @@ export function useAudioRecorder(maxDurationSeconds: number = 30, languageCode: 
       setAudioBlob(null);
       setLiveTranscript("");
       finalTranscriptRef.current = "";
+      pcmChunksRef.current = [];
     },
   };
 }
+

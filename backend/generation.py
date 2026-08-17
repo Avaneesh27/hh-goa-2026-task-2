@@ -12,6 +12,7 @@ from typing import Dict, Any, Optional, List
 import httpx
 
 from backend.config import settings
+from backend.keywords import MARATHI_MARKERS, NEPALI_MARKERS, SANSKRIT_MARKERS, ASSAMESE_MARKERS
 
 
 class AnswerGenerator:
@@ -281,7 +282,8 @@ Provide your grounded answer below:"""
     ) -> Dict[str, Any]:
         """
         Deterministic, fast extractive synthesizer when no external LLM API key is present.
-        Intelligently filters boilerplate, ranks sentences by query relevance, and formats with citation.
+        Intelligently filters boilerplate, matches language/script, ranks sentences by query relevance,
+        and formats with citation.
         """
         if not context_text or not context_text.strip():
             elapsed_ms = (time.perf_counter() - start_time) * 1000
@@ -299,9 +301,30 @@ Provide your grounded answer below:"""
             "privacy policy", "terms of use", "थीसॉरस", "thesaurus", "शुभकामनाओं"
         ]
 
-        # Extract non-source header passages
+        target_lang = (language or "en").lower().strip()
+
+        # Script regex matchers
+        script_matchers = {
+            "hi": re.compile(r"[\u0900-\u097F]"),
+            "mr": re.compile(r"[\u0900-\u097F]"),
+            "ne": re.compile(r"[\u0900-\u097F]"),
+            "sa": re.compile(r"[\u0900-\u097F]"),
+            "bn": re.compile(r"[\u0980-\u09FF]"),
+            "as": re.compile(r"[\u0980-\u09FF]"),
+            "gu": re.compile(r"[\u0A80-\u0AFF]"),
+            "pa": re.compile(r"[\u0A00-\u0A7F]"),
+            "or": re.compile(r"[\u0B00-\u0B7F]"),
+            "ta": re.compile(r"[\u0B80-\u0BFF]"),
+            "te": re.compile(r"[\u0C00-\u0C7F]"),
+            "kn": re.compile(r"[\u0C80-\u0CFF]"),
+            "ml": re.compile(r"[\u0D00-\u0D7F]"),
+            "ur": re.compile(r"[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]"),
+            "en": re.compile(r"[a-zA-Z]"),
+            "hinglish": re.compile(r"[a-zA-Z]"),
+        }
+
+        # Extract passages with citations
         passages = []
-        current_citation = "[1]"
         for block in context_text.split("Source "):
             if not block.strip():
                 continue
@@ -317,34 +340,47 @@ Provide your grounded answer below:"""
         if not passages:
             passages = [("[1]", context_text)]
 
-        # Candidate sentences from all retrieved passages
-        candidates = []
+        # Extract tokens from query
         q_tokens = set(re.findall(r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+", query.lower()))
         q_content_tokens = {t for t in q_tokens if len(t) > 2}
 
+        # Collect candidate sentences
+        candidates = []
         for cit, p_text in passages:
             raw_sentences = re.split(r"[\n\.\।\?\!]+", p_text)
             for s in raw_sentences:
                 s_clean = s.strip()
-                # Must be meaningful length
-                if len(s_clean) < 20 or len(s_clean) > 350:
+                if len(s_clean) < 15 or len(s_clean) > 400:
                     continue
-                # Must not contain boilerplate noise
                 if any(np in s_clean.lower() for np in noise_patterns):
                     continue
-                
+
                 s_tokens = set(re.findall(r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+", s_clean.lower()))
                 overlap = len(q_content_tokens.intersection(s_tokens))
-                
+
+                # Determine script affinity
+                is_exact_script = False
+                if target_lang in script_matchers:
+                    is_exact_script = bool(script_matchers[target_lang].search(s_clean))
+
+                # Check for non-Devanagari Indic/Arabic scripts (Odia, Tamil, Bengali, Telugu, etc.)
+                has_other_indic_script = bool(re.search(r"[\u0600-\u06FF\u0750-\u077F\u0980-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]", s_clean))
+                is_bengali_script = bool(re.search(r"[\u0980-\u09FF]", s_clean))
+                is_devanagari_script = bool(re.search(r"[\u0900-\u097F]", s_clean)) and not has_other_indic_script
+                is_latin_script = bool(re.search(r"[a-zA-Z]", s_clean)) and not has_other_indic_script and not bool(re.search(r"[\u0900-\u097F]", s_clean))
+
                 candidates.append({
                     "text": s_clean,
                     "citation": cit,
                     "overlap": overlap,
-                    "length": len(s_clean)
+                    "length": len(s_clean),
+                    "is_exact_script": is_exact_script,
+                    "is_bengali_script": is_bengali_script,
+                    "is_devanagari_script": is_devanagari_script,
+                    "is_latin_script": is_latin_script
                 })
 
         if not candidates:
-            # Fallback to first non-empty clean line
             raw_lines = [l.strip() for l in context_text.split("\n") if len(l.strip()) > 15 and not l.startswith("Source [")]
             clean_lines = [l for l in raw_lines if not any(np in l.lower() for np in noise_patterns)]
             if clean_lines:
@@ -358,7 +394,7 @@ Provide your grounded answer below:"""
                     "latency_ms": round(elapsed_ms, 2),
                     "provider": "deterministic_extractive"
                 }
-            
+
             elapsed_ms = (time.perf_counter() - start_time) * 1000
             return {
                 "answer": "ABSTAIN",
@@ -368,35 +404,88 @@ Provide your grounded answer below:"""
                 "provider": "deterministic_extractive"
             }
 
-        # Sort candidates by keyword overlap (descending), then reasonable length
-        candidates.sort(key=lambda x: (x["overlap"], x["length"]), reverse=True)
-        best = candidates[0]
+        # Language-aware candidate scoring and ranking
+        for c in candidates:
+            c_words = set(re.findall(r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+", c["text"].lower()))
+            score = c["overlap"] * 10
 
-        # Check if query and context share the same script
+            if target_lang == "hi":
+                if c["is_devanagari_script"]:
+                    score += 15
+                if any(w in MARATHI_MARKERS for w in c_words):
+                    score -= 8
+                if any(w in NEPALI_MARKERS for w in c_words):
+                    score -= 8
+                if c["is_bengali_script"]:
+                    score -= 100
+            elif target_lang == "mr":
+                if c["is_devanagari_script"]:
+                    score += 10
+                if any(w in MARATHI_MARKERS for w in c_words):
+                    score += 30
+                if c["is_bengali_script"]:
+                    score -= 100
+            elif target_lang == "bn":
+                if c["is_bengali_script"]:
+                    score += 50
+                if any(w in ASSAMESE_MARKERS for w in c_words):
+                    score -= 40
+            elif target_lang in ("en", "hinglish"):
+                if c["is_latin_script"]:
+                    score += 50
+                elif c["is_devanagari_script"]:
+                    # Prefer Hindi over Marathi
+                    score += 15
+                    if any(w in MARATHI_MARKERS for w in c_words):
+                        score -= 8
+                else:
+                    # Penalize non-Devanagari Indic scripts (Odia, Tamil, Telugu, etc.) for English/Hinglish
+                    score -= 80
+
+            c["score"] = score
+
+        # Add synonyms for common cross-lingual domain terms
+        synonym_map = {
+            "कॉर्पोरेशन": ["निगम", "कंपनी", "संस्था", "corporation"],
+            "निगम": ["कॉर्पोरेशन", "कंपनी", "संस्था", "corporation"],
+            "corporation": ["निगम", "कॉर्पोरेशन", "company"],
+            "किताब": ["पुस्तक", "book"],
+            "book": ["किताब", "पुस्तक"]
+        }
+        expanded_q_tokens = set(q_content_tokens)
+        for qt in q_content_tokens:
+            if qt in synonym_map:
+                expanded_q_tokens.update(synonym_map[qt])
+
+        # Filter out heavy negative scores unless nothing else exists
+        valid_candidates = [c for c in candidates if c["score"] > -40]
+        if not valid_candidates:
+            valid_candidates = candidates
+
+        valid_candidates.sort(key=lambda x: (x["score"], x["overlap"], x["length"]), reverse=True)
+        best = valid_candidates[0]
+
+        # Check script relationship
         is_same_script = (
-            (bool(re.search(r"[\u0900-\u097F]", query)) and bool(re.search(r"[\u0900-\u097F]", best["text"]))) or
-            (bool(re.search(r"[a-zA-Z]", query)) and bool(re.search(r"[a-zA-Z]", best["text"])))
+            (bool(re.search(r"[\u0900-\u097F]", query)) and best["is_devanagari_script"]) or
+            (bool(re.search(r"[a-zA-Z]", query)) and best["is_latin_script"]) or
+            (bool(re.search(r"[\u0980-\u09FF]", query)) and best["is_bengali_script"])
         )
 
-        if is_same_script and best["overlap"] == 0 and len(q_content_tokens) >= 2:
-            # Check if any full numeric token (e.g. 2026) or key entity substring matches
-            has_num_match = any(
-                qt.isnumeric() and len(qt) >= 3 and qt in best["text"]
-                for qt in q_content_tokens
-            )
-            has_term_match = any(
-                len(qt) >= 4 and qt in best["text"].lower()
-                for qt in q_content_tokens
-            )
-            if not has_num_match and not has_term_match:
-                elapsed_ms = (time.perf_counter() - start_time) * 1000
-                return {
-                    "answer": "ABSTAIN",
-                    "is_abstained": True,
-                    "confidence": 0.0,
-                    "latency_ms": round(elapsed_ms, 2),
-                    "provider": "deterministic_extractive"
-                }
+        has_any_token_match = any(
+            qt in best["text"].lower() for qt in expanded_q_tokens if len(qt) >= 3
+        ) if expanded_q_tokens else True
+
+        # If same script and zero token match, or if candidate score is deeply negative, ABSTAIN.
+        if (is_same_script and expanded_q_tokens and not has_any_token_match and best["overlap"] == 0 and len(expanded_q_tokens) >= 2) or best["score"] < 0:
+            elapsed_ms = (time.perf_counter() - start_time) * 1000
+            return {
+                "answer": "ABSTAIN",
+                "is_abstained": True,
+                "confidence": 0.0,
+                "latency_ms": round(elapsed_ms, 2),
+                "provider": "deterministic_extractive"
+            }
 
         answer_text = f"{best['text']} {best['citation']}"
         elapsed_ms = (time.perf_counter() - start_time) * 1000

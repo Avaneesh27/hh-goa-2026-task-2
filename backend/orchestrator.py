@@ -305,12 +305,12 @@ class RAGOrchestrator:
         timer.stop("stt")
 
         final_query_text = (stt_resp.text or "").strip()
-        detected_stt_lang = stt_resp.language
+        detected_stt_lang = stt_resp.language if stt_resp.language not in ("unknown", "auto", "") else None
 
         # If Sarvam STT returned empty or unconfigured, use live transcript fallback from browser
         if not final_query_text and transcript_fallback and transcript_fallback.strip():
             final_query_text = transcript_fallback.strip()
-            detected_stt_lang = language_hint or "hi"
+            detected_stt_lang = language_hint if language_hint not in ("auto", "unknown", "") else None
             execution_trace.append(f"✓ Speech transcribed via Audio Engine: \"{final_query_text}\"")
         elif final_query_text:
             execution_trace.append(f"✓ Speech transcribed via Sarvam STT: \"{final_query_text}\" ({stt_resp.latency_ms}ms)")
@@ -318,11 +318,12 @@ class RAGOrchestrator:
             timer.durations_ms["stt"] = stt_resp.latency_ms
             err_msg = stt_resp.error or "Audio unrecognizable. Please speak clearly into your microphone."
             execution_trace.append(f"⚠ STT Notice: {err_msg}")
-            abstain_data = self.guardrails.get_abstention_response("en", reason=err_msg)
+            fallback_lang = language_hint if language_hint not in ("auto", "unknown", "", None) else "en"
+            abstain_data = self.guardrails.get_abstention_response(fallback_lang, reason=err_msg)
             return self._build_response(
                 request_id=request_id,
                 transcript="(audio unrecognizable)",
-                language="unknown",
+                language=fallback_lang,
                 answer=abstain_data["answer"],
                 confidence=0.0,
                 grounded=False,

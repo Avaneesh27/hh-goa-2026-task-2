@@ -112,18 +112,19 @@ class GuardrailManager:
         overlap = ans_content_tokens.intersection(ctx_tokens)
         grounding_ratio = len(overlap) / len(ans_content_tokens)
 
-        # Cross-script check: if answer script differs from context script (e.g. Tamil query on Hindi corpus)
-        # lexical token overlap across scripts is 0, but citations and named entities/numbers should match
-        is_cross_script = len(ans_content_tokens.intersection(ctx_tokens)) == 0 and any(
-            c.isdigit() for c in answer
-        ) == any(c.isdigit() for c in context_text)
+        # Check if citations match
+        ans_citations = set(re.findall(r"\[\d+\]", answer))
+        ctx_citations = set(re.findall(r"\[\d+\]", context_text))
+        has_valid_citation = bool(ans_citations and ans_citations.issubset(ctx_citations))
 
-        if is_cross_script and len(answer) > 15:
-            # Verified cross-lingual translation synthesis
-            return True, 0.85, "Cross-lingual answer verified against retrieved evidence."
+        # Check for numeric entity consistency
+        ans_digits = set(re.findall(r"\b\d+\b", answer))
+        ctx_digits = set(re.findall(r"\b\d+\b", context_text))
+        digits_consistent = not ans_digits or bool(ans_digits.intersection(ctx_digits))
 
-        if grounding_ratio < self.min_grounding_ratio and not is_cross_script:
-            return False, round(grounding_ratio, 3), f"Answer content overlap with context ({grounding_ratio:.1%}) is below grounding threshold ({self.min_grounding_ratio:.1%})."
+        if grounding_ratio < self.min_grounding_ratio:
+            if not has_valid_citation or not digits_consistent:
+                return False, round(grounding_ratio, 3), f"Answer content overlap with context ({grounding_ratio:.1%}) is below grounding threshold ({self.min_grounding_ratio:.1%})."
 
         return True, round(grounding_ratio, 3), "Answer verified and grounded against retrieved evidence."
 
@@ -136,8 +137,8 @@ class GuardrailManager:
         Guardrail 4: Returns deterministic, polite abstention text matching user language.
         Supports all 14 Indian languages + English + Hinglish.
         """
-        norm_lang = (language or "hi").lower().strip()
-        msg = ABSTENTION_MESSAGES.get(norm_lang, ABSTENTION_MESSAGES.get("hi", "I couldn't find sufficient evidence in the retrieved dataset to answer that reliably."))
+        norm_lang = (language or "en").lower().strip()
+        msg = ABSTENTION_MESSAGES.get(norm_lang, ABSTENTION_MESSAGES.get("en", "I couldn't find sufficient evidence in the retrieved dataset to answer that reliably."))
 
         return {
             "answer": msg,

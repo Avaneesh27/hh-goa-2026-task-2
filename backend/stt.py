@@ -75,16 +75,20 @@ class SarvamSTTService:
                 error=err_msg
             )
 
-        # Resolve Sarvam language code
-        norm_lang = (language_code or "hi").lower().strip()
-        sarvam_lang = SARVAM_LANG_MAP.get(norm_lang, norm_lang if "-IN" in norm_lang else "hi-IN")
+        # Resolve Sarvam language code (use "unknown" for auto-detection)
+        if not language_code or language_code.strip() in ("", "auto", "unknown"):
+            sarvam_lang = "unknown"
+            norm_lang = "auto"
+        else:
+            norm_lang = language_code.lower().strip()
+            sarvam_lang = SARVAM_LANG_MAP.get(norm_lang, norm_lang if "-IN" in norm_lang else "unknown")
 
         # 2. Check for missing API Key (Provide graceful notice)
         if not self.api_key or self.api_key == "your_sarvam_api_key_here":
             print(f"[!] Warning: SARVAM_API_KEY not configured. Language requested: {sarvam_lang}.")
             return STTResponse(
                 text="",
-                language=norm_lang,
+                language="unknown",
                 confidence=0.0,
                 latency_ms=round((time.perf_counter() - start_time) * 1000, 2),
                 error="SARVAM_API_KEY not set in backend .env"
@@ -121,13 +125,13 @@ class SarvamSTTService:
                     if resp.status_code == 200:
                         res_json = resp.json()
                         transcript = res_json.get("transcript", "").strip()
-                        raw_detected_lang = res_json.get("language_code", norm_lang)
+                        raw_detected_lang = res_json.get("language_code", norm_lang if norm_lang != "auto" else "en-IN")
                         lang_short = raw_detected_lang.split("-")[0].lower() if "-" in raw_detected_lang else raw_detected_lang.lower()
                         
                         elapsed_ms = (time.perf_counter() - start_time) * 1000
                         return STTResponse(
                             text=transcript,
-                            language=lang_short or norm_lang,
+                            language=lang_short,
                             confidence=0.96,
                             latency_ms=round(elapsed_ms, 2)
                         )

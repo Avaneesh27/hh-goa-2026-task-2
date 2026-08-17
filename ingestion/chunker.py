@@ -374,26 +374,72 @@ class AdaptiveChunker:
 # =========================================================================
 # Adaptive Strategy Selector
 # =========================================================================
-def select_adaptive_chunk_strategy(query: str, intent: str = "factual") -> Tuple[str, str]:
+def select_adaptive_strategy(
+    doc_length: Optional[int] = None,
+    query_type: str = "factoid",
+    language_script: str = "Devanagari",
+    query: Optional[str] = None
+) -> Tuple[str, str]:
     """
-    Selects chunking strategy deterministically based on query length and intent:
-      - Simple/Factual query (<= 6 words) -> sentence_aware (precise evidence)
-      - Highly specific / numeric / entity query -> sentence_aware (fine-grained)
-      - Complex / Long query (> 10 words) -> multi_resolution
-      - Broad / Descriptive / comparison query -> structural / sliding_window
-    Returns (strategy_name, reason).
-    """
-    words = query.strip().split()
-    word_count = len(words)
+    Chooses the optimal chunking strategy deterministically based on three key dimensions:
+      1. Document Length:
+         - Short (< 100 words): Sentence-aware fine-grained splitting to maximize precision.
+         - Medium (100 - 500 words): Structural paragraph or Sliding Window (25-word overlap).
+         - Long (> 500 words): Multi-resolution hierarchical indexing (Doc -> Paragraph -> Sentence).
+      2. Query Type:
+         - Factoid / Entity / Numeric / Definition: Sentence-aware chunking for tight evidence grounding.
+         - Explanatory / Comparison / Procedural / Descriptive: Multi-resolution or structural chunking for macro-context.
+      3. Language Script:
+         - Indic Scripts (Devanagari, Bengali, Tamil, Telugu, etc.): Sentence-aware chunking with danda ('।', '॥') delimiters.
+         - Latin / Hinglish: Sentence-aware with Latin boundaries or sliding window with entity overlap.
 
-    if intent in ("numeric", "entity", "person", "definition") and word_count <= 8:
-        return "sentence_aware", f"Fine-grained sentence chunking chosen for {intent} query ({word_count} words)"
-    elif word_count > 10 or intent in ("comparison", "procedural"):
-        return "multi_resolution", f"Multi-resolution hierarchical chunking chosen for complex/long query ({word_count} words)"
-    elif intent == "description":
-        return "structural", f"Structural paragraph chunking chosen for descriptive query ({word_count} words)"
-    else:
-        return "sentence_aware", f"Default sentence-aware chunking chosen for query ({word_count} words)"
+    Returns:
+      (strategy_name, decision_rationale)
+    """
+    q_len = len(query.strip().split()) if query else 5
+    q_type = (query_type or "factoid").lower()
+    script = (language_script or "Devanagari").capitalize()
+
+    # Dimension 1: Document Length Priority
+    if doc_length is not None and doc_length > 500:
+        return (
+            "multi_resolution",
+            f"Multi-resolution hierarchical chunking selected for long document ({doc_length} words) in {script} script to preserve macro and micro context."
+        )
+
+    # Dimension 2: Query Type / Intent Priority
+    if q_type in ("factoid", "entity", "person", "numeric", "definition") and q_len <= 8:
+        return (
+            "sentence_aware",
+            f"Sentence-aware fine-grained chunking selected for {q_type} query ({q_len} words) to maximize precision on {script} text."
+        )
+    elif q_type in ("explanatory", "comparison", "procedural", "long_form") or q_len > 10:
+        return (
+            "multi_resolution",
+            f"Multi-resolution hierarchical chunking selected for {q_type} query ({q_len} words) requiring rich context."
+        )
+    elif q_type in ("descriptive", "overview"):
+        return (
+            "structural",
+            f"Structural paragraph chunking selected for {q_type} query in {script} script."
+        )
+
+    # Dimension 3: Language Script & Document Characteristics
+    if doc_length is not None and doc_length < 100:
+        return (
+            "sentence_aware",
+            f"Sentence-aware chunking selected for compact {script} document ({doc_length} words)."
+        )
+    
+    return (
+        "sentence_aware",
+        f"Default sentence-aware chunking selected for {script} text with {q_type} intent."
+    )
+
+
+def select_adaptive_chunk_strategy(query: str, intent: str = "factual") -> Tuple[str, str]:
+    """Backwards-compatible wrapper for select_adaptive_strategy."""
+    return select_adaptive_strategy(query_type=intent, query=query)
 
 
 if __name__ == "__main__":

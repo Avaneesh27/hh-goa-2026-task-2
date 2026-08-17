@@ -16,6 +16,7 @@ from typing import List, Dict, Any, Tuple, Optional, Set
 from backend.keywords import (
     INTENT_KEYWORDS,
     HINGLISH_KEYWORDS,
+    HINGLISH_STRONG_MARKERS,
     MARATHI_MARKERS,
     NEPALI_MARKERS,
     SANSKRIT_MARKERS,
@@ -46,12 +47,33 @@ class QueryProcessor:
         self.token_pattern = re.compile(r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+", re.UNICODE)
         self.extra_spaces_pattern = re.compile(r"\s+")
 
+    def clean_conversational_filler(self, query: str) -> str:
+        """Strips conversational greetings, filler repetitions, and query intros from spoken queries."""
+        cleaned = query.strip()
+        filler_patterns = [
+            r"^(hey|hello|hi|okay|ok|listen|excuse me|please)\b[\s,\.\!\?]*",
+            r"^(i just want to know about|i want to know about|i want to know|tell me about|tell me|give me information on|give me information about|can you tell me about|can you tell me|could you tell me about|could you tell me|what about|let me know about)\b[\s,\.\!\?]*",
+            r"^(batao|bataiye|mujhe janna hai|mujhe batao|kya aap bata sakte hain)\b[\s,\.\!\?]*",
+        ]
+        changed = True
+        while changed:
+            changed = False
+            for pat in filler_patterns:
+                new_q = re.sub(pat, "", cleaned, flags=re.IGNORECASE).strip()
+                new_q = re.sub(r"^[\s,\.\!\?\:\;]+", "", new_q).strip()
+                if new_q and new_q != cleaned:
+                    cleaned = new_q
+                    changed = True
+        return cleaned or query
+
     def normalize_query(self, query: str) -> str:
-        """Cleans and normalizes query Unicode, whitespaces, and punctuation."""
+        """Cleans and normalizes query Unicode, whitespaces, conversational filler, and punctuation."""
         if not query:
             return ""
         # NFKC Unicode normalization
         normalized = unicodedata.normalize("NFKC", query)
+        # Strip conversational spoken preamble ("hey hey hey okay I just want to know about...")
+        normalized = self.clean_conversational_filler(normalized)
         # Normalize punctuation (strip leading bullets/dots/quotes)
         normalized = re.sub(r"^[\s\.\,\:\;\-\–\—\?\"\']+", "", normalized)
         # Collapse multiple spaces
@@ -86,8 +108,7 @@ class QueryProcessor:
             return "unknown"
 
         top_script, (count, code) = max(script_counts.items(), key=lambda x: x[1][0])
-
-        words = set(query.lower().split())
+        words = set(re.findall(r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+", query.lower()))
 
         if top_script == "Devanagari":
             # Check for Marathi specific vocabulary markers
@@ -108,8 +129,11 @@ class QueryProcessor:
             return "bn"
 
         if top_script == "Latin":
-            hinglish_match_count = sum(1 for w in words if w in HINGLISH_KEYWORDS)
-            if hinglish_match_count >= 1:
+            latin_words = {w for w in words if w.isalpha()}
+            if any(w in HINGLISH_STRONG_MARKERS for w in latin_words):
+                return "hinglish"
+            hinglish_match_count = sum(1 for w in latin_words if w in HINGLISH_KEYWORDS)
+            if hinglish_match_count >= 2:
                 return "hinglish"
             return "en"
 
@@ -186,7 +210,10 @@ class QueryProcessor:
 
         normalized = self.normalize_query(raw_query)
         detected_lang = self.detect_language(normalized)
-        effective_lang = language.lower().strip() if language and language.strip() else detected_lang
+        if language and language.strip().lower() not in ("", "auto", "unknown"):
+            effective_lang = language.lower().strip()
+        else:
+            effective_lang = detected_lang
         intent = self.classify_intent(normalized)
         keywords = self.extract_keywords(normalized, effective_lang)
         retrieval_q = self.build_retrieval_query(normalized, keywords)
