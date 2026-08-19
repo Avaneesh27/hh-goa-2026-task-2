@@ -65,3 +65,27 @@ export async function fetchMetrics(): Promise<any> {
   }
   return res.json();
 }
+
+export async function sendTTSRequest(
+  text: string,
+  language: string,
+  speaker?: string
+): Promise<Blob> {
+  const res = await fetch(`${API_BASE}/api/text-to-speech`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      text,
+      language,
+      speaker: speaker || "shubh",
+    }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || `TTS generation failed: ${res.statusText}`);
+  }
+
+  return res.blob();
+}
+

@@ -1,0 +1,357 @@
+{
+  "model_path": "models/msmarco-xi-multilingual-biencoder",
+  "device": "cuda",
+  "timestamp": "2026-08-18 11:41:02 UTC",
+  "total_test_executions": 35000,
+  "total_duration_sec": 1734.5,
+  "macro_metrics": {
+    "Recall@1": 93.04,
+    "Recall@5": 99.96,
+    "Recall@10": 100.0,
+    "MRR@10": 0.9574,
+    "Answer_Token_F1": 34.15,
+    "Answer_Semantic_Similarity": 0.5753,
+    "Faithfulness_Rate": 88.6,
+    "End_to_End_Latency_p50_ms": 18.55,
+    "End_to_End_Latency_p95_ms": 365.09,
+    "End_to_End_Latency_p99_ms": 474.33
+  },
+  "per_language_benchmarks": [
+    {
+      "language_code": "hi",
+      "language_name": "Hindi",
+      "total_test_executions": 5000,
+      "total_test_duration_sec": 373.61,
+      "retrieval_metrics": {
+        "Recall@1": 94.24,
+        "Recall@5": 99.98,
+        "Recall@10": 100.0,
+        "MRR@10": 0.9652
+      },
+      "generation_quality_metrics": {
+        "Token_F1_Score": 29.05,
+        "ROUGE_L_Approx": 26.86,
+        "Answer_Semantic_Similarity": 0.4776,
+        "Faithfulness_Rate": 77.9
+      },
+      "latency_percentiles_ms": {
+        "embedding": {
+          "mean": 0.69,
+          "p50": 0.5,
+          "p90": 1.53,
+          "p95": 1.62,
+          "p99": 2.81
+        },
+        "retrieval": {
+          "mean": 17.31,
+          "p50": 18.12,
+          "p90": 23.56,
+          "p95": 26.18,
+          "p99": 31.43
+        },
+        "generation": {
+          "mean": 56.31,
+          "p50": 0.27,
+          "p90": 0.6,
+          "p95": 588.46,
+          "p99": 882.6
+        },
+        "end_to_end": {
+          "mean": 73.63,
+          "p50": 18.73,
+          "p90": 33.12,
+          "p95": 608.55,
+          "p99": 902.83
+        }
+      }
+    },
+    {
+      "language_code": "bn",
+      "language_name": "Bengali",
+      "total_test_executions": 5000,
+      "total_test_duration_sec": 97.35,
+      "retrieval_metrics": {
+        "Recall@1": 92.44,
+        "Recall@5": 99.96,
+        "Recall@10": 100.0,
+        "MRR@10": 0.9537
+      },
+      "generation_quality_metrics": {
+        "Token_F1_Score": 30.89,
+        "ROUGE_L_Approx": 29.26,
+        "Answer_Semantic_Similarity": 0.5386,
+        "Faithfulness_Rate": 86.38
+      },
+      "latency_percentiles_ms": {
+        "embedding": {
+          "mean": 0.54,
+          "p50": 0.44,
+          "p90": 1.42,
+          "p95": 1.46,
+          "p99": 1.5
+        },
+        "retrieval": {
+          "mean": 18.3,
+          "p50": 18.22,
+          "p90": 19.89,
+          "p95": 21.23,
+          "p99": 24.53
+        },
+        "generation": {
+          "mean": 0.23,
+          "p50": 0.22,
+          "p90": 0.31,
+          "p95": 0.35,
+          "p99": 0.44
+        },
+        "end_to_end": {
+          "mean": 18.54,
+          "p50": 18.45,
+          "p90": 20.15,
+          "p95": 21.47,
+          "p99": 24.89
+        }
+      }
+    },
+    {
+      "language_code": "mr",
+      "language_name": "Marathi",
+      "total_test_executions": 5000,
+      "total_test_duration_sec": 97.15,
+      "retrieval_metrics": {
+        "Recall@1": 93.74,
+        "Recall@5": 99.96,
+        "Recall@10": 100.0,
+        "MRR@10": 0.9626
+      },
+      "generation_quality_metrics": {
+        "Token_F1_Score": 27.78,
+        "ROUGE_L_Approx": 26.39,
+        "Answer_Semantic_Similarity": 0.5095,
+        "Faithfulness_Rate": 80.14
+      },
+      "latency_percentiles_ms": {
+        "embedding": {
+          "mean": 0.6,
+          "p50": 0.42,
+          "p90": 1.54,
+          "p95": 1.62,
+          "p99": 1.72
+        },
+        "retrieval": {
+          "mean": 18.19,
+          "p50": 18.04,
+          "p90": 20.09,
+          "p95": 21.96,
+          "p99": 25.23
+        },
+        "generation": {
+          "mean": 0.25,
+          "p50": 0.24,
+          "p90": 0.34,
+          "p95": 0.38,
+          "p99": 0.5
+        },
+        "end_to_end": {
+          "mean": 18.46,
+          "p50": 18.3,
+          "p90": 20.4,
+          "p95": 22.21,
+          "p99": 25.48
+        }
+      }
+    },
+    {
+      "language_code": "ta",
+      "language_name": "Tamil",
+      "total_test_executions": 5000,
+      "total_test_duration_sec": 456.15,
+      "retrieval_metrics": {
+        "Recall@1": 88.66,
+        "Recall@5": 99.88,
+        "Recall@10": 100.0,
+        "MRR@10": 0.9279
+      },
+      "generation_quality_metrics": {
+        "Token_F1_Score": 31.86,
+        "ROUGE_L_Approx": 30.24,
+        "Answer_Semantic_Similarity": 0.6024,
+        "Faithfulness_Rate": 90.34
+      },
+      "latency_percentiles_ms": {
+        "embedding": {
+          "mean": 0.77,
+          "p50": 0.61,
+          "p90": 1.68,
+          "p95": 2.05,
+          "p99": 2.14
+        },
+        "retrieval": {
+          "mean": 21.34,
+          "p50": 18.7,
+          "p90": 29.25,
+          "p95": 35.18,
+          "p99": 47.5
+        },
+        "generation": {
+          "mean": 68.68,
+          "p50": 0.23,
+          "p90": 0.59,
+          "p95": 635.46,
+          "p99": 928.87
+        },
+        "end_to_end": {
+          "mean": 90.04,
+          "p50": 19.27,
+          "p90": 56.78,
+          "p95": 659.04,
+          "p99": 950.39
+        }
+      }
+    },
+    {
+      "language_code": "te",
+      "language_name": "Telugu",
+      "total_test_executions": 5000,
+      "total_test_duration_sec": 311.14,
+      "retrieval_metrics": {
+        "Recall@1": 91.78,
+        "Recall@5": 99.98,
+        "Recall@10": 100.0,
+        "MRR@10": 0.9494
+      },
+      "generation_quality_metrics": {
+        "Token_F1_Score": 34.51,
+        "ROUGE_L_Approx": 32.78,
+        "Answer_Semantic_Similarity": 0.6159,
+        "Faithfulness_Rate": 93.64
+      },
+      "latency_percentiles_ms": {
+        "embedding": {
+          "mean": 0.6,
+          "p50": 0.5,
+          "p90": 0.91,
+          "p95": 1.12,
+          "p99": 2.59
+        },
+        "retrieval": {
+          "mean": 19.56,
+          "p50": 18.24,
+          "p90": 24.47,
+          "p95": 27.96,
+          "p99": 36.1
+        },
+        "generation": {
+          "mean": 41.64,
+          "p50": 0.22,
+          "p90": 0.36,
+          "p95": 595.73,
+          "p99": 675.4
+        },
+        "end_to_end": {
+          "mean": 61.22,
+          "p50": 18.56,
+          "p90": 29.1,
+          "p95": 616.55,
+          "p99": 693.13
+        }
+      }
+    },
+    {
+      "language_code": "gu",
+      "language_name": "Gujarati",
+      "total_test_executions": 5000,
+      "total_test_duration_sec": 291.81,
+      "retrieval_metrics": {
+        "Recall@1": 92.58,
+        "Recall@5": 99.98,
+        "Recall@10": 100.0,
+        "MRR@10": 0.9547
+      },
+      "generation_quality_metrics": {
+        "Token_F1_Score": 35.8,
+        "ROUGE_L_Approx": 34.14,
+        "Answer_Semantic_Similarity": 0.5864,
+        "Faithfulness_Rate": 94.02
+      },
+      "latency_percentiles_ms": {
+        "embedding": {
+          "mean": 0.7,
+          "p50": 0.55,
+          "p90": 1.46,
+          "p95": 1.67,
+          "p99": 2.09
+        },
+        "retrieval": {
+          "mean": 19.21,
+          "p50": 18.1,
+          "p90": 23.36,
+          "p95": 27.31,
+          "p99": 33.93
+        },
+        "generation": {
+          "mean": 37.99,
+          "p50": 0.23,
+          "p90": 0.35,
+          "p95": 587.61,
+          "p99": 681.89
+        },
+        "end_to_end": {
+          "mean": 57.22,
+          "p50": 18.41,
+          "p90": 28.02,
+          "p95": 606.54,
+          "p99": 699.38
+        }
+      }
+    },
+    {
+      "language_code": "en",
+      "language_name": "English",
+      "total_test_executions": 5000,
+      "total_test_duration_sec": 94.65,
+      "retrieval_metrics": {
+        "Recall@1": 97.82,
+        "Recall@5": 100.0,
+        "Recall@10": 100.0,
+        "MRR@10": 0.9885
+      },
+      "generation_quality_metrics": {
+        "Token_F1_Score": 49.13,
+        "ROUGE_L_Approx": 47.18,
+        "Answer_Semantic_Similarity": 0.6964,
+        "Faithfulness_Rate": 97.78
+      },
+      "latency_percentiles_ms": {
+        "embedding": {
+          "mean": 0.38,
+          "p50": 0.36,
+          "p90": 0.49,
+          "p95": 0.54,
+          "p99": 0.73
+        },
+        "retrieval": {
+          "mean": 17.99,
+          "p50": 17.92,
+          "p90": 19.8,
+          "p95": 21.07,
+          "p99": 23.95
+        },
+        "generation": {
+          "mean": 0.2,
+          "p50": 0.19,
+          "p90": 0.26,
+          "p95": 0.29,
+          "p99": 0.35
+        },
+        "end_to_end": {
+          "mean": 18.2,
+          "p50": 18.13,
+          "p90": 20.02,
+          "p95": 21.28,
+          "p99": 24.23
+        }
+      }
+    }
+  ]
+}

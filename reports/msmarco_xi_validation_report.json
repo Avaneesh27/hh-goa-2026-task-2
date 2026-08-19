@@ -1,0 +1,242 @@
+{
+  "model_evaluated": "models/msmarco-xi-multilingual-biencoder",
+  "device": "cuda",
+  "timestamp": "2026-08-18 11:04:07 UTC",
+  "total_evaluation_time_sec": 367.23,
+  "total_languages_evaluated": 14,
+  "macro_average_metrics": {
+    "Recall@1": 23.01,
+    "Recall@5": 55.68,
+    "Recall@10": 65.98,
+    "Recall@20": 73.12,
+    "MRR@10": 0.365,
+    "NDCG@10": 0.4358,
+    "Precision@5": 11.14
+  },
+  "per_language_results": [
+    {
+      "language_code": "hi",
+      "language_name": "Hindi",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16796,
+      "metrics": {
+        "Recall@1": 28.1,
+        "Recall@5": 66.7,
+        "Recall@10": 76.6,
+        "Recall@20": 82.7,
+        "MRR@10": 0.4333,
+        "NDCG@10": 0.5135,
+        "Precision@5": 13.34
+      },
+      "evaluation_latency_sec": 23.72
+    },
+    {
+      "language_code": "bn",
+      "language_name": "Bengali",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 21.8,
+        "Recall@5": 57.0,
+        "Recall@10": 68.6,
+        "Recall@20": 76.1,
+        "MRR@10": 0.362,
+        "NDCG@10": 0.4398,
+        "Precision@5": 11.4
+      },
+      "evaluation_latency_sec": 25.25
+    },
+    {
+      "language_code": "mr",
+      "language_name": "Marathi",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16796,
+      "metrics": {
+        "Recall@1": 27.4,
+        "Recall@5": 65.4,
+        "Recall@10": 75.6,
+        "Recall@20": 81.4,
+        "MRR@10": 0.4258,
+        "NDCG@10": 0.5053,
+        "Precision@5": 13.08
+      },
+      "evaluation_latency_sec": 24.96
+    },
+    {
+      "language_code": "ta",
+      "language_name": "Tamil",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 21.6,
+        "Recall@5": 53.3,
+        "Recall@10": 62.8,
+        "Recall@20": 70.7,
+        "MRR@10": 0.344,
+        "NDCG@10": 0.4122,
+        "Precision@5": 10.66
+      },
+      "evaluation_latency_sec": 26.76
+    },
+    {
+      "language_code": "te",
+      "language_name": "Telugu",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 22.6,
+        "Recall@5": 58.9,
+        "Recall@10": 69.7,
+        "Recall@20": 76.2,
+        "MRR@10": 0.3741,
+        "NDCG@10": 0.4517,
+        "Precision@5": 11.78
+      },
+      "evaluation_latency_sec": 26.11
+    },
+    {
+      "language_code": "gu",
+      "language_name": "Gujarati",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 29.2,
+        "Recall@5": 63.2,
+        "Recall@10": 73.5,
+        "Recall@20": 78.7,
+        "MRR@10": 0.4323,
+        "NDCG@10": 0.5052,
+        "Precision@5": 12.64
+      },
+      "evaluation_latency_sec": 25.93
+    },
+    {
+      "language_code": "kn",
+      "language_name": "Kannada",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 21.8,
+        "Recall@5": 54.1,
+        "Recall@10": 64.4,
+        "Recall@20": 71.7,
+        "MRR@10": 0.355,
+        "NDCG@10": 0.4246,
+        "Precision@5": 10.82
+      },
+      "evaluation_latency_sec": 26.77
+    },
+    {
+      "language_code": "ml",
+      "language_name": "Malayalam",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 21.4,
+        "Recall@5": 52.0,
+        "Recall@10": 63.0,
+        "Recall@20": 71.2,
+        "MRR@10": 0.34,
+        "NDCG@10": 0.4094,
+        "Precision@5": 10.4
+      },
+      "evaluation_latency_sec": 26.7
+    },
+    {
+      "language_code": "pa",
+      "language_name": "Punjabi",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 23.8,
+        "Recall@5": 53.6,
+        "Recall@10": 63.7,
+        "Recall@20": 70.2,
+        "MRR@10": 0.3654,
+        "NDCG@10": 0.4307,
+        "Precision@5": 10.72
+      },
+      "evaluation_latency_sec": 27.07
+    },
+    {
+      "language_code": "or",
+      "language_name": "Odia",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 19.9,
+        "Recall@5": 49.1,
+        "Recall@10": 58.5,
+        "Recall@20": 67.4,
+        "MRR@10": 0.3209,
+        "NDCG@10": 0.3843,
+        "Precision@5": 9.82
+      },
+      "evaluation_latency_sec": 27.44
+    },
+    {
+      "language_code": "as",
+      "language_name": "Assamese",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16796,
+      "metrics": {
+        "Recall@1": 19.3,
+        "Recall@5": 47.1,
+        "Recall@10": 55.7,
+        "Recall@20": 63.3,
+        "MRR@10": 0.3102,
+        "NDCG@10": 0.3697,
+        "Precision@5": 9.42
+      },
+      "evaluation_latency_sec": 27.37
+    },
+    {
+      "language_code": "ne",
+      "language_name": "Nepali",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 24.7,
+        "Recall@5": 60.8,
+        "Recall@10": 71.2,
+        "Recall@20": 79.2,
+        "MRR@10": 0.3958,
+        "NDCG@10": 0.4719,
+        "Precision@5": 12.16
+      },
+      "evaluation_latency_sec": 26.51
+    },
+    {
+      "language_code": "sa",
+      "language_name": "Sanskrit",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 15.1,
+        "Recall@5": 38.2,
+        "Recall@10": 49.0,
+        "Recall@20": 56.4,
+        "MRR@10": 0.2503,
+        "NDCG@10": 0.3073,
+        "Precision@5": 7.64
+      },
+      "evaluation_latency_sec": 27.33
+    },
+    {
+      "language_code": "ur",
+      "language_name": "Urdu",
+      "evaluated_queries": 1000,
+      "corpus_passages": 16797,
+      "metrics": {
+        "Recall@1": 25.5,
+        "Recall@5": 60.1,
+        "Recall@10": 71.4,
+        "Recall@20": 78.5,
+        "MRR@10": 0.4011,
+        "NDCG@10": 0.4763,
+        "Precision@5": 12.02
+      },
+      "evaluation_latency_sec": 25.28
+    }
+  ]
+}

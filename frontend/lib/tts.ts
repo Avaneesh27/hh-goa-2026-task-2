@@ -30,6 +30,12 @@ class TTSManager {
   private voices: SpeechSynthesisVoice[] = [];
   private voicesLoaded: boolean = false;
 
+  // HTML5 Audio variables for Sarvam TTS
+  private audioElement: HTMLAudioElement | null = null;
+  private activeMode: "sarvam" | "native" | null = null;
+  private currentOptions: TTSOptions = {};
+  private audioCache: Record<string, string> = {}; // Cache of text_lang -> Object URL
+
   constructor() {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       this.loadVoices();
@@ -48,7 +54,7 @@ class TTSManager {
   }
 
   public isSupported(): boolean {
-    return typeof window !== "undefined" && "speechSynthesis" in window;
+    return typeof window !== "undefined" && ("speechSynthesis" in window || typeof Audio !== "undefined");
   }
 
   private findBestVoice(langCode: string): SpeechSynthesisVoice | null {
@@ -88,22 +94,63 @@ class TTSManager {
     return this.voices.find((v) => v.default) || (this.voices.length > 0 ? this.voices[0] : null);
   }
 
-  public speak(text: string, langCode: string, options: TTSOptions = {}): boolean {
-    if (!this.isSupported()) {
-      if (options.onError) options.onError(new Error("SpeechSynthesis not supported"));
-      return false;
+  private cleanupAudio() {
+    if (this.audioElement) {
+      this.audioElement.pause();
+      this.audioElement.onplay = null;
+      this.audioElement.onended = null;
+      this.audioElement.onpause = null;
+      this.audioElement.onerror = null;
+      this.audioElement = null;
     }
+  }
 
-    this.stop();
-
-    const spokenText = cleanTextForNarration(text);
-    if (!spokenText) {
-      if (options.onEnd) options.onEnd();
-      return false;
-    }
-
+  private playSarvamAudio(url: string, options: TTSOptions) {
     try {
-      const utterance = new SpeechSynthesisUtterance(spokenText);
+      this.cleanupAudio();
+      this.audioElement = new Audio(url);
+
+      if (options.rate) {
+        this.audioElement.playbackRate = options.rate;
+      }
+      if (options.volume !== undefined) {
+        this.audioElement.volume = options.volume;
+      }
+
+      this.audioElement.onplay = () => {
+        if (options.onStart) options.onStart();
+      };
+
+      this.audioElement.onended = () => {
+        this.activeMode = null;
+        if (options.onEnd) options.onEnd();
+      };
+
+      this.audioElement.onpause = () => {
+        if (this.audioElement && !this.audioElement.ended && this.activeMode === "sarvam") {
+          if (options.onPause) options.onPause();
+        }
+      };
+
+      this.audioElement.onerror = (e) => {
+        console.warn("Sarvam audio element reported playback error:", e);
+        this.activeMode = null;
+        if (options.onError) options.onError(e);
+      };
+
+      this.audioElement.play().catch((err) => {
+        console.warn("Sarvam audio play request rejected:", err);
+        // Fall back to native on play failure (e.g. autoplay restriction)
+        if (options.onError) options.onError(err);
+      });
+    } catch (err) {
+      if (options.onError) options.onError(err);
+    }
+  }
+
+  private speakNative(text: string, langCode: string, options: TTSOptions): boolean {
+    try {
+      const utterance = new SpeechSynthesisUtterance(text);
       const voice = this.findBestVoice(langCode);
       if (voice) {
         utterance.voice = voice;
@@ -121,6 +168,7 @@ class TTSManager {
       };
       utterance.onend = () => {
         this.currentUtterance = null;
+        this.activeMode = null;
         if (options.onEnd) options.onEnd();
       };
       utterance.onpause = () => {
@@ -131,6 +179,7 @@ class TTSManager {
       };
       utterance.onerror = (e) => {
         this.currentUtterance = null;
+        this.activeMode = null;
         if (options.onError) options.onError(e);
       };
 
@@ -143,31 +192,127 @@ class TTSManager {
     }
   }
 
+  public speak(text: string, langCode: string, options: TTSOptions = {}): boolean {
+    if (!this.isSupported()) {
+      if (options.onError) options.onError(new Error("TTS is not supported in this browser"));
+      return false;
+    }
+
+    this.stop();
+    this.currentOptions = options;
+
+    const spokenText = cleanTextForNarration(text);
+    if (!spokenText) {
+      if (options.onEnd) options.onEnd();
+      return false;
+    }
+
+    const normLang = langCode.toLowerCase().split("-")[0];
+    const sarvamSupportedLangs = ["hi", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te", "en"];
+
+    if (sarvamSupportedLangs.includes(normLang)) {
+      const cacheKey = `${spokenText}_${normLang}`;
+      if (this.audioCache[cacheKey]) {
+        this.activeMode = "sarvam";
+        this.playSarvamAudio(this.audioCache[cacheKey], options);
+        return true;
+      }
+
+      this.activeMode = "sarvam";
+      // Load dynamically to avoid circular references and handle errors cleanly
+      import("./api")
+        .then(async ({ sendTTSRequest }) => {
+          try {
+            const blob = await sendTTSRequest(spokenText, normLang);
+            const url = URL.createObjectURL(blob);
+            this.audioCache[cacheKey] = url;
+
+            // Make sure active mode hasn't changed during network fetch
+            if (this.activeMode === "sarvam") {
+              this.playSarvamAudio(url, options);
+            }
+          } catch (err) {
+            console.warn("Sarvam TTS request failed, falling back to local SpeechSynthesis:", err);
+            if (this.activeMode === "sarvam") {
+              this.activeMode = "native";
+              this.speakNative(spokenText, langCode, options);
+            }
+          }
+        })
+        .catch((err) => {
+          console.warn("Failed to load api helpers, falling back to local SpeechSynthesis:", err);
+          if (this.activeMode === "sarvam") {
+            this.activeMode = "native";
+            this.speakNative(spokenText, langCode, options);
+          }
+        });
+
+      return true;
+    } else {
+      // Direct local synthesis for Assamese, Nepali, Sanskrit, Urdu, etc.
+      this.activeMode = "native";
+      return this.speakNative(spokenText, langCode, options);
+    }
+  }
+
   public pause(): void {
-    if (this.isSupported() && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
-      window.speechSynthesis.pause();
+    if (!this.isSupported()) return;
+
+    if (this.activeMode === "sarvam") {
+      if (this.audioElement) {
+        this.audioElement.pause();
+      }
+    } else if (this.activeMode === "native") {
+      if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+        window.speechSynthesis.pause();
+      }
     }
   }
 
   public resume(): void {
-    if (this.isSupported() && window.speechSynthesis.paused) {
-      window.speechSynthesis.resume();
+    if (!this.isSupported()) return;
+
+    if (this.activeMode === "sarvam") {
+      if (this.audioElement) {
+        this.audioElement.play().catch((err) => {
+          console.warn("Sarvam audio resume play request rejected:", err);
+          if (this.currentOptions.onError) this.currentOptions.onError(err);
+        });
+        if (this.currentOptions.onResume) this.currentOptions.onResume();
+      }
+    } else if (this.activeMode === "native") {
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
     }
   }
 
   public stop(): void {
-    if (this.isSupported()) {
+    if (!this.isSupported()) return;
+
+    if (this.activeMode === "sarvam") {
+      this.cleanupAudio();
+    } else {
       window.speechSynthesis.cancel();
       this.currentUtterance = null;
     }
+    this.activeMode = null;
   }
 
   public isSpeaking(): boolean {
-    return this.isSupported() && window.speechSynthesis.speaking;
+    if (!this.isSupported()) return false;
+    if (this.activeMode === "sarvam") {
+      return !!this.audioElement && !this.audioElement.paused && !this.audioElement.ended;
+    }
+    return window.speechSynthesis.speaking;
   }
 
   public isPaused(): boolean {
-    return this.isSupported() && window.speechSynthesis.paused;
+    if (!this.isSupported()) return false;
+    if (this.activeMode === "sarvam") {
+      return !!this.audioElement && this.audioElement.paused && !this.audioElement.ended;
+    }
+    return window.speechSynthesis.paused;
   }
 }
 

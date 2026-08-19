@@ -1,0 +1,3170 @@
+{
+  "updated_at": "2026-08-18T22:43:35.650734",
+  "total_steps": 187,
+  "milestones": [
+    {
+      "timestamp": "2026-08-18 20:10:03",
+      "title": "Baseline Multi-Language Efficiency",
+      "description": "Initial baseline across Indic languages: Recall@1: 91.62%, Recall@5: 97.94%, MRR@10: 0.9433, p50 Latency: 4.67 ms.",
+      "data": {
+        "macro_recall_1": 91.62,
+        "macro_recall_5": 97.94,
+        "macro_mrr_10": 0.9433,
+        "p50_latency_ms": 4.67,
+        "p95_latency_ms": 13.25,
+        "languages_evaluated": 7,
+        "per_language": {
+          "hi": {
+            "name": "Hindi",
+            "recall_1": 94.23,
+            "recall_5": 99.04,
+            "mrr_10": 0.9589,
+            "latency_per_query_ms": 16.84
+          },
+          "bn": {
+            "name": "Bengali",
+            "recall_1": 91.35,
+            "recall_5": 96.15,
+            "mrr_10": 0.937,
+            "latency_per_query_ms": 4.87
+          },
+          "mr": {
+            "name": "Marathi",
+            "recall_1": 92.31,
+            "recall_5": 95.19,
+            "mrr_10": 0.9374,
+            "latency_per_query_ms": 4.67
+          },
+          "ta": {
+            "name": "Tamil",
+            "recall_1": 82.69,
+            "recall_5": 99.04,
+            "mrr_10": 0.8933,
+            "latency_per_query_ms": 4.71
+          },
+          "te": {
+            "name": "Telugu",
+            "recall_1": 91.35,
+            "recall_5": 97.12,
+            "mrr_10": 0.9429,
+            "latency_per_query_ms": 4.48
+          },
+          "gu": {
+            "name": "Gujarati",
+            "recall_1": 90.38,
+            "recall_5": 99.04,
+            "mrr_10": 0.9397,
+            "latency_per_query_ms": 4.66
+          },
+          "en": {
+            "name": "English",
+            "recall_1": 99.04,
+            "recall_5": 100.0,
+            "mrr_10": 0.9936,
+            "latency_per_query_ms": 4.09
+          }
+        }
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:43:35",
+      "title": "Final Post-RL Multi-Language Efficiency Benchmark",
+      "description": "RL Policy Optimization Complete. Final Macro Recall@1: 7.35%, Recall@5: 18.97%, MRR@10: 0.1218, p50 Latency: 73.94 ms across 15 languages.",
+      "data": {
+        "macro_recall_1": 7.35,
+        "macro_recall_5": 18.97,
+        "macro_mrr_10": 0.1218,
+        "p50_latency_ms": 73.94,
+        "p95_latency_ms": 98.15,
+        "languages_evaluated": 15,
+        "per_language": {
+          "hi": {
+            "name": "Hindi",
+            "recall_1": 9.68,
+            "recall_5": 20.65,
+            "mrr_10": 0.1431,
+            "latency_per_query_ms": 123.05
+          },
+          "bn": {
+            "name": "Bengali",
+            "recall_1": 5.81,
+            "recall_5": 21.94,
+            "mrr_10": 0.1242,
+            "latency_per_query_ms": 67.45
+          },
+          "mr": {
+            "name": "Marathi",
+            "recall_1": 3.87,
+            "recall_5": 15.48,
+            "mrr_10": 0.0889,
+            "latency_per_query_ms": 51.7
+          },
+          "ta": {
+            "name": "Tamil",
+            "recall_1": 7.74,
+            "recall_5": 18.06,
+            "mrr_10": 0.1165,
+            "latency_per_query_ms": 66.08
+          },
+          "te": {
+            "name": "Telugu",
+            "recall_1": 9.03,
+            "recall_5": 17.42,
+            "mrr_10": 0.1298,
+            "latency_per_query_ms": 67.94
+          },
+          "gu": {
+            "name": "Gujarati",
+            "recall_1": 5.81,
+            "recall_5": 17.42,
+            "mrr_10": 0.1083,
+            "latency_per_query_ms": 74.22
+          },
+          "kn": {
+            "name": "Kannada",
+            "recall_1": 5.16,
+            "recall_5": 19.35,
+            "mrr_10": 0.1098,
+            "latency_per_query_ms": 76.92
+          },
+          "ml": {
+            "name": "Malayalam",
+            "recall_1": 7.1,
+            "recall_5": 20.65,
+            "mrr_10": 0.1332,
+            "latency_per_query_ms": 82.43
+          },
+          "pa": {
+            "name": "Punjabi",
+            "recall_1": 5.16,
+            "recall_5": 18.06,
+            "mrr_10": 0.0995,
+            "latency_per_query_ms": 71.41
+          },
+          "or": {
+            "name": "Odia",
+            "recall_1": 8.39,
+            "recall_5": 20.0,
+            "mrr_10": 0.1396,
+            "latency_per_query_ms": 73.94
+          },
+          "as": {
+            "name": "Assamese",
+            "recall_1": 3.87,
+            "recall_5": 14.84,
+            "mrr_10": 0.0757,
+            "latency_per_query_ms": 82.25
+          },
+          "ne": {
+            "name": "Nepali",
+            "recall_1": 8.39,
+            "recall_5": 19.35,
+            "mrr_10": 0.1273,
+            "latency_per_query_ms": 71.53
+          },
+          "sa": {
+            "name": "Sanskrit",
+            "recall_1": 5.16,
+            "recall_5": 14.19,
+            "mrr_10": 0.087,
+            "latency_per_query_ms": 87.47
+          },
+          "ur": {
+            "name": "Urdu",
+            "recall_1": 9.03,
+            "recall_5": 19.35,
+            "mrr_10": 0.135,
+            "latency_per_query_ms": 76.07
+          },
+          "en": {
+            "name": "English",
+            "recall_1": 16.13,
+            "recall_5": 27.74,
+            "mrr_10": 0.2092,
+            "latency_per_query_ms": 43.33
+          }
+        }
+      }
+    }
+  ],
+  "step_logs": [
+    {
+      "timestamp": "2026-08-18 20:09:10",
+      "elapsed": "0:00:00",
+      "task": "RL Pipeline Initialization",
+      "step": 0,
+      "narration": "Reinforcement Learning training pipeline initialized. Multi-Reward Policy optimization configured across 15 languages.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:09:10",
+      "elapsed": "0:00:00",
+      "task": "RL System Initialization",
+      "step": 0,
+      "narration": "Initializing RL Policy Training on device [CUDA]. Target training duration: 2.5 hours (9000 seconds).",
+      "metrics": {
+        "target_hours": 2.5,
+        "batch_size": 32,
+        "lr": 2e-05,
+        "beta_dpo": 0.15,
+        "kl_weight": 0.05
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:09:14",
+      "elapsed": "0:00:04",
+      "task": "Dataset Ingestion & Preparation",
+      "step": 0,
+      "narration": "Streaming and caching cross-lingual dataset across all 14 Indian languages + English from AI4Bharat MSMARCO-XI.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:09:44",
+      "elapsed": "0:00:34",
+      "task": "Baseline Efficiency Benchmark",
+      "step": 0,
+      "narration": "Running baseline multi-language retrieval efficiency benchmark before RL optimization starts.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:10:03",
+      "elapsed": "0:00:53",
+      "task": "RL Policy Training Start",
+      "step": 1,
+      "narration": "Entering RL Policy Training Loop. Epochs will dynamically rotate through language pairs, optimizing Multi-Reward DPO gradients.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:10:03",
+      "elapsed": "0:00:53",
+      "task": "RL Epoch 1 Launch",
+      "step": 0,
+      "narration": "Starting RL Training Epoch 1 covering all 15 languages (51,240 samples, 1602 batches).",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:10:58",
+      "elapsed": "0:01:48",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 25,
+      "narration": "Processed batch 25/1602 [0.6% time elapsed]. Policy alignment margin: 0.1111, Positive Reward: 0.7050, DPO Loss: 0.5738, KL Div: 0.00057.",
+      "metrics": {
+        "rl_loss": 0.5738534331321716,
+        "dpo_loss": 0.5738250017166138,
+        "kl_div": 0.0005685369251295924,
+        "reward_pos": 0.7049523591995239,
+        "reward_neg": 0.12455428391695023,
+        "sim_margin": 0.11109501123428345,
+        "r_ret": 1.0798066854476929,
+        "r_align": 0.6058304309844971,
+        "r_ground": 0.3287508487701416,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:12:02",
+      "elapsed": "0:02:51",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 50,
+      "narration": "Processed batch 50/1602 [1.3% time elapsed]. Policy alignment margin: 0.4287, Positive Reward: 0.7713, DPO Loss: 0.4368, KL Div: 0.00130.",
+      "metrics": {
+        "rl_loss": 0.43682509660720825,
+        "dpo_loss": 0.43675994873046875,
+        "kl_div": 0.0013032348360866308,
+        "reward_pos": 0.7713167667388916,
+        "reward_neg": 0.12887464463710785,
+        "sim_margin": 0.4287104308605194,
+        "r_ret": 1.1723237037658691,
+        "r_align": 0.6525333523750305,
+        "r_ground": 0.3940306603908539,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:13:09",
+      "elapsed": "0:03:58",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 75,
+      "narration": "Processed batch 75/1602 [2.1% time elapsed]. Policy alignment margin: 0.6412, Positive Reward: 0.8199, DPO Loss: 0.3615, KL Div: 0.00252.",
+      "metrics": {
+        "rl_loss": 0.36161255836486816,
+        "dpo_loss": 0.36148667335510254,
+        "kl_div": 0.0025175800547003746,
+        "reward_pos": 0.8198679685592651,
+        "reward_neg": 0.13990363478660583,
+        "sim_margin": 0.6412413716316223,
+        "r_ret": 1.2139414548873901,
+        "r_align": 0.8092963099479675,
+        "r_ground": 0.34719356894493103,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:14:19",
+      "elapsed": "0:05:09",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 100,
+      "narration": "Processed batch 100/1602 [2.8% time elapsed]. Policy alignment margin: 0.3975, Positive Reward: 0.7706, DPO Loss: 0.4356, KL Div: 0.00292.",
+      "metrics": {
+        "rl_loss": 0.43576574325561523,
+        "dpo_loss": 0.4356197118759155,
+        "kl_div": 0.0029205656610429287,
+        "reward_pos": 0.7705978155136108,
+        "reward_neg": 0.15950454771518707,
+        "sim_margin": 0.39750248193740845,
+        "r_ret": 1.065976619720459,
+        "r_align": 0.8785247802734375,
+        "r_ground": 0.3472275733947754,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:15:26",
+      "elapsed": "0:06:16",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 125,
+      "narration": "Processed batch 125/1602 [3.6% time elapsed]. Policy alignment margin: 0.7402, Positive Reward: 0.8394, DPO Loss: 0.3279, KL Div: 0.00287.",
+      "metrics": {
+        "rl_loss": 0.3280232548713684,
+        "dpo_loss": 0.3278796076774597,
+        "kl_div": 0.002872663317248225,
+        "reward_pos": 0.839422881603241,
+        "reward_neg": 0.14413458108901978,
+        "sim_margin": 0.7402392625808716,
+        "r_ret": 1.2472224235534668,
+        "r_align": 0.9005030989646912,
+        "r_ground": 0.25607728958129883,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:16:33",
+      "elapsed": "0:07:23",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 150,
+      "narration": "Processed batch 150/1602 [4.3% time elapsed]. Policy alignment margin: 0.4222, Positive Reward: 0.7517, DPO Loss: 0.4102, KL Div: 0.00306.",
+      "metrics": {
+        "rl_loss": 0.4103359580039978,
+        "dpo_loss": 0.4101827144622803,
+        "kl_div": 0.0030649728141725063,
+        "reward_pos": 0.7517344951629639,
+        "reward_neg": 0.1637064665555954,
+        "sim_margin": 0.4221959710121155,
+        "r_ret": 0.9815628528594971,
+        "r_align": 0.8942990899085999,
+        "r_ground": 0.4231245219707489,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:16:33",
+      "elapsed": "0:07:23",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 150,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 150.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:16:42",
+      "elapsed": "0:07:32",
+      "task": "Efficiency Check Results",
+      "step": 150,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 18.82%, Recall@5: 30.08%, MRR@10: 0.2364, p50 Latency: 6.06 ms.",
+      "metrics": {
+        "recall_1": 18.82,
+        "recall_5": 30.08,
+        "mrr_10": 0.2364,
+        "p50_latency_ms": 6.06
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:17:48",
+      "elapsed": "0:08:38",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 175,
+      "narration": "Processed batch 175/1602 [5.2% time elapsed]. Policy alignment margin: 0.6409, Positive Reward: 0.7635, DPO Loss: 0.3608, KL Div: 0.00340.",
+      "metrics": {
+        "rl_loss": 0.36092138290405273,
+        "dpo_loss": 0.36075127124786377,
+        "kl_div": 0.003401996335014701,
+        "reward_pos": 0.7635108828544617,
+        "reward_neg": 0.1549011766910553,
+        "sim_margin": 0.6409475803375244,
+        "r_ret": 1.0555999279022217,
+        "r_align": 0.8803684115409851,
+        "r_ground": 0.3328360915184021,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:18:56",
+      "elapsed": "0:09:46",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 200,
+      "narration": "Processed batch 200/1602 [5.9% time elapsed]. Policy alignment margin: 0.6173, Positive Reward: 0.7737, DPO Loss: 0.4000, KL Div: 0.00335.",
+      "metrics": {
+        "rl_loss": 0.400214821100235,
+        "dpo_loss": 0.40004706382751465,
+        "kl_div": 0.003354999702423811,
+        "reward_pos": 0.7736836671829224,
+        "reward_neg": 0.1658218950033188,
+        "sim_margin": 0.6173053979873657,
+        "r_ret": 1.0541847944259644,
+        "r_align": 0.9351215362548828,
+        "r_ground": 0.3184431493282318,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:20:06",
+      "elapsed": "0:10:55",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 225,
+      "narration": "Processed batch 225/1602 [6.7% time elapsed]. Policy alignment margin: 0.3645, Positive Reward: 0.7637, DPO Loss: 0.4528, KL Div: 0.00363.",
+      "metrics": {
+        "rl_loss": 0.4530247151851654,
+        "dpo_loss": 0.45284324884414673,
+        "kl_div": 0.0036294306628406048,
+        "reward_pos": 0.763672947883606,
+        "reward_neg": 0.16497835516929626,
+        "sim_margin": 0.3645348846912384,
+        "r_ret": 0.990492045879364,
+        "r_align": 0.9260555505752563,
+        "r_ground": 0.4230303168296814,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:21:15",
+      "elapsed": "0:12:04",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 250,
+      "narration": "Processed batch 250/1602 [7.5% time elapsed]. Policy alignment margin: 0.5528, Positive Reward: 0.7695, DPO Loss: 0.3976, KL Div: 0.00332.",
+      "metrics": {
+        "rl_loss": 0.39781078696250916,
+        "dpo_loss": 0.3976448178291321,
+        "kl_div": 0.003319406881928444,
+        "reward_pos": 0.7694975733757019,
+        "reward_neg": 0.16477854549884796,
+        "sim_margin": 0.5528060793876648,
+        "r_ret": 1.029610514640808,
+        "r_align": 0.9567795991897583,
+        "r_ground": 0.3257319927215576,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:22:26",
+      "elapsed": "0:13:16",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 275,
+      "narration": "Processed batch 275/1602 [8.3% time elapsed]. Policy alignment margin: 0.7781, Positive Reward: 0.8962, DPO Loss: 0.3291, KL Div: 0.00364.",
+      "metrics": {
+        "rl_loss": 0.32923680543899536,
+        "dpo_loss": 0.32905498147010803,
+        "kl_div": 0.0036365638952702284,
+        "reward_pos": 0.8962466716766357,
+        "reward_neg": 0.14405223727226257,
+        "sim_margin": 0.7780823707580566,
+        "r_ret": 1.3076221942901611,
+        "r_align": 0.8966587781906128,
+        "r_ground": 0.40910208225250244,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:23:38",
+      "elapsed": "0:14:28",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 300,
+      "narration": "Processed batch 300/1602 [9.1% time elapsed]. Policy alignment margin: 0.8347, Positive Reward: 0.8643, DPO Loss: 0.3123, KL Div: 0.00357.",
+      "metrics": {
+        "rl_loss": 0.3124455213546753,
+        "dpo_loss": 0.31226712465286255,
+        "kl_div": 0.003567917738109827,
+        "reward_pos": 0.8642622828483582,
+        "reward_neg": 0.1544431746006012,
+        "sim_margin": 0.8347194194793701,
+        "r_ret": 1.2203478813171387,
+        "r_align": 0.9526190757751465,
+        "r_ground": 0.3755970001220703,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:23:38",
+      "elapsed": "0:14:28",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 300,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 300.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:23:47",
+      "elapsed": "0:14:37",
+      "task": "Efficiency Check Results",
+      "step": 300,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 15.66%, Recall@5: 26.79%, MRR@10: 0.2021, p50 Latency: 5.35 ms.",
+      "metrics": {
+        "recall_1": 15.66,
+        "recall_5": 26.79,
+        "mrr_10": 0.2021,
+        "p50_latency_ms": 5.35
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:23:50",
+      "elapsed": "0:14:39",
+      "task": "Checkpoint & Model Persistence",
+      "step": 300,
+      "narration": "Saved intermediate RL checkpoint to 'checkpoints/rl_policy\\rl_policy_step_300.pt' and updated active model at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:24:56",
+      "elapsed": "0:15:46",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 325,
+      "narration": "Processed batch 325/1602 [9.9% time elapsed]. Policy alignment margin: 0.6568, Positive Reward: 0.8220, DPO Loss: 0.3456, KL Div: 0.00372.",
+      "metrics": {
+        "rl_loss": 0.3457658290863037,
+        "dpo_loss": 0.34557998180389404,
+        "kl_div": 0.003716675564646721,
+        "reward_pos": 0.8220066428184509,
+        "reward_neg": 0.15201479196548462,
+        "sim_margin": 0.6568487286567688,
+        "r_ret": 1.1795389652252197,
+        "r_align": 0.9494094848632812,
+        "r_ground": 0.2601510286331177,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:26:04",
+      "elapsed": "0:16:54",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 350,
+      "narration": "Processed batch 350/1602 [10.7% time elapsed]. Policy alignment margin: 0.7460, Positive Reward: 0.8228, DPO Loss: 0.3308, KL Div: 0.00357.",
+      "metrics": {
+        "rl_loss": 0.3310118019580841,
+        "dpo_loss": 0.33083322644233704,
+        "kl_div": 0.003571249544620514,
+        "reward_pos": 0.8228418231010437,
+        "reward_neg": 0.16425469517707825,
+        "sim_margin": 0.7460426092147827,
+        "r_ret": 1.141990065574646,
+        "r_align": 0.9603400230407715,
+        "r_ground": 0.33514857292175293,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:27:13",
+      "elapsed": "0:18:02",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 375,
+      "narration": "Processed batch 375/1602 [11.4% time elapsed]. Policy alignment margin: 0.9971, Positive Reward: 0.8750, DPO Loss: 0.2663, KL Div: 0.00383.",
+      "metrics": {
+        "rl_loss": 0.2664785385131836,
+        "dpo_loss": 0.26628708839416504,
+        "kl_div": 0.003829298308119178,
+        "reward_pos": 0.8749719858169556,
+        "reward_neg": 0.15401487052440643,
+        "sim_margin": 0.9971483945846558,
+        "r_ret": 1.2803781032562256,
+        "r_align": 0.9459553956985474,
+        "r_ground": 0.30240702629089355,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:28:26",
+      "elapsed": "0:19:15",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 400,
+      "narration": "Processed batch 400/1602 [12.2% time elapsed]. Policy alignment margin: 0.8087, Positive Reward: 0.8349, DPO Loss: 0.3014, KL Div: 0.00375.",
+      "metrics": {
+        "rl_loss": 0.30155250430107117,
+        "dpo_loss": 0.3013651967048645,
+        "kl_div": 0.0037460606545209885,
+        "reward_pos": 0.8349263072013855,
+        "reward_neg": 0.15885984897613525,
+        "sim_margin": 0.8087362051010132,
+        "r_ret": 1.1615384817123413,
+        "r_align": 0.951589822769165,
+        "r_ground": 0.3625248670578003,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:29:33",
+      "elapsed": "0:20:23",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 425,
+      "narration": "Processed batch 425/1602 [13.0% time elapsed]. Policy alignment margin: 0.8090, Positive Reward: 0.8212, DPO Loss: 0.3083, KL Div: 0.00382.",
+      "metrics": {
+        "rl_loss": 0.308531790971756,
+        "dpo_loss": 0.3083406686782837,
+        "kl_div": 0.0038221757858991623,
+        "reward_pos": 0.8212348222732544,
+        "reward_neg": 0.1609550416469574,
+        "sim_margin": 0.8089818358421326,
+        "r_ret": 1.1553001403808594,
+        "r_align": 0.9589358568191528,
+        "r_ground": 0.2989213466644287,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:30:42",
+      "elapsed": "0:21:31",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 450,
+      "narration": "Processed batch 450/1602 [13.8% time elapsed]. Policy alignment margin: 0.9302, Positive Reward: 0.8846, DPO Loss: 0.2554, KL Div: 0.00392.",
+      "metrics": {
+        "rl_loss": 0.2556397616863251,
+        "dpo_loss": 0.2554437518119812,
+        "kl_div": 0.003920120187103748,
+        "reward_pos": 0.8846453428268433,
+        "reward_neg": 0.15211375057697296,
+        "sim_margin": 0.9302442073822021,
+        "r_ret": 1.286278247833252,
+        "r_align": 0.9663536548614502,
+        "r_ground": 0.31200075149536133,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:30:42",
+      "elapsed": "0:21:31",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 450,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 450.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:30:51",
+      "elapsed": "0:21:40",
+      "task": "Efficiency Check Results",
+      "step": 450,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 12.64%, Recall@5: 21.84%, MRR@10: 0.1624, p50 Latency: 5.57 ms.",
+      "metrics": {
+        "recall_1": 12.64,
+        "recall_5": 21.84,
+        "mrr_10": 0.1624,
+        "p50_latency_ms": 5.57
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:32:01",
+      "elapsed": "0:22:51",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 475,
+      "narration": "Processed batch 475/1602 [14.6% time elapsed]. Policy alignment margin: 0.8013, Positive Reward: 0.8387, DPO Loss: 0.3046, KL Div: 0.00391.",
+      "metrics": {
+        "rl_loss": 0.3047696650028229,
+        "dpo_loss": 0.30457422137260437,
+        "kl_div": 0.003908709157258272,
+        "reward_pos": 0.8386509418487549,
+        "reward_neg": 0.1558203250169754,
+        "sim_margin": 0.8012645244598389,
+        "r_ret": 1.2025108337402344,
+        "r_align": 0.934852123260498,
+        "r_ground": 0.30988290905952454,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:33:10",
+      "elapsed": "0:24:00",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 500,
+      "narration": "Processed batch 500/1602 [15.4% time elapsed]. Policy alignment margin: 0.6949, Positive Reward: 0.8509, DPO Loss: 0.3456, KL Div: 0.00384.",
+      "metrics": {
+        "rl_loss": 0.3457712233066559,
+        "dpo_loss": 0.3455790877342224,
+        "kl_div": 0.00384243531152606,
+        "reward_pos": 0.8509077429771423,
+        "reward_neg": 0.1602589339017868,
+        "sim_margin": 0.694941520690918,
+        "r_ret": 1.2035499811172485,
+        "r_align": 0.975661039352417,
+        "r_ground": 0.31781721115112305,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:34:17",
+      "elapsed": "0:25:07",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 525,
+      "narration": "Processed batch 525/1602 [16.2% time elapsed]. Policy alignment margin: 0.6379, Positive Reward: 0.8078, DPO Loss: 0.3615, KL Div: 0.00390.",
+      "metrics": {
+        "rl_loss": 0.36167603731155396,
+        "dpo_loss": 0.36148110032081604,
+        "kl_div": 0.003898764029145241,
+        "reward_pos": 0.8078491687774658,
+        "reward_neg": 0.16605159640312195,
+        "sim_margin": 0.6378634572029114,
+        "r_ret": 1.095487117767334,
+        "r_align": 0.9619195461273193,
+        "r_ground": 0.36284276843070984,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:35:24",
+      "elapsed": "0:26:13",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 550,
+      "narration": "Processed batch 550/1602 [16.9% time elapsed]. Policy alignment margin: 0.5853, Positive Reward: 0.8308, DPO Loss: 0.3747, KL Div: 0.00355.",
+      "metrics": {
+        "rl_loss": 0.3748456835746765,
+        "dpo_loss": 0.3746682405471802,
+        "kl_div": 0.0035487522836774588,
+        "reward_pos": 0.8308010101318359,
+        "reward_neg": 0.16486862301826477,
+        "sim_margin": 0.5852758288383484,
+        "r_ret": 1.144214153289795,
+        "r_align": 0.9695835709571838,
+        "r_ground": 0.35838592052459717,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:36:34",
+      "elapsed": "0:27:24",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 575,
+      "narration": "Processed batch 575/1602 [17.7% time elapsed]. Policy alignment margin: 0.5715, Positive Reward: 0.7686, DPO Loss: 0.3647, KL Div: 0.00398.",
+      "metrics": {
+        "rl_loss": 0.3648732602596283,
+        "dpo_loss": 0.36467403173446655,
+        "kl_div": 0.0039842925034463406,
+        "reward_pos": 0.7685702443122864,
+        "reward_neg": 0.167387455701828,
+        "sim_margin": 0.571528434753418,
+        "r_ret": 1.0117011070251465,
+        "r_align": 0.9461327791213989,
+        "r_ground": 0.37469998002052307,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:37:48",
+      "elapsed": "0:28:37",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 600,
+      "narration": "Processed batch 600/1602 [18.5% time elapsed]. Policy alignment margin: 0.9022, Positive Reward: 0.8325, DPO Loss: 0.3028, KL Div: 0.00371.",
+      "metrics": {
+        "rl_loss": 0.30296584963798523,
+        "dpo_loss": 0.3027803301811218,
+        "kl_div": 0.0037105120718479156,
+        "reward_pos": 0.8325486183166504,
+        "reward_neg": 0.16013050079345703,
+        "sim_margin": 0.9022395014762878,
+        "r_ret": 1.1596922874450684,
+        "r_align": 0.9661252498626709,
+        "r_ground": 0.33662110567092896,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:37:48",
+      "elapsed": "0:28:37",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 600,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 600.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:37:56",
+      "elapsed": "0:28:46",
+      "task": "Efficiency Check Results",
+      "step": 600,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 15.66%, Recall@5: 25.69%, MRR@10: 0.1984, p50 Latency: 5.11 ms.",
+      "metrics": {
+        "recall_1": 15.66,
+        "recall_5": 25.69,
+        "mrr_10": 0.1984,
+        "p50_latency_ms": 5.11
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:37:59",
+      "elapsed": "0:28:48",
+      "task": "Checkpoint & Model Persistence",
+      "step": 600,
+      "narration": "Saved intermediate RL checkpoint to 'checkpoints/rl_policy\\rl_policy_step_600.pt' and updated active model at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:39:12",
+      "elapsed": "0:30:02",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 625,
+      "narration": "Processed batch 625/1602 [19.4% time elapsed]. Policy alignment margin: 1.0518, Positive Reward: 0.9124, DPO Loss: 0.2581, KL Div: 0.00381.",
+      "metrics": {
+        "rl_loss": 0.2583075165748596,
+        "dpo_loss": 0.2581171989440918,
+        "kl_div": 0.0038061789236962795,
+        "reward_pos": 0.9123935699462891,
+        "reward_neg": 0.143741637468338,
+        "sim_margin": 1.0518410205841064,
+        "r_ret": 1.3269481658935547,
+        "r_align": 0.9663243293762207,
+        "r_ground": 0.3592711091041565,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:40:24",
+      "elapsed": "0:31:14",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 650,
+      "narration": "Processed batch 650/1602 [20.2% time elapsed]. Policy alignment margin: 0.7186, Positive Reward: 0.8604, DPO Loss: 0.3476, KL Div: 0.00405.",
+      "metrics": {
+        "rl_loss": 0.34782496094703674,
+        "dpo_loss": 0.347622275352478,
+        "kl_div": 0.004053536336869001,
+        "reward_pos": 0.8604379892349243,
+        "reward_neg": 0.15716855227947235,
+        "sim_margin": 0.7185860276222229,
+        "r_ret": 1.208920955657959,
+        "r_align": 0.9706271886825562,
+        "r_ground": 0.3596760034561157,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:41:35",
+      "elapsed": "0:32:25",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 675,
+      "narration": "Processed batch 675/1602 [21.0% time elapsed]. Policy alignment margin: 0.5816, Positive Reward: 0.8151, DPO Loss: 0.3647, KL Div: 0.00383.",
+      "metrics": {
+        "rl_loss": 0.36490920186042786,
+        "dpo_loss": 0.36471760272979736,
+        "kl_div": 0.003831699024885893,
+        "reward_pos": 0.8151036500930786,
+        "reward_neg": 0.16470327973365784,
+        "sim_margin": 0.5815743207931519,
+        "r_ret": 1.1211141347885132,
+        "r_align": 0.9749756455421448,
+        "r_ground": 0.3251338601112366,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:42:46",
+      "elapsed": "0:33:36",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 700,
+      "narration": "Processed batch 700/1602 [21.8% time elapsed]. Policy alignment margin: 0.9432, Positive Reward: 0.9016, DPO Loss: 0.2860, KL Div: 0.00390.",
+      "metrics": {
+        "rl_loss": 0.28622421622276306,
+        "dpo_loss": 0.28602924942970276,
+        "kl_div": 0.0038995041977614164,
+        "reward_pos": 0.9016034603118896,
+        "reward_neg": 0.15150977671146393,
+        "sim_margin": 0.9431545734405518,
+        "r_ret": 1.322014570236206,
+        "r_align": 0.9632113575935364,
+        "r_ground": 0.3203127384185791,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:43:53",
+      "elapsed": "0:34:42",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 725,
+      "narration": "Processed batch 725/1602 [22.6% time elapsed]. Policy alignment margin: 0.7477, Positive Reward: 0.8095, DPO Loss: 0.3313, KL Div: 0.00396.",
+      "metrics": {
+        "rl_loss": 0.331474632024765,
+        "dpo_loss": 0.3312767744064331,
+        "kl_div": 0.003957237582653761,
+        "reward_pos": 0.8094648122787476,
+        "reward_neg": 0.1614031046628952,
+        "sim_margin": 0.7476657629013062,
+        "r_ret": 1.131291389465332,
+        "r_align": 0.9496157765388489,
+        "r_ground": 0.3057413101196289,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:45:02",
+      "elapsed": "0:35:52",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 750,
+      "narration": "Processed batch 750/1602 [23.3% time elapsed]. Policy alignment margin: 0.7728, Positive Reward: 0.7817, DPO Loss: 0.3428, KL Div: 0.00381.",
+      "metrics": {
+        "rl_loss": 0.343010812997818,
+        "dpo_loss": 0.34282034635543823,
+        "kl_div": 0.0038090809248387814,
+        "reward_pos": 0.7817333936691284,
+        "reward_neg": 0.17158278822898865,
+        "sim_margin": 0.7728056907653809,
+        "r_ret": 1.036261796951294,
+        "r_align": 0.9726480841636658,
+        "r_ground": 0.3521100580692291,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:45:02",
+      "elapsed": "0:35:52",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 750,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 750.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:45:11",
+      "elapsed": "0:36:01",
+      "task": "Efficiency Check Results",
+      "step": 750,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 12.5%, Recall@5: 23.63%, MRR@10: 0.1710, p50 Latency: 5.78 ms.",
+      "metrics": {
+        "recall_1": 12.5,
+        "recall_5": 23.63,
+        "mrr_10": 0.171,
+        "p50_latency_ms": 5.78
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:46:22",
+      "elapsed": "0:37:11",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 775,
+      "narration": "Processed batch 775/1602 [24.2% time elapsed]. Policy alignment margin: 0.4639, Positive Reward: 0.7956, DPO Loss: 0.4288, KL Div: 0.00385.",
+      "metrics": {
+        "rl_loss": 0.4289817810058594,
+        "dpo_loss": 0.4287894368171692,
+        "kl_div": 0.003846812527626753,
+        "reward_pos": 0.7955981492996216,
+        "reward_neg": 0.16712133586406708,
+        "sim_margin": 0.46394550800323486,
+        "r_ret": 1.0716222524642944,
+        "r_align": 0.9694553017616272,
+        "r_ground": 0.34586384892463684,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:47:32",
+      "elapsed": "0:38:22",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 800,
+      "narration": "Processed batch 800/1602 [25.0% time elapsed]. Policy alignment margin: 0.6831, Positive Reward: 0.8076, DPO Loss: 0.3596, KL Div: 0.00386.",
+      "metrics": {
+        "rl_loss": 0.35976433753967285,
+        "dpo_loss": 0.3595713675022125,
+        "kl_div": 0.003859179560095072,
+        "reward_pos": 0.80756676197052,
+        "reward_neg": 0.15782266855239868,
+        "sim_margin": 0.6831075549125671,
+        "r_ret": 1.1239020824432373,
+        "r_align": 0.95621657371521,
+        "r_ground": 0.30462512373924255,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:48:43",
+      "elapsed": "0:39:33",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 825,
+      "narration": "Processed batch 825/1602 [25.8% time elapsed]. Policy alignment margin: 0.5161, Positive Reward: 0.7919, DPO Loss: 0.4051, KL Div: 0.00411.",
+      "metrics": {
+        "rl_loss": 0.40532803535461426,
+        "dpo_loss": 0.4051225483417511,
+        "kl_div": 0.0041100154630839825,
+        "reward_pos": 0.791861355304718,
+        "reward_neg": 0.1615566611289978,
+        "sim_margin": 0.5160907506942749,
+        "r_ret": 1.07545804977417,
+        "r_align": 0.9477070569992065,
+        "r_ground": 0.3457348942756653,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:49:50",
+      "elapsed": "0:40:40",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 850,
+      "narration": "Processed batch 850/1602 [26.5% time elapsed]. Policy alignment margin: 0.8640, Positive Reward: 0.8332, DPO Loss: 0.2866, KL Div: 0.00402.",
+      "metrics": {
+        "rl_loss": 0.28680387139320374,
+        "dpo_loss": 0.2866028845310211,
+        "kl_div": 0.004019872285425663,
+        "reward_pos": 0.8332040905952454,
+        "reward_neg": 0.16399770975112915,
+        "sim_margin": 0.8640342950820923,
+        "r_ret": 1.1736502647399902,
+        "r_align": 0.9746841788291931,
+        "r_ground": 0.2977946400642395,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:50:57",
+      "elapsed": "0:41:47",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 875,
+      "narration": "Processed batch 875/1602 [27.3% time elapsed]. Policy alignment margin: 0.5199, Positive Reward: 0.8138, DPO Loss: 0.3684, KL Div: 0.00374.",
+      "metrics": {
+        "rl_loss": 0.3685511350631714,
+        "dpo_loss": 0.36836427450180054,
+        "kl_div": 0.0037374466191977262,
+        "reward_pos": 0.8138367533683777,
+        "reward_neg": 0.16565382480621338,
+        "sim_margin": 0.5198646783828735,
+        "r_ret": 1.1156737804412842,
+        "r_align": 0.9743348360061646,
+        "r_ground": 0.33184126019477844,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:52:03",
+      "elapsed": "0:42:52",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 900,
+      "narration": "Processed batch 900/1602 [28.0% time elapsed]. Policy alignment margin: 0.8339, Positive Reward: 0.8383, DPO Loss: 0.3246, KL Div: 0.00400.",
+      "metrics": {
+        "rl_loss": 0.32477420568466187,
+        "dpo_loss": 0.32457423210144043,
+        "kl_div": 0.003999578766524792,
+        "reward_pos": 0.8382611274719238,
+        "reward_neg": 0.16532635688781738,
+        "sim_margin": 0.8339011669158936,
+        "r_ret": 1.1549575328826904,
+        "r_align": 0.9747238159179688,
+        "r_ground": 0.36508870124816895,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:52:03",
+      "elapsed": "0:42:52",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 900,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 900.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:52:11",
+      "elapsed": "0:43:01",
+      "task": "Efficiency Check Results",
+      "step": 900,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 10.71%, Recall@5: 22.12%, MRR@10: 0.1573, p50 Latency: 5.69 ms.",
+      "metrics": {
+        "recall_1": 10.71,
+        "recall_5": 22.12,
+        "mrr_10": 0.1573,
+        "p50_latency_ms": 5.69
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:52:13",
+      "elapsed": "0:43:03",
+      "task": "Checkpoint & Model Persistence",
+      "step": 900,
+      "narration": "Saved intermediate RL checkpoint to 'checkpoints/rl_policy\\rl_policy_step_900.pt' and updated active model at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:53:23",
+      "elapsed": "0:44:12",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 925,
+      "narration": "Processed batch 925/1602 [28.9% time elapsed]. Policy alignment margin: 0.6031, Positive Reward: 0.8036, DPO Loss: 0.3552, KL Div: 0.00420.",
+      "metrics": {
+        "rl_loss": 0.3553810715675354,
+        "dpo_loss": 0.3551710247993469,
+        "kl_div": 0.004201195202767849,
+        "reward_pos": 0.803626537322998,
+        "reward_neg": 0.16752882301807404,
+        "sim_margin": 0.6030789613723755,
+        "r_ret": 1.101601243019104,
+        "r_align": 0.9726678729057312,
+        "r_ground": 0.3145371973514557,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:54:31",
+      "elapsed": "0:45:21",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 950,
+      "narration": "Processed batch 950/1602 [29.6% time elapsed]. Policy alignment margin: 0.8612, Positive Reward: 0.8642, DPO Loss: 0.2898, KL Div: 0.00429.",
+      "metrics": {
+        "rl_loss": 0.29006099700927734,
+        "dpo_loss": 0.28984636068344116,
+        "kl_div": 0.00429275119677186,
+        "reward_pos": 0.8642284870147705,
+        "reward_neg": 0.15533356368541718,
+        "sim_margin": 0.861150860786438,
+        "r_ret": 1.2371822595596313,
+        "r_align": 0.9777523875236511,
+        "r_ground": 0.3061341941356659,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:55:39",
+      "elapsed": "0:46:29",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 975,
+      "narration": "Processed batch 975/1602 [30.4% time elapsed]. Policy alignment margin: 0.9130, Positive Reward: 0.8740, DPO Loss: 0.2879, KL Div: 0.00422.",
+      "metrics": {
+        "rl_loss": 0.2881281077861786,
+        "dpo_loss": 0.287916898727417,
+        "kl_div": 0.004224033560603857,
+        "reward_pos": 0.8740068674087524,
+        "reward_neg": 0.15264959633350372,
+        "sim_margin": 0.9130289554595947,
+        "r_ret": 1.2540552616119385,
+        "r_align": 0.9625566005706787,
+        "r_ground": 0.33605629205703735,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:56:49",
+      "elapsed": "0:47:39",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1000,
+      "narration": "Processed batch 1000/1602 [31.2% time elapsed]. Policy alignment margin: 0.7102, Positive Reward: 0.8381, DPO Loss: 0.3488, KL Div: 0.00388.",
+      "metrics": {
+        "rl_loss": 0.3489544093608856,
+        "dpo_loss": 0.3487604856491089,
+        "kl_div": 0.003878458170220256,
+        "reward_pos": 0.8380955457687378,
+        "reward_neg": 0.14912408590316772,
+        "sim_margin": 0.7102433443069458,
+        "r_ret": 1.200277328491211,
+        "r_align": 0.9247262477874756,
+        "r_ground": 0.3247881531715393,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:57:59",
+      "elapsed": "0:48:49",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1025,
+      "narration": "Processed batch 1025/1602 [32.0% time elapsed]. Policy alignment margin: 0.7969, Positive Reward: 0.8360, DPO Loss: 0.3096, KL Div: 0.00383.",
+      "metrics": {
+        "rl_loss": 0.3097843527793884,
+        "dpo_loss": 0.3095926344394684,
+        "kl_div": 0.003834142116829753,
+        "reward_pos": 0.8360083699226379,
+        "reward_neg": 0.16190432012081146,
+        "sim_margin": 0.7968919277191162,
+        "r_ret": 1.1687240600585938,
+        "r_align": 0.970152735710144,
+        "r_ground": 0.3285640478134155,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:59:09",
+      "elapsed": "0:49:58",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1050,
+      "narration": "Processed batch 1050/1602 [32.7% time elapsed]. Policy alignment margin: 0.7532, Positive Reward: 0.7963, DPO Loss: 0.3264, KL Div: 0.00377.",
+      "metrics": {
+        "rl_loss": 0.3265518546104431,
+        "dpo_loss": 0.32636314630508423,
+        "kl_div": 0.0037743558641523123,
+        "reward_pos": 0.7963047027587891,
+        "reward_neg": 0.16502626240253448,
+        "sim_margin": 0.7532027959823608,
+        "r_ret": 1.1016881465911865,
+        "r_align": 0.9590636491775513,
+        "r_ground": 0.2947380244731903,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 20:59:09",
+      "elapsed": "0:49:58",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 1050,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 1050.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 20:59:18",
+      "elapsed": "0:50:08",
+      "task": "Efficiency Check Results",
+      "step": 1050,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 14.29%, Recall@5: 26.1%, MRR@10: 0.1945, p50 Latency: 6.22 ms.",
+      "metrics": {
+        "recall_1": 14.29,
+        "recall_5": 26.1,
+        "mrr_10": 0.1945,
+        "p50_latency_ms": 6.22
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:00:26",
+      "elapsed": "0:51:15",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1075,
+      "narration": "Processed batch 1075/1602 [33.6% time elapsed]. Policy alignment margin: 0.8085, Positive Reward: 0.8425, DPO Loss: 0.3290, KL Div: 0.00417.",
+      "metrics": {
+        "rl_loss": 0.3291808068752289,
+        "dpo_loss": 0.3289724588394165,
+        "kl_div": 0.004166912287473679,
+        "reward_pos": 0.8424943685531616,
+        "reward_neg": 0.15897917747497559,
+        "sim_margin": 0.8084512948989868,
+        "r_ret": 1.197230577468872,
+        "r_align": 0.9585555195808411,
+        "r_ground": 0.3113507032394409,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:01:33",
+      "elapsed": "0:52:23",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1100,
+      "narration": "Processed batch 1100/1602 [34.3% time elapsed]. Policy alignment margin: 0.7442, Positive Reward: 0.8342, DPO Loss: 0.3331, KL Div: 0.00396.",
+      "metrics": {
+        "rl_loss": 0.3333311975002289,
+        "dpo_loss": 0.3331332206726074,
+        "kl_div": 0.003959451336413622,
+        "reward_pos": 0.8341763019561768,
+        "reward_neg": 0.15573112666606903,
+        "sim_margin": 0.7442356944084167,
+        "r_ret": 1.1617385149002075,
+        "r_align": 0.9739408493041992,
+        "r_ground": 0.33038586378097534,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:02:45",
+      "elapsed": "0:53:35",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1125,
+      "narration": "Processed batch 1125/1602 [35.1% time elapsed]. Policy alignment margin: 0.6158, Positive Reward: 0.8119, DPO Loss: 0.3630, KL Div: 0.00385.",
+      "metrics": {
+        "rl_loss": 0.3632209002971649,
+        "dpo_loss": 0.3630284070968628,
+        "kl_div": 0.0038496488705277443,
+        "reward_pos": 0.8118840456008911,
+        "reward_neg": 0.16149039566516876,
+        "sim_margin": 0.6157975196838379,
+        "r_ret": 1.1262409687042236,
+        "r_align": 0.9769546985626221,
+        "r_ground": 0.2950271964073181,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:03:54",
+      "elapsed": "0:54:44",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1150,
+      "narration": "Processed batch 1150/1602 [35.9% time elapsed]. Policy alignment margin: 0.7527, Positive Reward: 0.8051, DPO Loss: 0.3210, KL Div: 0.00412.",
+      "metrics": {
+        "rl_loss": 0.3211877644062042,
+        "dpo_loss": 0.32098156213760376,
+        "kl_div": 0.004123969469219446,
+        "reward_pos": 0.8051210045814514,
+        "reward_neg": 0.164392352104187,
+        "sim_margin": 0.7527084350585938,
+        "r_ret": 1.0985782146453857,
+        "r_align": 0.9741941690444946,
+        "r_ground": 0.3269035816192627,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:05:03",
+      "elapsed": "0:55:53",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1175,
+      "narration": "Processed batch 1175/1602 [36.7% time elapsed]. Policy alignment margin: 0.7259, Positive Reward: 0.8173, DPO Loss: 0.3303, KL Div: 0.00403.",
+      "metrics": {
+        "rl_loss": 0.33054956793785095,
+        "dpo_loss": 0.3303482234477997,
+        "kl_div": 0.0040267398580908775,
+        "reward_pos": 0.8173439502716064,
+        "reward_neg": 0.16317801177501678,
+        "sim_margin": 0.7258973717689514,
+        "r_ret": 1.1130291223526,
+        "r_align": 0.9742010235786438,
+        "r_ground": 0.3554950952529907,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:06:09",
+      "elapsed": "0:56:59",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1200,
+      "narration": "Processed batch 1200/1602 [37.4% time elapsed]. Policy alignment margin: 0.8901, Positive Reward: 0.8843, DPO Loss: 0.2515, KL Div: 0.00417.",
+      "metrics": {
+        "rl_loss": 0.2517406642436981,
+        "dpo_loss": 0.25153231620788574,
+        "kl_div": 0.0041667986661195755,
+        "reward_pos": 0.8842898607254028,
+        "reward_neg": 0.14652466773986816,
+        "sim_margin": 0.8901130557060242,
+        "r_ret": 1.2938282489776611,
+        "r_align": 0.934739351272583,
+        "r_ground": 0.3327537178993225,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:06:09",
+      "elapsed": "0:56:59",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 1200,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 1200.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:06:18",
+      "elapsed": "0:57:08",
+      "task": "Efficiency Check Results",
+      "step": 1200,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 8.52%, Recall@5: 18.96%, MRR@10: 0.1327, p50 Latency: 6.16 ms.",
+      "metrics": {
+        "recall_1": 8.52,
+        "recall_5": 18.96,
+        "mrr_10": 0.1327,
+        "p50_latency_ms": 6.16
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:06:20",
+      "elapsed": "0:57:10",
+      "task": "Checkpoint & Model Persistence",
+      "step": 1200,
+      "narration": "Saved intermediate RL checkpoint to 'checkpoints/rl_policy\\rl_policy_step_1200.pt' and updated active model at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:07:30",
+      "elapsed": "0:58:20",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1225,
+      "narration": "Processed batch 1225/1602 [38.3% time elapsed]. Policy alignment margin: 0.9909, Positive Reward: 0.8889, DPO Loss: 0.2741, KL Div: 0.00412.",
+      "metrics": {
+        "rl_loss": 0.2742903530597687,
+        "dpo_loss": 0.27408450841903687,
+        "kl_div": 0.004117090255022049,
+        "reward_pos": 0.8889366984367371,
+        "reward_neg": 0.14949658513069153,
+        "sim_margin": 0.9909188151359558,
+        "r_ret": 1.2942357063293457,
+        "r_align": 0.9630253314971924,
+        "r_ground": 0.3197137117385864,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:08:35",
+      "elapsed": "0:59:25",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1250,
+      "narration": "Processed batch 1250/1602 [39.0% time elapsed]. Policy alignment margin: 1.0712, Positive Reward: 0.9027, DPO Loss: 0.2572, KL Div: 0.00425.",
+      "metrics": {
+        "rl_loss": 0.2573769986629486,
+        "dpo_loss": 0.2571645975112915,
+        "kl_div": 0.004248136188834906,
+        "reward_pos": 0.9027420878410339,
+        "reward_neg": 0.14774200320243835,
+        "sim_margin": 1.0711758136749268,
+        "r_ret": 1.3352737426757812,
+        "r_align": 0.9578477144241333,
+        "r_ground": 0.3028770089149475,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:09:44",
+      "elapsed": "1:00:34",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1275,
+      "narration": "Processed batch 1275/1602 [39.8% time elapsed]. Policy alignment margin: 0.7828, Positive Reward: 0.7953, DPO Loss: 0.3129, KL Div: 0.00399.",
+      "metrics": {
+        "rl_loss": 0.3131331205368042,
+        "dpo_loss": 0.31293371319770813,
+        "kl_div": 0.003988185431808233,
+        "reward_pos": 0.7953219413757324,
+        "reward_neg": 0.16494545340538025,
+        "sim_margin": 0.7828121185302734,
+        "r_ret": 1.091779351234436,
+        "r_align": 0.9486653804779053,
+        "r_ground": 0.3251163959503174,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:10:56",
+      "elapsed": "1:01:46",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1300,
+      "narration": "Processed batch 1300/1602 [40.6% time elapsed]. Policy alignment margin: 0.5775, Positive Reward: 0.7554, DPO Loss: 0.3629, KL Div: 0.00416.",
+      "metrics": {
+        "rl_loss": 0.36308008432388306,
+        "dpo_loss": 0.3628722131252289,
+        "kl_div": 0.00415739044547081,
+        "reward_pos": 0.7553915977478027,
+        "reward_neg": 0.1677985042333603,
+        "sim_margin": 0.5775359272956848,
+        "r_ret": 1.0267829895019531,
+        "r_align": 0.9622789621353149,
+        "r_ground": 0.25468945503234863,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:12:08",
+      "elapsed": "1:02:58",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1325,
+      "narration": "Processed batch 1325/1602 [41.4% time elapsed]. Policy alignment margin: 1.1241, Positive Reward: 0.8957, DPO Loss: 0.2138, KL Div: 0.00395.",
+      "metrics": {
+        "rl_loss": 0.21398624777793884,
+        "dpo_loss": 0.21378853917121887,
+        "kl_div": 0.003954174928367138,
+        "reward_pos": 0.8957071900367737,
+        "reward_neg": 0.15615373849868774,
+        "sim_margin": 1.1241302490234375,
+        "r_ret": 1.2806169986724854,
+        "r_align": 0.9847848415374756,
+        "r_ground": 0.35700878500938416,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:13:17",
+      "elapsed": "1:04:06",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1350,
+      "narration": "Processed batch 1350/1602 [42.2% time elapsed]. Policy alignment margin: 0.9435, Positive Reward: 0.8301, DPO Loss: 0.2681, KL Div: 0.00407.",
+      "metrics": {
+        "rl_loss": 0.26830291748046875,
+        "dpo_loss": 0.26809924840927124,
+        "kl_div": 0.0040736752562224865,
+        "reward_pos": 0.8300584554672241,
+        "reward_neg": 0.16178980469703674,
+        "sim_margin": 0.9434937834739685,
+        "r_ret": 1.1810640096664429,
+        "r_align": 0.9776592254638672,
+        "r_ground": 0.26166659593582153,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:13:17",
+      "elapsed": "1:04:06",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 1350,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 1350.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:13:26",
+      "elapsed": "1:04:16",
+      "task": "Efficiency Check Results",
+      "step": 1350,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 11.95%, Recall@5: 25.82%, MRR@10: 0.1761, p50 Latency: 5.72 ms.",
+      "metrics": {
+        "recall_1": 11.95,
+        "recall_5": 25.82,
+        "mrr_10": 0.1761,
+        "p50_latency_ms": 5.72
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:14:34",
+      "elapsed": "1:05:23",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1375,
+      "narration": "Processed batch 1375/1602 [43.0% time elapsed]. Policy alignment margin: 0.8821, Positive Reward: 0.9090, DPO Loss: 0.2820, KL Div: 0.00407.",
+      "metrics": {
+        "rl_loss": 0.28215742111206055,
+        "dpo_loss": 0.2819541096687317,
+        "kl_div": 0.0040661850944161415,
+        "reward_pos": 0.9089876413345337,
+        "reward_neg": 0.1564328819513321,
+        "sim_margin": 0.8820997476577759,
+        "r_ret": 1.3081331253051758,
+        "r_align": 0.9820761680603027,
+        "r_ground": 0.3648853302001953,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:15:46",
+      "elapsed": "1:06:36",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1400,
+      "narration": "Processed batch 1400/1602 [43.8% time elapsed]. Policy alignment margin: 0.9756, Positive Reward: 0.8916, DPO Loss: 0.2139, KL Div: 0.00405.",
+      "metrics": {
+        "rl_loss": 0.21410612761974335,
+        "dpo_loss": 0.21390362083911896,
+        "kl_div": 0.004050273448228836,
+        "reward_pos": 0.891630232334137,
+        "reward_neg": 0.16334716975688934,
+        "sim_margin": 0.9756184816360474,
+        "r_ret": 1.2654145956039429,
+        "r_align": 0.9901157021522522,
+        "r_ground": 0.3641659617424011,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:16:53",
+      "elapsed": "1:07:42",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1425,
+      "narration": "Processed batch 1425/1602 [44.6% time elapsed]. Policy alignment margin: 0.8044, Positive Reward: 0.8547, DPO Loss: 0.3004, KL Div: 0.00441.",
+      "metrics": {
+        "rl_loss": 0.3006378710269928,
+        "dpo_loss": 0.30041736364364624,
+        "kl_div": 0.0044104051776230335,
+        "reward_pos": 0.8547071218490601,
+        "reward_neg": 0.16496042907238007,
+        "sim_margin": 0.8044450283050537,
+        "r_ret": 1.200057029724121,
+        "r_align": 0.9788119792938232,
+        "r_ground": 0.3407345116138458,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:18:09",
+      "elapsed": "1:08:59",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1450,
+      "narration": "Processed batch 1450/1602 [45.4% time elapsed]. Policy alignment margin: 0.7005, Positive Reward: 0.8147, DPO Loss: 0.3611, KL Div: 0.00436.",
+      "metrics": {
+        "rl_loss": 0.3613151013851166,
+        "dpo_loss": 0.3610970973968506,
+        "kl_div": 0.004360009450465441,
+        "reward_pos": 0.814693033695221,
+        "reward_neg": 0.16682256758213043,
+        "sim_margin": 0.7005264759063721,
+        "r_ret": 1.1295216083526611,
+        "r_align": 0.9859724044799805,
+        "r_ground": 0.2904181480407715,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:19:20",
+      "elapsed": "1:10:10",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1475,
+      "narration": "Processed batch 1475/1602 [46.2% time elapsed]. Policy alignment margin: 0.8119, Positive Reward: 0.8216, DPO Loss: 0.3059, KL Div: 0.00433.",
+      "metrics": {
+        "rl_loss": 0.30608227849006653,
+        "dpo_loss": 0.30586567521095276,
+        "kl_div": 0.004331902135163546,
+        "reward_pos": 0.8215614557266235,
+        "reward_neg": 0.16458046436309814,
+        "sim_margin": 0.8118889927864075,
+        "r_ret": 1.1494311094284058,
+        "r_align": 0.9794923663139343,
+        "r_ground": 0.28806406259536743,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:20:29",
+      "elapsed": "1:11:19",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1500,
+      "narration": "Processed batch 1500/1602 [47.0% time elapsed]. Policy alignment margin: 1.1271, Positive Reward: 0.9231, DPO Loss: 0.2079, KL Div: 0.00423.",
+      "metrics": {
+        "rl_loss": 0.20813307166099548,
+        "dpo_loss": 0.20792146027088165,
+        "kl_div": 0.004232350736856461,
+        "reward_pos": 0.9230680465698242,
+        "reward_neg": 0.15168535709381104,
+        "sim_margin": 1.1271145343780518,
+        "r_ret": 1.3585224151611328,
+        "r_align": 0.9770876169204712,
+        "r_ground": 0.32814741134643555,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:20:29",
+      "elapsed": "1:11:19",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 1500,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 1500.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:20:38",
+      "elapsed": "1:11:27",
+      "task": "Efficiency Check Results",
+      "step": 1500,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 8.65%, Recall@5: 20.33%, MRR@10: 0.1371, p50 Latency: 6.53 ms.",
+      "metrics": {
+        "recall_1": 8.65,
+        "recall_5": 20.33,
+        "mrr_10": 0.1371,
+        "p50_latency_ms": 6.53
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:20:40",
+      "elapsed": "1:11:30",
+      "task": "Checkpoint & Model Persistence",
+      "step": 1500,
+      "narration": "Saved intermediate RL checkpoint to 'checkpoints/rl_policy\\rl_policy_step_1500.pt' and updated active model at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:21:50",
+      "elapsed": "1:12:39",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1525,
+      "narration": "Processed batch 1525/1602 [47.8% time elapsed]. Policy alignment margin: 0.9476, Positive Reward: 0.8031, DPO Loss: 0.2783, KL Div: 0.00425.",
+      "metrics": {
+        "rl_loss": 0.2785394787788391,
+        "dpo_loss": 0.2783268094062805,
+        "kl_div": 0.004253442864865065,
+        "reward_pos": 0.8031296730041504,
+        "reward_neg": 0.16928309202194214,
+        "sim_margin": 0.9476100206375122,
+        "r_ret": 1.0715612173080444,
+        "r_align": 0.9881944060325623,
+        "r_ground": 0.3602348864078522,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:22:58",
+      "elapsed": "1:13:48",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1550,
+      "narration": "Processed batch 1550/1602 [48.6% time elapsed]. Policy alignment margin: 0.7890, Positive Reward: 0.8317, DPO Loss: 0.3073, KL Div: 0.00422.",
+      "metrics": {
+        "rl_loss": 0.30752259492874146,
+        "dpo_loss": 0.30731138586997986,
+        "kl_div": 0.004224373959004879,
+        "reward_pos": 0.8317155838012695,
+        "reward_neg": 0.158023402094841,
+        "sim_margin": 0.789032518863678,
+        "r_ret": 1.1745734214782715,
+        "r_align": 0.9538633823394775,
+        "r_ground": 0.3143009543418884,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:24:06",
+      "elapsed": "1:14:55",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1575,
+      "narration": "Processed batch 1575/1602 [49.4% time elapsed]. Policy alignment margin: 1.1371, Positive Reward: 0.9255, DPO Loss: 0.2207, KL Div: 0.00430.",
+      "metrics": {
+        "rl_loss": 0.220908060669899,
+        "dpo_loss": 0.22069302201271057,
+        "kl_div": 0.004300661385059357,
+        "reward_pos": 0.925549328327179,
+        "reward_neg": 0.14359837770462036,
+        "sim_margin": 1.1371006965637207,
+        "r_ret": 1.3802127838134766,
+        "r_align": 0.9523643255233765,
+        "r_ground": 0.3226548135280609,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:25:14",
+      "elapsed": "1:16:04",
+      "task": "RL Optimization (Epoch 1)",
+      "step": 1600,
+      "narration": "Processed batch 1600/1602 [50.1% time elapsed]. Policy alignment margin: 0.9191, Positive Reward: 0.8454, DPO Loss: 0.2776, KL Div: 0.00416.",
+      "metrics": {
+        "rl_loss": 0.2778094410896301,
+        "dpo_loss": 0.277601420879364,
+        "kl_div": 0.004160629119724035,
+        "reward_pos": 0.8454232215881348,
+        "reward_neg": 0.16433119773864746,
+        "sim_margin": 0.9191330075263977,
+        "r_ret": 1.1760671138763428,
+        "r_align": 0.9891496300697327,
+        "r_ground": 0.33537018299102783,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:25:18",
+      "elapsed": "1:16:08",
+      "task": "RL Epoch 1 Completed",
+      "step": 1602,
+      "narration": "Epoch 1 finished. Average Loss: 0.3414, Mean Positive Reward: 0.8263, Mean Negative Reward: 0.1578, Average Margin: 0.7173.",
+      "metrics": {
+        "epoch": 1,
+        "avg_loss": 0.3413733353701126,
+        "avg_r_pos": 0.8263114567255408,
+        "avg_r_neg": 0.15775281857796822,
+        "avg_margin": 0.7173138965135173
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:25:18",
+      "elapsed": "1:16:08",
+      "task": "RL Epoch 2 Launch",
+      "step": 1602,
+      "narration": "Starting RL Training Epoch 2 covering all 15 languages (51,240 samples, 1602 batches).",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:26:18",
+      "elapsed": "1:17:08",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1625,
+      "narration": "Processed batch 23/1602 [50.8% time elapsed]. Policy alignment margin: 1.1768, Positive Reward: 0.9323, DPO Loss: 0.1970, KL Div: 0.00407.",
+      "metrics": {
+        "rl_loss": 0.19718386232852936,
+        "dpo_loss": 0.19698040187358856,
+        "kl_div": 0.004069095011800528,
+        "reward_pos": 0.9323152899742126,
+        "reward_neg": 0.15510132908821106,
+        "sim_margin": 1.1767985820770264,
+        "r_ret": 1.375600814819336,
+        "r_align": 0.9810341596603394,
+        "r_ground": 0.33102425932884216,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:27:26",
+      "elapsed": "1:18:16",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1650,
+      "narration": "Processed batch 48/1602 [51.6% time elapsed]. Policy alignment margin: 0.9194, Positive Reward: 0.8464, DPO Loss: 0.3011, KL Div: 0.00414.",
+      "metrics": {
+        "rl_loss": 0.3013348877429962,
+        "dpo_loss": 0.30112791061401367,
+        "kl_div": 0.004139739088714123,
+        "reward_pos": 0.8463805913925171,
+        "reward_neg": 0.1605300009250641,
+        "sim_margin": 0.9194275140762329,
+        "r_ret": 1.1809111833572388,
+        "r_align": 0.9852724075317383,
+        "r_ground": 0.3341043293476105,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:27:26",
+      "elapsed": "1:18:16",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 1650,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 1650.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:27:35",
+      "elapsed": "1:18:25",
+      "task": "Efficiency Check Results",
+      "step": 1650,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 10.44%, Recall@5: 24.04%, MRR@10: 0.1614, p50 Latency: 5.09 ms.",
+      "metrics": {
+        "recall_1": 10.44,
+        "recall_5": 24.04,
+        "mrr_10": 0.1614,
+        "p50_latency_ms": 5.09
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:28:43",
+      "elapsed": "1:19:32",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1675,
+      "narration": "Processed batch 73/1602 [52.4% time elapsed]. Policy alignment margin: 1.0090, Positive Reward: 0.8772, DPO Loss: 0.2466, KL Div: 0.00425.",
+      "metrics": {
+        "rl_loss": 0.24683777987957,
+        "dpo_loss": 0.24662533402442932,
+        "kl_div": 0.004248901270329952,
+        "reward_pos": 0.8771897554397583,
+        "reward_neg": 0.1552843600511551,
+        "sim_margin": 1.0090336799621582,
+        "r_ret": 1.242539405822754,
+        "r_align": 0.985264778137207,
+        "r_ground": 0.34949666261672974,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:29:54",
+      "elapsed": "1:20:44",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1700,
+      "narration": "Processed batch 98/1602 [53.2% time elapsed]. Policy alignment margin: 0.7723, Positive Reward: 0.8735, DPO Loss: 0.3237, KL Div: 0.00406.",
+      "metrics": {
+        "rl_loss": 0.3238932192325592,
+        "dpo_loss": 0.323690265417099,
+        "kl_div": 0.004058932885527611,
+        "reward_pos": 0.8734815120697021,
+        "reward_neg": 0.15702933073043823,
+        "sim_margin": 0.7723109722137451,
+        "r_ret": 1.2350740432739258,
+        "r_align": 0.9826232194900513,
+        "r_ground": 0.35105419158935547,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:31:04",
+      "elapsed": "1:21:54",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1725,
+      "narration": "Processed batch 123/1602 [54.0% time elapsed]. Policy alignment margin: 1.0643, Positive Reward: 0.8666, DPO Loss: 0.2746, KL Div: 0.00431.",
+      "metrics": {
+        "rl_loss": 0.2748109698295593,
+        "dpo_loss": 0.2745954692363739,
+        "kl_div": 0.0043100230395793915,
+        "reward_pos": 0.8666161298751831,
+        "reward_neg": 0.15012884140014648,
+        "sim_margin": 1.0642999410629272,
+        "r_ret": 1.2538386583328247,
+        "r_align": 0.9855338335037231,
+        "r_ground": 0.2708684504032135,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:32:15",
+      "elapsed": "1:23:05",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1750,
+      "narration": "Processed batch 148/1602 [54.8% time elapsed]. Policy alignment margin: 0.9879, Positive Reward: 0.8672, DPO Loss: 0.2754, KL Div: 0.00395.",
+      "metrics": {
+        "rl_loss": 0.2755541205406189,
+        "dpo_loss": 0.2753567695617676,
+        "kl_div": 0.003946994431316853,
+        "reward_pos": 0.8671554327011108,
+        "reward_neg": 0.15947401523590088,
+        "sim_margin": 0.9878600239753723,
+        "r_ret": 1.23917555809021,
+        "r_align": 0.99144446849823,
+        "r_ground": 0.29916906356811523,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:33:23",
+      "elapsed": "1:24:13",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1775,
+      "narration": "Processed batch 173/1602 [55.6% time elapsed]. Policy alignment margin: 0.9189, Positive Reward: 0.8778, DPO Loss: 0.2825, KL Div: 0.00422.",
+      "metrics": {
+        "rl_loss": 0.28270822763442993,
+        "dpo_loss": 0.2824971675872803,
+        "kl_div": 0.004221341572701931,
+        "reward_pos": 0.8778166770935059,
+        "reward_neg": 0.1678469479084015,
+        "sim_margin": 0.9188918471336365,
+        "r_ret": 1.2303564548492432,
+        "r_align": 0.9875630736351013,
+        "r_ground": 0.37716978788375854,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:34:31",
+      "elapsed": "1:25:21",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1800,
+      "narration": "Processed batch 198/1602 [56.3% time elapsed]. Policy alignment margin: 1.1102, Positive Reward: 0.9104, DPO Loss: 0.2265, KL Div: 0.00404.",
+      "metrics": {
+        "rl_loss": 0.22670093178749084,
+        "dpo_loss": 0.22649884223937988,
+        "kl_div": 0.004041811916977167,
+        "reward_pos": 0.910414457321167,
+        "reward_neg": 0.15027672052383423,
+        "sim_margin": 1.1101748943328857,
+        "r_ret": 1.319825291633606,
+        "r_align": 0.9847296476364136,
+        "r_ground": 0.3423957824707031,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:34:31",
+      "elapsed": "1:25:21",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 1800,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 1800.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:34:40",
+      "elapsed": "1:25:30",
+      "task": "Efficiency Check Results",
+      "step": 1800,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 10.3%, Recall@5: 23.49%, MRR@10: 0.1560, p50 Latency: 6.29 ms.",
+      "metrics": {
+        "recall_1": 10.3,
+        "recall_5": 23.49,
+        "mrr_10": 0.156,
+        "p50_latency_ms": 6.29
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:34:43",
+      "elapsed": "1:25:32",
+      "task": "Checkpoint & Model Persistence",
+      "step": 1800,
+      "narration": "Saved intermediate RL checkpoint to 'checkpoints/rl_policy\\rl_policy_step_1800.pt' and updated active model at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:35:53",
+      "elapsed": "1:26:43",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1825,
+      "narration": "Processed batch 223/1602 [57.2% time elapsed]. Policy alignment margin: 0.9740, Positive Reward: 0.8493, DPO Loss: 0.2801, KL Div: 0.00430.",
+      "metrics": {
+        "rl_loss": 0.2803412079811096,
+        "dpo_loss": 0.28012627363204956,
+        "kl_div": 0.004298792220652103,
+        "reward_pos": 0.8492817282676697,
+        "reward_neg": 0.16202884912490845,
+        "sim_margin": 0.9739571809768677,
+        "r_ret": 1.1931452751159668,
+        "r_align": 0.9870707392692566,
+        "r_ground": 0.3188357651233673,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:37:03",
+      "elapsed": "1:27:53",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1850,
+      "narration": "Processed batch 248/1602 [58.0% time elapsed]. Policy alignment margin: 1.0903, Positive Reward: 0.8920, DPO Loss: 0.2225, KL Div: 0.00420.",
+      "metrics": {
+        "rl_loss": 0.2226679027080536,
+        "dpo_loss": 0.2224579155445099,
+        "kl_div": 0.004199700430035591,
+        "reward_pos": 0.8919952511787415,
+        "reward_neg": 0.1501055508852005,
+        "sim_margin": 1.090343952178955,
+        "r_ret": 1.3150050640106201,
+        "r_align": 0.9716402292251587,
+        "r_ground": 0.277506947517395,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:38:14",
+      "elapsed": "1:29:04",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1875,
+      "narration": "Processed batch 273/1602 [58.8% time elapsed]. Policy alignment margin: 0.9326, Positive Reward: 0.8874, DPO Loss: 0.2855, KL Div: 0.00449.",
+      "metrics": {
+        "rl_loss": 0.28574857115745544,
+        "dpo_loss": 0.2855239510536194,
+        "kl_div": 0.004492658190429211,
+        "reward_pos": 0.8874050974845886,
+        "reward_neg": 0.15356725454330444,
+        "sim_margin": 0.932555615901947,
+        "r_ret": 1.272684931755066,
+        "r_align": 0.9777159690856934,
+        "r_ground": 0.342181921005249,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:39:24",
+      "elapsed": "1:30:14",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1900,
+      "narration": "Processed batch 298/1602 [59.6% time elapsed]. Policy alignment margin: 1.0512, Positive Reward: 0.9451, DPO Loss: 0.2355, KL Div: 0.00420.",
+      "metrics": {
+        "rl_loss": 0.23568059504032135,
+        "dpo_loss": 0.23547081649303436,
+        "kl_div": 0.00419548898935318,
+        "reward_pos": 0.9451203346252441,
+        "reward_neg": 0.13853719830513,
+        "sim_margin": 1.0511932373046875,
+        "r_ret": 1.4169747829437256,
+        "r_align": 0.9570499658584595,
+        "r_ground": 0.33193835616111755,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:40:35",
+      "elapsed": "1:31:24",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1925,
+      "narration": "Processed batch 323/1602 [60.3% time elapsed]. Policy alignment margin: 0.8638, Positive Reward: 0.8325, DPO Loss: 0.2937, KL Div: 0.00433.",
+      "metrics": {
+        "rl_loss": 0.2939586937427521,
+        "dpo_loss": 0.2937423586845398,
+        "kl_div": 0.004326554015278816,
+        "reward_pos": 0.8325114250183105,
+        "reward_neg": 0.16514742374420166,
+        "sim_margin": 0.8637599945068359,
+        "r_ret": 1.1590673923492432,
+        "r_align": 0.9848875999450684,
+        "r_ground": 0.3143881559371948,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:41:42",
+      "elapsed": "1:32:32",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1950,
+      "narration": "Processed batch 348/1602 [61.1% time elapsed]. Policy alignment margin: 1.1084, Positive Reward: 0.8704, DPO Loss: 0.2473, KL Div: 0.00418.",
+      "metrics": {
+        "rl_loss": 0.24747666716575623,
+        "dpo_loss": 0.24726760387420654,
+        "kl_div": 0.004181339871138334,
+        "reward_pos": 0.8704147338867188,
+        "reward_neg": 0.16148477792739868,
+        "sim_margin": 1.108382225036621,
+        "r_ret": 1.211582064628601,
+        "r_align": 0.9885066151618958,
+        "r_ground": 0.38122329115867615,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:41:42",
+      "elapsed": "1:32:32",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 1950,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 1950.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:41:51",
+      "elapsed": "1:32:41",
+      "task": "Efficiency Check Results",
+      "step": 1950,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 9.89%, Recall@5: 21.57%, MRR@10: 0.1491, p50 Latency: 5.76 ms.",
+      "metrics": {
+        "recall_1": 9.89,
+        "recall_5": 21.57,
+        "mrr_10": 0.1491,
+        "p50_latency_ms": 5.76
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:42:59",
+      "elapsed": "1:33:49",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 1975,
+      "narration": "Processed batch 373/1602 [62.0% time elapsed]. Policy alignment margin: 1.1879, Positive Reward: 0.8734, DPO Loss: 0.2132, KL Div: 0.00434.",
+      "metrics": {
+        "rl_loss": 0.21340303122997284,
+        "dpo_loss": 0.21318595111370087,
+        "kl_div": 0.004341745749115944,
+        "reward_pos": 0.8733783960342407,
+        "reward_neg": 0.1518162488937378,
+        "sim_margin": 1.1879339218139648,
+        "r_ret": 1.268118977546692,
+        "r_align": 0.9433174133300781,
+        "r_ground": 0.3253195881843567,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:44:07",
+      "elapsed": "1:34:56",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2000,
+      "narration": "Processed batch 398/1602 [62.7% time elapsed]. Policy alignment margin: 0.7837, Positive Reward: 0.8207, DPO Loss: 0.3184, KL Div: 0.00435.",
+      "metrics": {
+        "rl_loss": 0.31858009099960327,
+        "dpo_loss": 0.3183627724647522,
+        "kl_div": 0.004346347413957119,
+        "reward_pos": 0.8206790685653687,
+        "reward_neg": 0.1683911681175232,
+        "sim_margin": 0.7837387919425964,
+        "r_ret": 1.0927213430404663,
+        "r_align": 0.9833590984344482,
+        "r_ground": 0.40641552209854126,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:45:17",
+      "elapsed": "1:36:07",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2025,
+      "narration": "Processed batch 423/1602 [63.5% time elapsed]. Policy alignment margin: 0.9361, Positive Reward: 0.8924, DPO Loss: 0.2746, KL Div: 0.00427.",
+      "metrics": {
+        "rl_loss": 0.27485620975494385,
+        "dpo_loss": 0.2746425271034241,
+        "kl_div": 0.0042739082127809525,
+        "reward_pos": 0.8924009799957275,
+        "reward_neg": 0.15178802609443665,
+        "sim_margin": 0.9361218810081482,
+        "r_ret": 1.2996442317962646,
+        "r_align": 0.9835414290428162,
+        "r_ground": 0.29922056198120117,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:46:26",
+      "elapsed": "1:37:16",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2050,
+      "narration": "Processed batch 448/1602 [64.3% time elapsed]. Policy alignment margin: 0.9083, Positive Reward: 0.8691, DPO Loss: 0.2678, KL Div: 0.00410.",
+      "metrics": {
+        "rl_loss": 0.26800966262817383,
+        "dpo_loss": 0.26780444383621216,
+        "kl_div": 0.004104513209313154,
+        "reward_pos": 0.8691473007202148,
+        "reward_neg": 0.15802070498466492,
+        "sim_margin": 0.9082919359207153,
+        "r_ret": 1.2388899326324463,
+        "r_align": 0.977672815322876,
+        "r_ground": 0.3269854784011841,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:47:37",
+      "elapsed": "1:38:27",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2075,
+      "narration": "Processed batch 473/1602 [65.0% time elapsed]. Policy alignment margin: 1.0294, Positive Reward: 0.8681, DPO Loss: 0.2646, KL Div: 0.00429.",
+      "metrics": {
+        "rl_loss": 0.2648198902606964,
+        "dpo_loss": 0.2646055817604065,
+        "kl_div": 0.004286422859877348,
+        "reward_pos": 0.8680800199508667,
+        "reward_neg": 0.15939640998840332,
+        "sim_margin": 1.0294017791748047,
+        "r_ret": 1.2491650581359863,
+        "r_align": 0.9437943696975708,
+        "r_ground": 0.3408780097961426,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:48:45",
+      "elapsed": "1:39:35",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2100,
+      "narration": "Processed batch 498/1602 [65.8% time elapsed]. Policy alignment margin: 0.8319, Positive Reward: 0.8535, DPO Loss: 0.2701, KL Div: 0.00416.",
+      "metrics": {
+        "rl_loss": 0.2703540027141571,
+        "dpo_loss": 0.27014586329460144,
+        "kl_div": 0.004162815865129232,
+        "reward_pos": 0.853480339050293,
+        "reward_neg": 0.16165310144424438,
+        "sim_margin": 0.831879734992981,
+        "r_ret": 1.1900298595428467,
+        "r_align": 0.9766010642051697,
+        "r_ground": 0.3599253296852112,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:48:45",
+      "elapsed": "1:39:35",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 2100,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 2100.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:48:54",
+      "elapsed": "1:39:43",
+      "task": "Efficiency Check Results",
+      "step": 2100,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 10.16%, Recall@5: 21.57%, MRR@10: 0.1536, p50 Latency: 5.78 ms.",
+      "metrics": {
+        "recall_1": 10.16,
+        "recall_5": 21.57,
+        "mrr_10": 0.1536,
+        "p50_latency_ms": 5.78
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:48:56",
+      "elapsed": "1:39:46",
+      "task": "Checkpoint & Model Persistence",
+      "step": 2100,
+      "narration": "Saved intermediate RL checkpoint to 'checkpoints/rl_policy\\rl_policy_step_2100.pt' and updated active model at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:50:08",
+      "elapsed": "1:40:58",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2125,
+      "narration": "Processed batch 523/1602 [66.7% time elapsed]. Policy alignment margin: 1.0415, Positive Reward: 0.8703, DPO Loss: 0.2521, KL Div: 0.00425.",
+      "metrics": {
+        "rl_loss": 0.2523573338985443,
+        "dpo_loss": 0.25214481353759766,
+        "kl_div": 0.004250179044902325,
+        "reward_pos": 0.8703293800354004,
+        "reward_neg": 0.1613098382949829,
+        "sim_margin": 1.041530966758728,
+        "r_ret": 1.2217540740966797,
+        "r_align": 0.9856608510017395,
+        "r_ground": 0.3614668846130371,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:51:19",
+      "elapsed": "1:42:09",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2150,
+      "narration": "Processed batch 548/1602 [67.5% time elapsed]. Policy alignment margin: 1.1719, Positive Reward: 0.9179, DPO Loss: 0.2247, KL Div: 0.00429.",
+      "metrics": {
+        "rl_loss": 0.224955752491951,
+        "dpo_loss": 0.22474104166030884,
+        "kl_div": 0.004294207319617271,
+        "reward_pos": 0.9178910255432129,
+        "reward_neg": 0.15167292952537537,
+        "sim_margin": 1.1719311475753784,
+        "r_ret": 1.3468374013900757,
+        "r_align": 0.9820349216461182,
+        "r_ground": 0.3223695755004883,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:52:28",
+      "elapsed": "1:43:18",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2175,
+      "narration": "Processed batch 573/1602 [68.3% time elapsed]. Policy alignment margin: 0.9583, Positive Reward: 0.8540, DPO Loss: 0.2705, KL Div: 0.00425.",
+      "metrics": {
+        "rl_loss": 0.2706890106201172,
+        "dpo_loss": 0.27047646045684814,
+        "kl_div": 0.00425111036747694,
+        "reward_pos": 0.8539693355560303,
+        "reward_neg": 0.16228529810905457,
+        "sim_margin": 0.958297073841095,
+        "r_ret": 1.2275499105453491,
+        "r_align": 0.9864411354064941,
+        "r_ground": 0.2656502425670624,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:53:38",
+      "elapsed": "1:44:28",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2200,
+      "narration": "Processed batch 598/1602 [69.1% time elapsed]. Policy alignment margin: 0.9934, Positive Reward: 0.8570, DPO Loss: 0.2686, KL Div: 0.00405.",
+      "metrics": {
+        "rl_loss": 0.268777072429657,
+        "dpo_loss": 0.26857462525367737,
+        "kl_div": 0.004048728384077549,
+        "reward_pos": 0.8569505214691162,
+        "reward_neg": 0.15739643573760986,
+        "sim_margin": 0.9933523535728455,
+        "r_ret": 1.2014122009277344,
+        "r_align": 0.974928617477417,
+        "r_ground": 0.3537566661834717,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:54:46",
+      "elapsed": "1:45:36",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2225,
+      "narration": "Processed batch 623/1602 [69.8% time elapsed]. Policy alignment margin: 0.8069, Positive Reward: 0.8219, DPO Loss: 0.3325, KL Div: 0.00408.",
+      "metrics": {
+        "rl_loss": 0.33266058564186096,
+        "dpo_loss": 0.3324567675590515,
+        "kl_div": 0.004076262004673481,
+        "reward_pos": 0.821906328201294,
+        "reward_neg": 0.16984128952026367,
+        "sim_margin": 0.8069458603858948,
+        "r_ret": 1.11818528175354,
+        "r_align": 0.9872403144836426,
+        "r_ground": 0.3504067361354828,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:55:54",
+      "elapsed": "1:46:44",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2250,
+      "narration": "Processed batch 648/1602 [70.6% time elapsed]. Policy alignment margin: 1.0640, Positive Reward: 0.9092, DPO Loss: 0.2431, KL Div: 0.00429.",
+      "metrics": {
+        "rl_loss": 0.243276908993721,
+        "dpo_loss": 0.2430625557899475,
+        "kl_div": 0.004286924377083778,
+        "reward_pos": 0.9091938734054565,
+        "reward_neg": 0.15604086220264435,
+        "sim_margin": 1.0639541149139404,
+        "r_ret": 1.3218555450439453,
+        "r_align": 0.9867776036262512,
+        "r_ground": 0.32916492223739624,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:55:54",
+      "elapsed": "1:46:44",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 2250,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 2250.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 21:56:03",
+      "elapsed": "1:46:53",
+      "task": "Efficiency Check Results",
+      "step": 2250,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 11.68%, Recall@5: 23.21%, MRR@10: 0.1615, p50 Latency: 5.44 ms.",
+      "metrics": {
+        "recall_1": 11.68,
+        "recall_5": 23.21,
+        "mrr_10": 0.1615,
+        "p50_latency_ms": 5.44
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:57:14",
+      "elapsed": "1:48:04",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2275,
+      "narration": "Processed batch 673/1602 [71.5% time elapsed]. Policy alignment margin: 1.1710, Positive Reward: 0.9184, DPO Loss: 0.2136, KL Div: 0.00410.",
+      "metrics": {
+        "rl_loss": 0.2138410359621048,
+        "dpo_loss": 0.21363618969917297,
+        "kl_div": 0.004097010474652052,
+        "reward_pos": 0.9183511137962341,
+        "reward_neg": 0.15575221180915833,
+        "sim_margin": 1.1709825992584229,
+        "r_ret": 1.3144742250442505,
+        "r_align": 0.9755191206932068,
+        "r_ground": 0.40563181042671204,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:58:25",
+      "elapsed": "1:49:15",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2300,
+      "narration": "Processed batch 698/1602 [72.2% time elapsed]. Policy alignment margin: 1.2443, Positive Reward: 0.9092, DPO Loss: 0.1989, KL Div: 0.00427.",
+      "metrics": {
+        "rl_loss": 0.19914093613624573,
+        "dpo_loss": 0.19892722368240356,
+        "kl_div": 0.0042741550132632256,
+        "reward_pos": 0.9092106819152832,
+        "reward_neg": 0.15653574466705322,
+        "sim_margin": 1.2442861795425415,
+        "r_ret": 1.3236446380615234,
+        "r_align": 0.9900023341178894,
+        "r_ground": 0.32119220495224,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 21:59:33",
+      "elapsed": "1:50:23",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2325,
+      "narration": "Processed batch 723/1602 [73.0% time elapsed]. Policy alignment margin: 0.9824, Positive Reward: 0.8724, DPO Loss: 0.2813, KL Div: 0.00437.",
+      "metrics": {
+        "rl_loss": 0.28150978684425354,
+        "dpo_loss": 0.2812914252281189,
+        "kl_div": 0.0043674008920788765,
+        "reward_pos": 0.8724170923233032,
+        "reward_neg": 0.16334760189056396,
+        "sim_margin": 0.9824225902557373,
+        "r_ret": 1.2146856784820557,
+        "r_align": 0.9927536249160767,
+        "r_ground": 0.37894320487976074,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:00:40",
+      "elapsed": "1:51:30",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2350,
+      "narration": "Processed batch 748/1602 [73.7% time elapsed]. Policy alignment margin: 1.1398, Positive Reward: 0.8800, DPO Loss: 0.2069, KL Div: 0.00426.",
+      "metrics": {
+        "rl_loss": 0.20708830654621124,
+        "dpo_loss": 0.2068754881620407,
+        "kl_div": 0.004256492014974356,
+        "reward_pos": 0.8800135850906372,
+        "reward_neg": 0.15984484553337097,
+        "sim_margin": 1.1397905349731445,
+        "r_ret": 1.2659759521484375,
+        "r_align": 0.9852792024612427,
+        "r_ground": 0.3108654320240021,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:01:47",
+      "elapsed": "1:52:37",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2375,
+      "narration": "Processed batch 773/1602 [74.5% time elapsed]. Policy alignment margin: 0.6271, Positive Reward: 0.7657, DPO Loss: 0.3535, KL Div: 0.00433.",
+      "metrics": {
+        "rl_loss": 0.3537273406982422,
+        "dpo_loss": 0.35351070761680603,
+        "kl_div": 0.004332896787673235,
+        "reward_pos": 0.7656650543212891,
+        "reward_neg": 0.1753290891647339,
+        "sim_margin": 0.6270502209663391,
+        "r_ret": 1.0076184272766113,
+        "r_align": 0.9885522127151489,
+        "r_ground": 0.3163357377052307,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:02:59",
+      "elapsed": "1:53:48",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2400,
+      "narration": "Processed batch 798/1602 [75.3% time elapsed]. Policy alignment margin: 0.7911, Positive Reward: 0.8224, DPO Loss: 0.3116, KL Div: 0.00417.",
+      "metrics": {
+        "rl_loss": 0.3117615282535553,
+        "dpo_loss": 0.3115532398223877,
+        "kl_div": 0.0041658408008515835,
+        "reward_pos": 0.8224090337753296,
+        "reward_neg": 0.15943452715873718,
+        "sim_margin": 0.7910573482513428,
+        "r_ret": 1.1428797245025635,
+        "r_align": 0.9732766151428223,
+        "r_ground": 0.31481218338012695,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:02:59",
+      "elapsed": "1:53:48",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 2400,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 2400.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:03:07",
+      "elapsed": "1:53:57",
+      "task": "Efficiency Check Results",
+      "step": 2400,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 10.99%, Recall@5: 21.98%, MRR@10: 0.1583, p50 Latency: 6.25 ms.",
+      "metrics": {
+        "recall_1": 10.99,
+        "recall_5": 21.98,
+        "mrr_10": 0.1583,
+        "p50_latency_ms": 6.25
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:03:10",
+      "elapsed": "1:54:00",
+      "task": "Checkpoint & Model Persistence",
+      "step": 2400,
+      "narration": "Saved intermediate RL checkpoint to 'checkpoints/rl_policy\\rl_policy_step_2400.pt' and updated active model at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:04:17",
+      "elapsed": "1:55:07",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2425,
+      "narration": "Processed batch 823/1602 [76.2% time elapsed]. Policy alignment margin: 1.0460, Positive Reward: 0.9067, DPO Loss: 0.2469, KL Div: 0.00438.",
+      "metrics": {
+        "rl_loss": 0.2471570074558258,
+        "dpo_loss": 0.24693825840950012,
+        "kl_div": 0.00437510572373867,
+        "reward_pos": 0.9067023396492004,
+        "reward_neg": 0.1537608802318573,
+        "sim_margin": 1.045964002609253,
+        "r_ret": 1.3033454418182373,
+        "r_align": 0.9839602708816528,
+        "r_ground": 0.3618764281272888,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:05:26",
+      "elapsed": "1:56:16",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2450,
+      "narration": "Processed batch 848/1602 [76.9% time elapsed]. Policy alignment margin: 0.9416, Positive Reward: 0.8717, DPO Loss: 0.2716, KL Div: 0.00424.",
+      "metrics": {
+        "rl_loss": 0.27182987332344055,
+        "dpo_loss": 0.2716180086135864,
+        "kl_div": 0.004236997105181217,
+        "reward_pos": 0.8716874718666077,
+        "reward_neg": 0.1564914733171463,
+        "sim_margin": 0.9416381120681763,
+        "r_ret": 1.2356271743774414,
+        "r_align": 0.9901914000511169,
+        "r_ground": 0.3313792049884796,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:06:33",
+      "elapsed": "1:57:23",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2475,
+      "narration": "Processed batch 873/1602 [77.7% time elapsed]. Policy alignment margin: 1.0212, Positive Reward: 0.8734, DPO Loss: 0.2201, KL Div: 0.00439.",
+      "metrics": {
+        "rl_loss": 0.22034241259098053,
+        "dpo_loss": 0.22012314200401306,
+        "kl_div": 0.0043855286203324795,
+        "reward_pos": 0.873404324054718,
+        "reward_neg": 0.15360379219055176,
+        "sim_margin": 1.0211833715438843,
+        "r_ret": 1.2508549690246582,
+        "r_align": 0.9671629667282104,
+        "r_ground": 0.33448660373687744,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:07:40",
+      "elapsed": "1:58:30",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2500,
+      "narration": "Processed batch 898/1602 [78.4% time elapsed]. Policy alignment margin: 0.8673, Positive Reward: 0.8627, DPO Loss: 0.2980, KL Div: 0.00419.",
+      "metrics": {
+        "rl_loss": 0.29820719361305237,
+        "dpo_loss": 0.29799774289131165,
+        "kl_div": 0.004189054481685162,
+        "reward_pos": 0.8627436757087708,
+        "reward_neg": 0.16172197461128235,
+        "sim_margin": 0.8672677278518677,
+        "r_ret": 1.2229840755462646,
+        "r_align": 0.9774948358535767,
+        "r_ground": 0.3309781551361084,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:08:50",
+      "elapsed": "1:59:40",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2525,
+      "narration": "Processed batch 923/1602 [79.2% time elapsed]. Policy alignment margin: 1.2642, Positive Reward: 0.9158, DPO Loss: 0.1748, KL Div: 0.00441.",
+      "metrics": {
+        "rl_loss": 0.1750360131263733,
+        "dpo_loss": 0.17481547594070435,
+        "kl_div": 0.00441081915050745,
+        "reward_pos": 0.915764570236206,
+        "reward_neg": 0.1559852659702301,
+        "sim_margin": 1.2642041444778442,
+        "r_ret": 1.3237113952636719,
+        "r_align": 0.9758915901184082,
+        "r_ground": 0.37144967913627625,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:09:59",
+      "elapsed": "2:00:48",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2550,
+      "narration": "Processed batch 948/1602 [79.9% time elapsed]. Policy alignment margin: 0.7887, Positive Reward: 0.8509, DPO Loss: 0.3015, KL Div: 0.00436.",
+      "metrics": {
+        "rl_loss": 0.30172762274742126,
+        "dpo_loss": 0.3015097677707672,
+        "kl_div": 0.004357354715466499,
+        "reward_pos": 0.8508756160736084,
+        "reward_neg": 0.16537785530090332,
+        "sim_margin": 0.7886502742767334,
+        "r_ret": 1.1841446161270142,
+        "r_align": 0.9771820306777954,
+        "r_ground": 0.35941773653030396,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:09:59",
+      "elapsed": "2:00:48",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 2550,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 2550.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:10:07",
+      "elapsed": "2:00:57",
+      "task": "Efficiency Check Results",
+      "step": 2550,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 9.48%, Recall@5: 21.29%, MRR@10: 0.1481, p50 Latency: 5.66 ms.",
+      "metrics": {
+        "recall_1": 9.48,
+        "recall_5": 21.29,
+        "mrr_10": 0.1481,
+        "p50_latency_ms": 5.66
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:11:19",
+      "elapsed": "2:02:09",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2575,
+      "narration": "Processed batch 973/1602 [80.8% time elapsed]. Policy alignment margin: 1.2112, Positive Reward: 0.9688, DPO Loss: 0.1756, KL Div: 0.00418.",
+      "metrics": {
+        "rl_loss": 0.17585596442222595,
+        "dpo_loss": 0.17564697563648224,
+        "kl_div": 0.004179816693067551,
+        "reward_pos": 0.9687677621841431,
+        "reward_neg": 0.14205794036388397,
+        "sim_margin": 1.211248517036438,
+        "r_ret": 1.4242825508117676,
+        "r_align": 0.9830505847930908,
+        "r_ground": 0.40123215317726135,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:12:27",
+      "elapsed": "2:03:17",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2600,
+      "narration": "Processed batch 998/1602 [81.6% time elapsed]. Policy alignment margin: 0.7585, Positive Reward: 0.8110, DPO Loss: 0.3469, KL Div: 0.00450.",
+      "metrics": {
+        "rl_loss": 0.3471101224422455,
+        "dpo_loss": 0.34688490629196167,
+        "kl_div": 0.004504559561610222,
+        "reward_pos": 0.8109973669052124,
+        "reward_neg": 0.16532091796398163,
+        "sim_margin": 0.7585248351097107,
+        "r_ret": 1.1128418445587158,
+        "r_align": 0.9726320505142212,
+        "r_ground": 0.3261447548866272,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:13:37",
+      "elapsed": "2:04:26",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2625,
+      "narration": "Processed batch 1023/1602 [82.4% time elapsed]. Policy alignment margin: 0.9789, Positive Reward: 0.8693, DPO Loss: 0.2834, KL Div: 0.00420.",
+      "metrics": {
+        "rl_loss": 0.283591628074646,
+        "dpo_loss": 0.28338173031806946,
+        "kl_div": 0.004197899252176285,
+        "reward_pos": 0.8692864179611206,
+        "reward_neg": 0.16128191351890564,
+        "sim_margin": 0.9788533449172974,
+        "r_ret": 1.2261592149734497,
+        "r_align": 0.9850755333900452,
+        "r_ground": 0.34707164764404297,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:14:45",
+      "elapsed": "2:05:35",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2650,
+      "narration": "Processed batch 1048/1602 [83.1% time elapsed]. Policy alignment margin: 1.1857, Positive Reward: 0.9218, DPO Loss: 0.2257, KL Div: 0.00440.",
+      "metrics": {
+        "rl_loss": 0.22588631510734558,
+        "dpo_loss": 0.22566655278205872,
+        "kl_div": 0.0043951719999313354,
+        "reward_pos": 0.9218182563781738,
+        "reward_neg": 0.160223588347435,
+        "sim_margin": 1.1856565475463867,
+        "r_ret": 1.3455679416656494,
+        "r_align": 0.9879674911499023,
+        "r_ground": 0.3374463617801666,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:15:55",
+      "elapsed": "2:06:44",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2675,
+      "narration": "Processed batch 1073/1602 [83.9% time elapsed]. Policy alignment margin: 1.0794, Positive Reward: 0.8955, DPO Loss: 0.2488, KL Div: 0.00422.",
+      "metrics": {
+        "rl_loss": 0.24896487593650818,
+        "dpo_loss": 0.2487538754940033,
+        "kl_div": 0.004220013041049242,
+        "reward_pos": 0.8954906463623047,
+        "reward_neg": 0.1502682864665985,
+        "sim_margin": 1.0793895721435547,
+        "r_ret": 1.3109967708587646,
+        "r_align": 0.9806303381919861,
+        "r_ground": 0.2927645146846771,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:17:09",
+      "elapsed": "2:07:59",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2700,
+      "narration": "Processed batch 1098/1602 [84.7% time elapsed]. Policy alignment margin: 1.0069, Positive Reward: 0.8711, DPO Loss: 0.2504, KL Div: 0.00406.",
+      "metrics": {
+        "rl_loss": 0.2505671977996826,
+        "dpo_loss": 0.2503640055656433,
+        "kl_div": 0.004063775762915611,
+        "reward_pos": 0.8711024522781372,
+        "reward_neg": 0.15753263235092163,
+        "sim_margin": 1.0069173574447632,
+        "r_ret": 1.224626064300537,
+        "r_align": 0.9557086229324341,
+        "r_ground": 0.3963104486465454,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:17:09",
+      "elapsed": "2:07:59",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 2700,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 2700.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:17:17",
+      "elapsed": "2:08:07",
+      "task": "Efficiency Check Results",
+      "step": 2700,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 9.48%, Recall@5: 20.6%, MRR@10: 0.1477, p50 Latency: 5.06 ms.",
+      "metrics": {
+        "recall_1": 9.48,
+        "recall_5": 20.6,
+        "mrr_10": 0.1477,
+        "p50_latency_ms": 5.06
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:17:19",
+      "elapsed": "2:08:09",
+      "task": "Checkpoint & Model Persistence",
+      "step": 2700,
+      "narration": "Saved intermediate RL checkpoint to 'checkpoints/rl_policy\\rl_policy_step_2700.pt' and updated active model at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:18:31",
+      "elapsed": "2:09:21",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2725,
+      "narration": "Processed batch 1123/1602 [85.6% time elapsed]. Policy alignment margin: 1.0323, Positive Reward: 0.8692, DPO Loss: 0.2577, KL Div: 0.00436.",
+      "metrics": {
+        "rl_loss": 0.2578926384449005,
+        "dpo_loss": 0.2576747536659241,
+        "kl_div": 0.004357578232884407,
+        "reward_pos": 0.8692318201065063,
+        "reward_neg": 0.15052911639213562,
+        "sim_margin": 1.0323286056518555,
+        "r_ret": 1.2657086849212646,
+        "r_align": 0.982157289981842,
+        "r_ground": 0.26146021485328674,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:19:42",
+      "elapsed": "2:10:31",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2750,
+      "narration": "Processed batch 1148/1602 [86.4% time elapsed]. Policy alignment margin: 1.0731, Positive Reward: 0.8750, DPO Loss: 0.2417, KL Div: 0.00434.",
+      "metrics": {
+        "rl_loss": 0.24187135696411133,
+        "dpo_loss": 0.24165454506874084,
+        "kl_div": 0.004336341749876738,
+        "reward_pos": 0.8749865293502808,
+        "reward_neg": 0.1580500304698944,
+        "sim_margin": 1.0730901956558228,
+        "r_ret": 1.2663683891296387,
+        "r_align": 0.9731104373931885,
+        "r_ground": 0.30005788803100586,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:20:51",
+      "elapsed": "2:11:41",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2775,
+      "narration": "Processed batch 1173/1602 [87.2% time elapsed]. Policy alignment margin: 1.1216, Positive Reward: 0.9064, DPO Loss: 0.2282, KL Div: 0.00428.",
+      "metrics": {
+        "rl_loss": 0.22846049070358276,
+        "dpo_loss": 0.2282465696334839,
+        "kl_div": 0.004278438165783882,
+        "reward_pos": 0.9064136147499084,
+        "reward_neg": 0.15031889081001282,
+        "sim_margin": 1.1215983629226685,
+        "r_ret": 1.316059947013855,
+        "r_align": 0.9852919578552246,
+        "r_ground": 0.33016085624694824,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:22:06",
+      "elapsed": "2:12:55",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2800,
+      "narration": "Processed batch 1198/1602 [88.0% time elapsed]. Policy alignment margin: 1.0949, Positive Reward: 0.8973, DPO Loss: 0.2241, KL Div: 0.00419.",
+      "metrics": {
+        "rl_loss": 0.22433346509933472,
+        "dpo_loss": 0.2241239845752716,
+        "kl_div": 0.0041895764879882336,
+        "reward_pos": 0.897317111492157,
+        "reward_neg": 0.15294378995895386,
+        "sim_margin": 1.0948572158813477,
+        "r_ret": 1.3035905361175537,
+        "r_align": 0.9875806570053101,
+        "r_ground": 0.3098733425140381,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:23:15",
+      "elapsed": "2:14:04",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2825,
+      "narration": "Processed batch 1223/1602 [88.8% time elapsed]. Policy alignment margin: 0.9700, Positive Reward: 0.9000, DPO Loss: 0.2624, KL Div: 0.00426.",
+      "metrics": {
+        "rl_loss": 0.26263996958732605,
+        "dpo_loss": 0.26242682337760925,
+        "kl_div": 0.004262639209628105,
+        "reward_pos": 0.899996817111969,
+        "reward_neg": 0.15567898750305176,
+        "sim_margin": 0.9699644446372986,
+        "r_ret": 1.2952728271484375,
+        "r_align": 0.9874492883682251,
+        "r_ground": 0.34215110540390015,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:24:31",
+      "elapsed": "2:15:21",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2850,
+      "narration": "Processed batch 1248/1602 [89.6% time elapsed]. Policy alignment margin: 1.0790, Positive Reward: 0.9054, DPO Loss: 0.2464, KL Div: 0.00430.",
+      "metrics": {
+        "rl_loss": 0.24656805396080017,
+        "dpo_loss": 0.2463531643152237,
+        "kl_div": 0.0042977179400622845,
+        "reward_pos": 0.905404806137085,
+        "reward_neg": 0.1575969159603119,
+        "sim_margin": 1.0789794921875,
+        "r_ret": 1.3137764930725098,
+        "r_align": 0.9890797138214111,
+        "r_ground": 0.3255193829536438,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:24:31",
+      "elapsed": "2:15:21",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 2850,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 2850.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:24:56",
+      "elapsed": "2:15:46",
+      "task": "Efficiency Check Results",
+      "step": 2850,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 10.58%, Recall@5: 24.04%, MRR@10: 0.1627, p50 Latency: 6.42 ms.",
+      "metrics": {
+        "recall_1": 10.58,
+        "recall_5": 24.04,
+        "mrr_10": 0.1627,
+        "p50_latency_ms": 6.42
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:26:54",
+      "elapsed": "2:17:44",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2875,
+      "narration": "Processed batch 1273/1602 [91.2% time elapsed]. Policy alignment margin: 0.8505, Positive Reward: 0.8771, DPO Loss: 0.3036, KL Div: 0.00449.",
+      "metrics": {
+        "rl_loss": 0.3037905693054199,
+        "dpo_loss": 0.3035663068294525,
+        "kl_div": 0.004485289100557566,
+        "reward_pos": 0.8770942687988281,
+        "reward_neg": 0.15927737951278687,
+        "sim_margin": 0.8505419492721558,
+        "r_ret": 1.2642757892608643,
+        "r_align": 0.9703115224838257,
+        "r_ground": 0.3188035488128662,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:28:13",
+      "elapsed": "2:19:03",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2900,
+      "narration": "Processed batch 1298/1602 [92.1% time elapsed]. Policy alignment margin: 0.8868, Positive Reward: 0.8686, DPO Loss: 0.2809, KL Div: 0.00432.",
+      "metrics": {
+        "rl_loss": 0.28111532330513,
+        "dpo_loss": 0.2808991074562073,
+        "kl_div": 0.004324458073824644,
+        "reward_pos": 0.8686022162437439,
+        "reward_neg": 0.1600952446460724,
+        "sim_margin": 0.8868004083633423,
+        "r_ret": 1.2322337627410889,
+        "r_align": 0.9794947504997253,
+        "r_ground": 0.33695900440216064,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:29:31",
+      "elapsed": "2:20:20",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2925,
+      "narration": "Processed batch 1323/1602 [93.0% time elapsed]. Policy alignment margin: 1.2253, Positive Reward: 0.9374, DPO Loss: 0.2040, KL Div: 0.00417.",
+      "metrics": {
+        "rl_loss": 0.20418357849121094,
+        "dpo_loss": 0.20397500693798065,
+        "kl_div": 0.004171453416347504,
+        "reward_pos": 0.9374098777770996,
+        "reward_neg": 0.14883913099765778,
+        "sim_margin": 1.225303053855896,
+        "r_ret": 1.3704116344451904,
+        "r_align": 0.9904439449310303,
+        "r_ground": 0.3564109206199646,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:30:49",
+      "elapsed": "2:21:39",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2950,
+      "narration": "Processed batch 1348/1602 [93.8% time elapsed]. Policy alignment margin: 1.0012, Positive Reward: 0.9093, DPO Loss: 0.2414, KL Div: 0.00445.",
+      "metrics": {
+        "rl_loss": 0.24160365760326385,
+        "dpo_loss": 0.24138137698173523,
+        "kl_div": 0.004445651080459356,
+        "reward_pos": 0.9092531204223633,
+        "reward_neg": 0.15286800265312195,
+        "sim_margin": 1.0011597871780396,
+        "r_ret": 1.3144185543060303,
+        "r_align": 0.985633373260498,
+        "r_ground": 0.34762465953826904,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:32:08",
+      "elapsed": "2:22:58",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 2975,
+      "narration": "Processed batch 1373/1602 [94.7% time elapsed]. Policy alignment margin: 1.1918, Positive Reward: 0.9136, DPO Loss: 0.2199, KL Div: 0.00409.",
+      "metrics": {
+        "rl_loss": 0.22006209194660187,
+        "dpo_loss": 0.21985754370689392,
+        "kl_div": 0.004090925212949514,
+        "reward_pos": 0.9135951399803162,
+        "reward_neg": 0.1523776650428772,
+        "sim_margin": 1.1917860507965088,
+        "r_ret": 1.3242619037628174,
+        "r_align": 0.9814698696136475,
+        "r_ground": 0.3523912727832794,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:33:34",
+      "elapsed": "2:24:23",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 3000,
+      "narration": "Processed batch 1398/1602 [95.7% time elapsed]. Policy alignment margin: 0.6188, Positive Reward: 0.7572, DPO Loss: 0.3815, KL Div: 0.00434.",
+      "metrics": {
+        "rl_loss": 0.38172197341918945,
+        "dpo_loss": 0.3815048933029175,
+        "kl_div": 0.004341729450970888,
+        "reward_pos": 0.7571855783462524,
+        "reward_neg": 0.17741712927818298,
+        "sim_margin": 0.6187745928764343,
+        "r_ret": 0.9946085214614868,
+        "r_align": 0.9835053086280823,
+        "r_ground": 0.30951911211013794,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:33:34",
+      "elapsed": "2:24:23",
+      "task": "Periodic RAG Efficiency Check",
+      "step": 3000,
+      "narration": "Executing periodic multi-lingual efficiency evaluation at step 3000.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:34:16",
+      "elapsed": "2:25:06",
+      "task": "Efficiency Check Results",
+      "step": 3000,
+      "narration": "Current Multilingual Policy Performance -> Recall@1: 10.03%, Recall@5: 24.31%, MRR@10: 0.1649, p50 Latency: 31.02 ms.",
+      "metrics": {
+        "recall_1": 10.03,
+        "recall_5": 24.31,
+        "mrr_10": 0.1649,
+        "p50_latency_ms": 31.02
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:34:30",
+      "elapsed": "2:25:20",
+      "task": "Checkpoint & Model Persistence",
+      "step": 3000,
+      "narration": "Saved intermediate RL checkpoint to 'checkpoints/rl_policy\\rl_policy_step_3000.pt' and updated active model at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:35:47",
+      "elapsed": "2:26:36",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 3025,
+      "narration": "Processed batch 1423/1602 [97.2% time elapsed]. Policy alignment margin: 0.6902, Positive Reward: 0.7989, DPO Loss: 0.3556, KL Div: 0.00416.",
+      "metrics": {
+        "rl_loss": 0.35579633712768555,
+        "dpo_loss": 0.3555883765220642,
+        "kl_div": 0.004159353207796812,
+        "reward_pos": 0.7989484071731567,
+        "reward_neg": 0.1673598736524582,
+        "sim_margin": 0.6901688575744629,
+        "r_ret": 1.110090970993042,
+        "r_align": 0.9885748028755188,
+        "r_ground": 0.25216060876846313,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:37:06",
+      "elapsed": "2:27:56",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 3050,
+      "narration": "Processed batch 1448/1602 [98.0% time elapsed]. Policy alignment margin: 1.3209, Positive Reward: 0.9495, DPO Loss: 0.1853, KL Div: 0.00429.",
+      "metrics": {
+        "rl_loss": 0.1854986846446991,
+        "dpo_loss": 0.18528421223163605,
+        "kl_div": 0.004289477597922087,
+        "reward_pos": 0.9495453238487244,
+        "reward_neg": 0.14611247181892395,
+        "sim_margin": 1.3209433555603027,
+        "r_ret": 1.4203710556030273,
+        "r_align": 0.9848732948303223,
+        "r_ground": 0.31164249777793884,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:38:23",
+      "elapsed": "2:29:12",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 3075,
+      "narration": "Processed batch 1473/1602 [98.9% time elapsed]. Policy alignment margin: 1.3208, Positive Reward: 0.9346, DPO Loss: 0.1737, KL Div: 0.00410.",
+      "metrics": {
+        "rl_loss": 0.17392171919345856,
+        "dpo_loss": 0.17371676862239838,
+        "kl_div": 0.004099036566913128,
+        "reward_pos": 0.9345597624778748,
+        "reward_neg": 0.1490485668182373,
+        "sim_margin": 1.3208370208740234,
+        "r_ret": 1.3682167530059814,
+        "r_align": 0.9879552125930786,
+        "r_ground": 0.3502093553543091,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:39:56",
+      "elapsed": "2:30:46",
+      "task": "RL Optimization (Epoch 2)",
+      "step": 3100,
+      "narration": "Processed batch 1498/1602 [99.9% time elapsed]. Policy alignment margin: 1.1172, Positive Reward: 0.8894, DPO Loss: 0.2390, KL Div: 0.00428.",
+      "metrics": {
+        "rl_loss": 0.23925147950649261,
+        "dpo_loss": 0.23903758823871613,
+        "kl_div": 0.004277779720723629,
+        "reward_pos": 0.8894319534301758,
+        "reward_neg": 0.1551721841096878,
+        "sim_margin": 1.117241621017456,
+        "r_ret": 1.2634882926940918,
+        "r_align": 0.9904471635818481,
+        "r_ground": 0.35709476470947266,
+        "r_eff": 0.01831563888873418
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:40:05",
+      "elapsed": "2:30:55",
+      "task": "Target Training Duration Reached",
+      "step": 3102,
+      "narration": "Target training duration of 2.5 hours reached (2.50 hours total). Finalizing model.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:40:05",
+      "elapsed": "2:30:55",
+      "task": "RL Epoch 2 Completed",
+      "step": 3102,
+      "narration": "Epoch 2 finished. Average Loss: 0.2525, Mean Positive Reward: 0.8811, Mean Negative Reward: 0.1566, Average Margin: 1.0256.",
+      "metrics": {
+        "epoch": 2,
+        "avg_loss": 0.25249324435492354,
+        "avg_r_pos": 0.8810924033323924,
+        "avg_r_neg": 0.1566184055705865,
+        "avg_margin": 1.025596444785595
+      }
+    },
+    {
+      "timestamp": "2026-08-18 22:40:05",
+      "elapsed": "2:30:55",
+      "task": "Final Model Persistence",
+      "step": 3102,
+      "narration": "Exporting finalized Reinforcement Learning Policy weights to 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:40:06",
+      "elapsed": "2:30:56",
+      "task": "Final Comprehensive Multi-Language Evaluation",
+      "step": 3102,
+      "narration": "Running final post-training multilingual efficiency benchmark across all languages.",
+      "metrics": {}
+    },
+    {
+      "timestamp": "2026-08-18 22:43:35",
+      "elapsed": "2:34:25",
+      "task": "RL Pipeline Completion",
+      "step": 3102,
+      "narration": "Reinforcement Learning Training Pipeline successfully concluded after 3102 steps. Model is active at 'models/msmarco-xi-multilingual-rl-biencoder'.",
+      "metrics": {}
+    }
+  ]
+}

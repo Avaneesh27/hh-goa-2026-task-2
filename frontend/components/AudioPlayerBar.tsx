@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Play, Pause, RotateCcw, Square, Volume2, VolumeX, Sparkles } from "lucide-react";
+import { Play, Pause, RotateCcw, Square, Volume2, VolumeX } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 import { TTSStatus } from "@/hooks/useTTS";
 
@@ -28,7 +28,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
 
   if (!isSupported) {
     return (
-      <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl glass-pill text-xs text-slate-500">
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FAF8F3] border border-[#EBE5D8] text-xs text-[#8B95A5]">
         <VolumeX className="w-3.5 h-3.5" />
         <span>{t("tts.unsupported")}</span>
       </div>
@@ -40,14 +40,20 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
   const requiresGesture = status === "requiresGesture";
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 p-2.5 rounded-2xl glass-panel-subtle border border-brand-500/20 shadow-inner">
+    <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-2xl bg-[#FAF8F3] border border-[#EBE5D8] shadow-sm">
       <div className="flex items-center gap-2.5">
-        <div className={`w-7 h-7 rounded-xl flex items-center justify-center ${isPlaying ? "bg-brand-600 text-white shadow-md shadow-brand-500/30 animate-pulse" : "bg-slate-800/80 text-brand-400"}`}>
+        <div
+          className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all ${
+            isPlaying
+              ? "bg-[#E85D42] text-white shadow-warm-sm animate-pulse"
+              : "bg-[#FFFFFF] border border-[#EBE5D8] text-[#E85D42]"
+          }`}
+        >
           <Volume2 className="w-4 h-4" />
         </div>
 
         <div className="flex flex-col">
-          <span className="text-xs font-semibold text-slate-200">
+          <span className="text-xs font-bold text-[#172033]">
             {requiresGesture
               ? t("tts.tapToPlay")
               : isPlaying
@@ -62,9 +68,9 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               {[...Array(6)].map((_, i) => (
                 <span
                   key={i}
-                  className="w-1 rounded-full bg-gradient-to-t from-brand-500 via-indigo-400 to-cyan-300 animate-pulse shadow-[0_0_8px_rgba(168,85,247,0.8)]"
+                  className="w-1 rounded-full bg-[#E85D42] animate-pulse"
                   style={{
-                    height: `${7 + (i % 3) * 5}px`,
+                    height: `${6 + (i % 3) * 4}px`,
                     animationDelay: `${i * 120}ms`,
                   }}
                 />
@@ -80,7 +86,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
           <>
             <button
               onClick={onPause}
-              className="px-3 py-1.5 rounded-xl glass-button text-xs font-semibold text-slate-200 hover:text-white flex items-center gap-1"
+              className="px-3 py-1.5 rounded-xl paper-button text-xs font-bold text-[#172033] flex items-center gap-1"
               title={t("tts.pause")}
               aria-label={t("tts.pause")}
             >
@@ -89,7 +95,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             </button>
             <button
               onClick={onStop}
-              className="p-1.5 rounded-xl glass-button text-xs text-rose-400 hover:text-rose-300"
+              className="p-1.5 rounded-xl paper-button text-xs text-[#DC2626] hover:bg-[#FEE2E2]"
               title={t("tts.stop")}
               aria-label={t("tts.stop")}
             >
@@ -100,7 +106,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
           <>
             <button
               onClick={onResume}
-              className="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold flex items-center gap-1 shadow-md shadow-brand-500/20 active:scale-95"
+              className="px-3 py-1.5 rounded-xl bg-[#E85D42] hover:bg-[#D14328] text-white text-xs font-bold flex items-center gap-1 shadow-sm active:scale-95 transition-all"
               title={t("tts.resume")}
               aria-label={t("tts.resume")}
             >
@@ -109,7 +115,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             </button>
             <button
               onClick={onReplay}
-              className="p-1.5 rounded-xl glass-button text-xs text-slate-300 hover:text-white"
+              className="p-1.5 rounded-xl paper-button text-xs text-[#5A6478] hover:text-[#172033]"
               title={t("tts.replay")}
               aria-label={t("tts.replay")}
             >
@@ -119,7 +125,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
         ) : (
           <button
             onClick={onPlay}
-            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-brand-500/25 active:scale-95 transition-all"
+            className="px-3.5 py-1.5 rounded-xl bg-[#E85D42] hover:bg-[#D14328] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 transition-all"
             title={t("tts.listen")}
             aria-label={t("tts.listen")}
           >

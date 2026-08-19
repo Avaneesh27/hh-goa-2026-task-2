@@ -18,3 +18,12 @@ scratch/
 data/checkpoint_*.json
 data/ingestion_checkpoint.json
 data/qdrant_db/
+data/*.pkl
+data/*.bin
+
+# Large model artifacts & training checkpoints
+checkpoints/
+models/
+*.pt
+*.safetensors
+*.bin

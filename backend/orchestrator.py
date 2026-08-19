@@ -89,7 +89,8 @@ class RAGOrchestrator:
             bm25_top_k=settings.BM25_TOP_K,
             rrf_k=settings.RRF_K,
             fused_top_k=settings.DENSE_TOP_K,
-            filter_language=filter_language
+            filter_language=filter_language,
+            preferred_language=detected_lang
         )
         timer.durations_ms["embedding"] = ret_out["timings_ms"]["embedding_ms"]
         timer.durations_ms["dense_retrieval"] = ret_out["timings_ms"]["dense_retrieval_ms"]

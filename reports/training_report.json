@@ -1,0 +1,32 @@
+{
+  "base_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "output_dir": "models/msmarco-xi-multilingual-biencoder",
+  "device": "cuda",
+  "gpu_name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "training_duration_seconds": 216.79,
+  "total_training_pairs": 28014,
+  "target_languages": [
+    "hi",
+    "bn",
+    "mr",
+    "ta",
+    "te",
+    "gu",
+    "kn",
+    "ml",
+    "pa",
+    "or",
+    "as",
+    "ne",
+    "sa",
+    "ur"
+  ],
+  "hyperparameters": {
+    "batch_size": 32,
+    "epochs": 1,
+    "learning_rate": 2e-05,
+    "warmup_steps": 100,
+    "loss_function": "MultipleNegativesRankingLoss"
+  },
+  "completed_at": "2026-08-18 10:57:42 UTC"
+}

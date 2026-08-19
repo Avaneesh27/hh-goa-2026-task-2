@@ -10,14 +10,15 @@ Endpoints:
 
 import time
 from typing import Dict, Any, Optional
-from fastapi import APIRouter, File, UploadFile, Form, HTTPException, Query
+from fastapi import APIRouter, File, UploadFile, Form, HTTPException, Query, Response
 from fastapi.responses import JSONResponse
 
 from backend.config import settings
 from backend.schemas import (
     RAGResponse,
     TextQueryRequest,
-    HealthResponse
+    HealthResponse,
+    TTSRequest
 )
 from backend.orchestrator import rag_orchestrator
 
@@ -184,4 +185,32 @@ async def handle_translate_ui(payload: Dict[str, Any]):
 
     translations = translate_ui_keys(keys_dict, target_lang=target_lang, source_lang=source_lang)
     return {"translations": translations}
+
+
+@router.post("/api/text-to-speech")
+async def handle_text_to_speech(req: TTSRequest):
+    """
+    Synthesizes speech from input text and language using Sarvam Bulbul v3 TTS API.
+    Returns raw binary audio file (WAV) so it can be streamed/played in frontend.
+    """
+    import base64
+    from backend.tts import sarvam_tts_service
+
+    base64_audio, err = await sarvam_tts_service.text_to_speech(
+        text=req.text,
+        language_code=req.language,
+        speaker=req.speaker or "shubh"
+    )
+
+    if err:
+        # Return HTTP 400 with details so frontend can trigger native SpeechSynthesis fallback
+        raise HTTPException(status_code=400, detail=err)
+
+    try:
+        audio_data = base64.b64decode(base64_audio)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to decode audio: {str(e)}")
+
+    return Response(content=audio_data, media_type="audio/wav")
+
 

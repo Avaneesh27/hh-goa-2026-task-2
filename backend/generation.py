@@ -346,12 +346,26 @@ Provide your grounded answer below:"""
         q_tokens = set(re.findall(r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+", query.lower()))
         q_content_tokens = {t for t in q_tokens if len(t) > 2}
 
+        def _clean_candidate(text: str) -> str:
+            s = text.strip().strip("-:,; ")
+            # Repair or remove unbalanced closing/opening parenthesis
+            if s.count("(") > s.count(")"):
+                last_open = s.rfind("(")
+                if last_open > 10:
+                    s = s[:last_open].strip().strip("-:,; ")
+            if s.count("[") > s.count("]"):
+                last_open = s.rfind("[")
+                if last_open > 10:
+                    s = s[:last_open].strip().strip("-:,; ")
+            return s.strip()
+
         # Collect candidate sentences
         candidates = []
         for cit, p_lang, p_text in passages:
-            raw_sentences = re.split(r"[\n\.\।\?\!]+", p_text)
+            # Split sentences on danda (।), newline, ?, ! or periods followed by space/end of string (not inside abbreviations like B.C.P. or numbers)
+            raw_sentences = re.split(r"[\n।\?\!]+|(?<!\b[A-Za-z\u0900-\u0D7F])\.(?:\s+|$)|(?<=[a-zA-Z\u0900-\u0D7F]{3})\.(?:\s+|$)", p_text)
             for s in raw_sentences:
-                s_clean = s.strip()
+                s_clean = _clean_candidate(s)
                 if len(s_clean) < 15 or len(s_clean) > 400:
                     continue
                 if any(np in s_clean.lower() for np in noise_patterns):
@@ -408,50 +422,61 @@ Provide your grounded answer below:"""
             }
 
         # Language-aware candidate scoring and ranking
+        HINDI_MARKERS = {"है", "हैं", "था", "थी", "थे", "का", "की", "के", "को", "में", "पर", "से", "ने", "द्वारा", "गया", "गई", "गए", "होता", "होती", "होते", "निगम", "परिभाषा"}
         for c in candidates:
             c_words = set(re.findall(r"[\w\u0600-\u06FF\u0750-\u077F\u0900-\u0D7F\uFB50-\uFDFF\uFE70-\uFEFF]+", c["text"].lower()))
-            score = c["overlap"] * 10
+            score = c["overlap"] * 15
 
             if target_lang == "hi":
                 if c["is_devanagari_script"]:
-                    score += 25
-                if any(w in MARATHI_MARKERS for w in c_words):
-                    score -= 50
-                if any(w in NEPALI_MARKERS for w in c_words):
-                    score -= 50
-                if any(w in SANSKRIT_MARKERS for w in c_words):
-                    score -= 80
-                if c["is_bengali_script"] or not c["is_devanagari_script"]:
-                    score -= 100
+                    score += 30
+                if any(w in HINDI_MARKERS for w in c_words):
+                    score += 50
+                elif any(w in MARATHI_MARKERS for w in c_words):
+                    score += 15
+                elif any(w in NEPALI_MARKERS for w in c_words):
+                    score += 10
+                elif any(w in SANSKRIT_MARKERS for w in c_words):
+                    score += 5
+                elif c["is_latin_script"]:
+                    score += 10
+                else:
+                    score -= 30
             elif target_lang == "mr":
                 if c["is_devanagari_script"]:
-                    score += 10
+                    score += 20
                 if any(w in MARATHI_MARKERS for w in c_words):
-                    score += 40
-                if any(w in SANSKRIT_MARKERS for w in c_words):
-                    score -= 60
-                if c["is_bengali_script"]:
-                    score -= 100
+                    score += 50
+                elif any(w in HINDI_MARKERS for w in c_words):
+                    score += 20
+                elif c["is_latin_script"]:
+                    score += 10
+                else:
+                    score -= 30
             elif target_lang == "bn":
                 if c["is_bengali_script"]:
                     score += 50
-                if any(w in ASSAMESE_MARKERS for w in c_words):
-                    score -= 40
+                elif any(w in ASSAMESE_MARKERS for w in c_words):
+                    score += 25
+                elif c["is_latin_script"]:
+                    score += 10
+                else:
+                    score -= 30
             elif target_lang in ("en", "hinglish"):
                 if c["is_latin_script"]:
                     score += 60
                 elif c["is_devanagari_script"]:
-                    # Prefer pure Hindi over Marathi/Nepali/Sanskrit
-                    score += 15
-                    if any(w in MARATHI_MARKERS for w in c_words):
-                        score -= 40
-                    if any(w in NEPALI_MARKERS for w in c_words):
-                        score -= 40
-                    if any(w in SANSKRIT_MARKERS for w in c_words):
-                        score -= 80
+                    score += 25
                 else:
-                    # Heavily penalize non-Devanagari Indic scripts (Odia, Tamil, Telugu, etc.) for English/Hinglish
-                    score -= 100
+                    score -= 20
+            else:
+                # Other Indic languages (ta, te, gu, kn, ml, pa, or, as, ur, sa, ne)
+                if c["is_exact_script"]:
+                    score += 60
+                elif c["is_latin_script"]:
+                    score += 15
+                else:
+                    score -= 20
 
             c["score"] = score
 

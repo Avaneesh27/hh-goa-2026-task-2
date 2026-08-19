@@ -130,15 +130,10 @@ class IngestionPipeline:
 
         print(f"[+] Cleaned {len(cleaned_docs)} valid documents (Skipped {clean_stats['duplicates_skipped']} dupes, {clean_stats['empty_or_short_skipped']} empty/short).")
 
-        # Generate multi-strategy chunks
+        # Generate clean atomic passage chunks (MS MARCO optimal)
         for doc in cleaned_docs:
-            # Primary: Sentence-aware chunks for precision
-            sent_chunks = self.chunker.chunk_sentence_aware(doc)
-            all_chunks.extend(sent_chunks)
-            
-            # Structural paragraph chunk
-            struct_chunks = self.chunker.chunk_structural(doc)
-            all_chunks.extend(struct_chunks)
+            atomic_chunks = self.chunker.chunk_atomic_passage(doc)
+            all_chunks.extend(atomic_chunks)
 
         # Deduplicate chunks by text hash
         unique_chunks = []

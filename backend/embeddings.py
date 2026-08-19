@@ -4,6 +4,7 @@ Wraps SentenceTransformer with lazy model loading, normalized output embeddings,
 and an in-memory LRU query embedding cache for fast sub-millisecond repeated queries.
 """
 
+import os
 import time
 import hashlib
 from typing import List, Union, Optional
@@ -29,9 +30,15 @@ class EmbeddingManager:
     @property
     def model(self) -> SentenceTransformer:
         if self._model is None:
-            print(f"[*] Loading embedding model: {settings.EMBEDDING_MODEL} on {self.device}...")
+            if os.path.exists("models/msmarco-xi-multilingual-biencoder"):
+                model_target = "models/msmarco-xi-multilingual-biencoder"
+            elif os.path.exists("models/msmarco-xi-multilingual-rl-biencoder"):
+                model_target = "models/msmarco-xi-multilingual-rl-biencoder"
+            else:
+                model_target = settings.EMBEDDING_MODEL
+            print(f"[*] Loading embedding model: {model_target} on {self.device}...")
             start = time.perf_counter()
-            self._model = SentenceTransformer(settings.EMBEDDING_MODEL, device=self.device)
+            self._model = SentenceTransformer(model_target, device=self.device)
             print(f"[+] Loaded embedding model in {(time.perf_counter() - start):.3f}s")
         return self._model
 

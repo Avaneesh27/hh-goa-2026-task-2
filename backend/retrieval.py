@@ -118,7 +118,28 @@ class BM25SearchEngine:
         if not query_tokens:
             query_tokens = query.strip().lower().split()
 
-        raw_scores = self.bm25.get_scores(query_tokens)
+        # Cross-lingual synonym expansion for common English and Indic query terms
+        CROSS_LINGUAL_SYNONYMS = {
+            "corporation": ["कॉर्पोरेशन", "निगम", "कর্পোরেশন", "கார்ப்பரேஷன்", "కార్పొరేషన్", "કોર્પોરેશન", "ಕಾರ್ಪೊರೇಷನ್", "ਕਾਰਪੋਰੇਸ਼ਨ", "କର୍ପୋରେସନ୍", "കോർപ്പറേഷൻ", "کارپوریشن"],
+            "company": ["कंपनी", "কোম্পানি", "நிறுவனம்", "సంస్థ", "કંપની", "ಕಂಪನಿ", "കമ്പനി", "ਕੰਪਨੀ", "କମ୍ପାନୀ", "کمپنی"],
+            "business": ["व्यवसाय", "व्यापार", "ব্যবসা", "வணிகம்", "వ్యాపారం", "વેપાર", "ವ್ಯವಹಾರ", "ബിസിനസ്", "ਵਪਾਰ", "ବ୍ୟବସାୟ", "کاروبار"],
+            "website": ["वेबसाइट", "ৱেবছাইট", "ওয়েবসাইট", "இணையதளம்", "వెబ్‌సైట్", "વેબસાઇટ", "ವೆಬ್‌ಸೈಟ್", "വെബ്സൈറ്റ്", "ਵੈੱਬਸਾਈਟ", "ୱେବସାଇଟ୍", "ویب سائٹ"],
+            "olympics": ["ओलंपिक", "অলিম্পিক", "ஒலிம்பிக்", "ఒలింపిక్స్", "ઓલિમ્પિક", "ಒಲಿಂಪಿಕ್ಸ್", "ഒളിമ്പിക്സ്", "ਓਲੰਪਿਕ", "ଅଲିମ୍ପିକ୍", "اولمپکس"],
+            "marathon": ["मैराथन", "ম্যারাথন", "மராத்தான்", "మారథాన్", "મેરેથોન", "ಮ್ಯಾರಥಾನ್", "മാരത്തൺ", "ਮੈਰਾਥਨ", "ମାରାଥନ୍", "میراتھن"],
+            "cell": ["कोशिका", "কোষ", "செல்", "కణం", "કોષ", "ಕಣ", "കോശം", "ਸੈੱਲ", "କୋଷ", "خلیہ"],
+            "dna": ["डीएनए", "ডিএনএ", "டிஎன்ஏ", "డిఎన్ఎ", "ડીએનએ", "ಡಿಎನ್‌ಎ", "ഡിഎൻഎ", "ਡੀਐਨਏ", "ଡିଏନଏ", "ڈی این اے"],
+            "temperature": ["तापमान", "তাপমাত্রা", "வெப்பநிலை", "ఉష్ణోగ్రత", "તાપમાન", "ತಾપಮಾನ", "താപനില", "ਤਾਪਮਾਨ", "താପମାତ୍ରା", "درجہ حرارت"],
+            "president": ["राष्ट्रपति", "রাষ্ট্রপতি", "ஜனாதிபதி", "రాష్ట్రపతి", "રાષ્ટ્રપતિ", "ರಾಷ್ಟ್ರಪತಿ", "രാഷ്ട്രപതി", "ਰਾਸ਼ਟਰਪਤੀ", "ରାଷ୍ଟ୍ରପତି", "صدر"],
+            "computer": ["कंप्यूटर", "কম্পিউটার", "கணினி", "కంప్యూటర్", "કમ્પ્યુટર", "ಕಂಪ್ಯೂಟರ್", "കമ്പ്യൂട്ടർ", "ਕੰਪਿਊਟਰ", "କମ୍ପ୍ୟୁଟର", "کمپیوٹر"],
+            "book": ["किताब", "पुस्तक", "বই", "புத்தகம்", "పుస్తకం", "પુસ્તક", "ಪುಸ್ತಕ", "പുസ്തകം", "ਕਿਤਾਬ", "ବହି", "کتاب"],
+        }
+        expanded_tokens = list(query_tokens)
+        for t in query_tokens:
+            t_low = t.lower()
+            if t_low in CROSS_LINGUAL_SYNONYMS:
+                expanded_tokens.extend(CROSS_LINGUAL_SYNONYMS[t_low])
+
+        raw_scores = self.bm25.get_scores(expanded_tokens)
         top_indices = np.argsort(raw_scores)[::-1]
 
         results = []
@@ -277,11 +298,13 @@ def reciprocal_rank_fusion(
     dense_results: List[Dict[str, Any]],
     bm25_results: List[Dict[str, Any]],
     k: int = 60,
-    top_k: int = 20
+    top_k: int = 20,
+    preferred_language: Optional[str] = None
 ) -> List[Dict[str, Any]]:
     """
-    Combines dense and sparse results using Reciprocal Rank Fusion:
-    RRF(d) = sum(1 / (k + rank_i(d)))
+    Combines dense and sparse results using Reciprocal Rank Fusion with language-aware soft boosting:
+    RRF(d) = (sum(1 / (k + rank_i(d)))) * (1.10 if lang == preferred_lang else 1.0)
+    Deduplicates candidates by text hash to prevent identical passages from crowding the top-k.
     """
     rrf_scores: Dict[str, float] = {}
     doc_map: Dict[str, Dict[str, Any]] = {}
@@ -293,7 +316,8 @@ def reciprocal_rank_fusion(
         cid = res["chunk_id"]
         dense_ranks[cid] = rank
         doc_map[cid] = res
-        rrf_scores[cid] = rrf_scores.get(cid, 0.0) + (1.0 / (k + rank))
+        base_score = 1.0 / (k + rank)
+        rrf_scores[cid] = rrf_scores.get(cid, 0.0) + base_score
 
     # Rank BM25 results
     for rank, res in enumerate(bm25_results, 1):
@@ -301,20 +325,42 @@ def reciprocal_rank_fusion(
         bm25_ranks[cid] = rank
         if cid not in doc_map:
             doc_map[cid] = res
-        rrf_scores[cid] = rrf_scores.get(cid, 0.0) + (1.0 / (k + rank))
+        base_score = 1.0 / (k + rank)
+        rrf_scores[cid] = rrf_scores.get(cid, 0.0) + base_score
 
-    # Sort fused results by RRF score descending
-    sorted_chunks = sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)[:top_k]
+    # Apply soft metadata language boost (+10% for same-language without hard filtering)
+    if preferred_language:
+        pref = preferred_language.lower()
+        for cid in rrf_scores:
+            doc_lang = (doc_map[cid].get("language") or "").lower()
+            if doc_lang == pref:
+                rrf_scores[cid] *= 1.10
+
+    # Sort fused results by boosted RRF score descending
+    sorted_chunks = sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)
 
     fused_results = []
+    seen_text_hashes = set()
+
     for cid, score in sorted_chunks:
         item = dict(doc_map[cid])
+        text_content = item.get("text", "").strip()
+        t_hash = hash(text_content)
+
+        # Deduplicate identical passage texts
+        if t_hash in seen_text_hashes:
+            continue
+        seen_text_hashes.add(t_hash)
+
         item["rrf_score"] = round(score, 5)
         item["score"] = round(score, 5)
         item["dense_rank"] = dense_ranks.get(cid, None)
         item["bm25_rank"] = bm25_ranks.get(cid, None)
         item["retrieval_source"] = "hybrid_rrf"
         fused_results.append(item)
+
+        if len(fused_results) >= top_k:
+            break
 
     return fused_results
 
@@ -334,14 +380,15 @@ class HybridRetriever:
         bm25_top_k: int = settings.BM25_TOP_K,
         rrf_k: int = settings.RRF_K,
         fused_top_k: int = settings.DENSE_TOP_K,
-        filter_language: Optional[str] = None
+        filter_language: Optional[str] = None,
+        preferred_language: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Executes hybrid retrieval:
           1. Embed query
           2. Dense ANN vector search via Qdrant
           3. BM25 keyword search
-          4. Candidate Fusion via RRF
+          4. Candidate Fusion via RRF with language soft boosting & deduplication
         """
         start_time = time.perf_counter()
 
@@ -373,7 +420,8 @@ class HybridRetriever:
             dense_results=dense_results,
             bm25_results=bm25_results,
             k=rrf_k,
-            top_k=fused_top_k
+            top_k=fused_top_k,
+            preferred_language=preferred_language or filter_language
         )
         t_fuse = (time.perf_counter() - t_fuse_start) * 1000
 

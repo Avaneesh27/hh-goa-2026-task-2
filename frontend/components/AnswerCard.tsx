@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Copy, Check, ShieldCheck, AlertOctagon, Sparkles, Volume2, Award } from "lucide-react";
+import { Copy, Check, ShieldCheck, AlertCircle, Sparkles, BookOpen, Zap } from "lucide-react";
 import { RAGResponse } from "@/types/rag";
 import { useTranslation } from "@/lib/i18n";
 import { AudioPlayerBar } from "@/components/AudioPlayerBar";
@@ -15,7 +15,7 @@ interface AnswerCardProps {
   onResumeTTS: () => void;
   onReplayTTS: () => void;
   onStopTTS: () => void;
-  isTTSSupported: boolean;
+  isSupported: boolean;
 }
 
 export const AnswerCard: React.FC<AnswerCardProps> = ({
@@ -26,7 +26,7 @@ export const AnswerCard: React.FC<AnswerCardProps> = ({
   onResumeTTS,
   onReplayTTS,
   onStopTTS,
-  isTTSSupported,
+  isSupported,
 }) => {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
@@ -41,38 +41,44 @@ export const AnswerCard: React.FC<AnswerCardProps> = ({
 
   return (
     <div
-      className={`rounded-3xl p-6 sm:p-7 border backdrop-blur-2xl shadow-2xl transition-all duration-500 ${
+      className={`rounded-3xl p-6 sm:p-8 bg-[#FFFFFF] dark:bg-[#161F30] border shadow-warm-md transition-all duration-300 ${
         isAbstained
-          ? "glass-panel border-amber-500/35 shadow-amber-500/10"
-          : "glass-panel-elevated border-brand-500/35 shadow-brand-500/15"
+          ? "border-[#FDE68A] dark:border-[#FDE68A]/30 bg-[#FFFDF7] dark:bg-[#1E1B4B]/30"
+          : "border-[#EBE5D8] dark:border-[#232E42]"
       }`}
     >
       {/* Header & Badges */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 mb-5">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-brand-500/15 border border-brand-500/30 flex items-center justify-center text-brand-400">
-            <Sparkles className="w-4 h-4" />
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#EBE5D8] dark:border-[#232E42] pb-4 mb-5">
+        <div className="flex items-center gap-3">
+          <div
+            className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm ${
+              isAbstained
+                ? "bg-[#FEF3C7] dark:bg-[#FEF3C7]/10 text-[#D97706] border border-[#FDE68A] dark:border-[#FDE68A]/20"
+                : "bg-[#FFEDE8] dark:bg-[#FFEDE8]/10 text-[#E85D42] dark:text-[#F8876B] border border-[#FFD7CD] dark:border-[#FFD7CD]/20"
+            }`}
+          >
+            {isAbstained ? "!" : "A"}
           </div>
           <div>
-            <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-200">
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#172033] dark:text-[#F8FAFC]">
               {isAbstained ? t("answer.decision") : t("answer.title")}
             </h3>
-            <span className="text-[11px] text-slate-400 font-medium">
+            <span className="text-[11px] text-[#5A6478] dark:text-[#94A3B8] font-medium">
               {response.language.toUpperCase()} • {t("answer.confidence")}: {Math.round(response.confidence * 100)}%
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Grounded vs Abstained Status Pill */}
+          {/* Grounded vs Abstained Status Badge */}
           {isAbstained ? (
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/30">
-              <AlertOctagon className="w-3.5 h-3.5" />
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]">
+              <AlertCircle className="w-3.5 h-3.5 text-[#D97706]" />
               {t("answer.abstainedBadge")}
             </span>
           ) : (
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-              <ShieldCheck className="w-3.5 h-3.5" />
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#DCFCE7] text-[#166534] border border-[#BBF7D0]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#16A34A]" />
               {t("answer.groundedBadge")}
             </span>
           )}
@@ -80,12 +86,12 @@ export const AnswerCard: React.FC<AnswerCardProps> = ({
           {/* Copy Button */}
           <button
             onClick={handleCopy}
-            className="p-2 rounded-xl glass-button text-slate-300 hover:text-white"
+            className="p-2 rounded-xl paper-button text-[#5A6478] hover:text-[#172033]"
             title={t("answer.copy")}
             aria-label={t("answer.copy")}
           >
             {copied ? (
-              <Check className="w-4 h-4 text-emerald-400" />
+              <Check className="w-4 h-4 text-[#16A34A]" />
             ) : (
               <Copy className="w-4 h-4" />
             )}
@@ -94,12 +100,12 @@ export const AnswerCard: React.FC<AnswerCardProps> = ({
       </div>
 
       {/* Answer Core Body */}
-      <div className="space-y-4">
+      <div className="space-y-5">
         <div
-          className={`p-5 sm:p-6 rounded-2xl border text-sm sm:text-base leading-relaxed tracking-normal font-normal ${
+          className={`p-5 sm:p-6 rounded-2xl text-base sm:text-lg leading-relaxed font-normal ${
             isAbstained
-              ? "bg-amber-950/20 border-amber-500/25 text-amber-100"
-              : "bg-slate-900/60 border-white/10 text-slate-100 shadow-inner"
+              ? "bg-[#FEF3C7]/40 border border-[#FDE68A] text-[#78350F]"
+              : "bg-[#FAF8F3] border border-[#EBE5D8] text-[#172033]"
           }`}
         >
           {response.answer}
@@ -107,7 +113,7 @@ export const AnswerCard: React.FC<AnswerCardProps> = ({
 
         {/* Abstention Reason Note if applicable */}
         {isAbstained && (response.abstention_reason || response.answer.includes("ABSTAIN")) && (
-          <p className="text-xs text-amber-300/85 italic px-1">
+          <p className="text-xs text-[#92400E] italic px-1 font-medium">
             {t("answer.abstentionReason")}: {response.abstention_reason || t("answer.abstentionDefault")}
           </p>
         )}
@@ -120,25 +126,25 @@ export const AnswerCard: React.FC<AnswerCardProps> = ({
           onResume={onResumeTTS}
           onReplay={onReplayTTS}
           onStop={onStopTTS}
-          isSupported={isTTSSupported}
+          isSupported={isSupported}
         />
 
         {/* Meta summary footer */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 text-xs text-slate-400 border-t border-white/5">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 text-xs text-[#5A6478] border-t border-[#EBE5D8]">
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1 text-slate-400">
-              <Award className="w-3.5 h-3.5 text-brand-400" />
+            <span className="flex items-center gap-1.5 text-[#5A6478]">
+              <BookOpen className="w-4 h-4 text-[#E85D42]" />
               {t("answer.retrieval")}:{" "}
-              <strong className="text-slate-200 font-mono">
+              <strong className="text-[#172033] font-semibold">
                 {response.retrieval.selected_count || response.retrieval.reranked_count} {t("evidence.sources")}
               </strong>
             </span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="text-slate-400">{t("answer.totalLatency")}:</span>
-            <span className="font-mono font-bold text-brand-300 px-2 py-0.5 rounded-md glass-pill">
-              {response.latency.end_to_end_ms} ms
+            <span className="text-[#5A6478]">{t("answer.totalLatency")}:</span>
+            <span className="font-mono font-bold text-[#E85D42] px-2.5 py-0.5 rounded-lg bg-[#FFEDE8] border border-[#FFD7CD]">
+              ⚡ {response.latency.end_to_end_ms} ms
             </span>
           </div>
         </div>

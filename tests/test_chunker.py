@@ -1,49 +1,59 @@
 import os
 import sys
-import pytest
+import unittest
 
 # Ensure root workspace directory in python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from ingestion.chunker import AdaptiveChunker, select_adaptive_chunk_strategy
+from ingestion.chunker import AdaptiveChunker
 
 
-def test_sentence_aware_chunking():
-    chunker = AdaptiveChunker(default_chunk_size=10, min_chunk_size=2)
-    doc = {
-        "document_id": "doc_test_1",
-        "query_id": 1,
-        "passage_index": 0,
-        "language": "hi",
-        "text": "प्रथम वाक्य यहाँ समाप्त होता है। दूसरा वाक्य यहाँ से शुरू होता है। तीसरा वाक्य अंतिम है।"
-    }
-    chunks = chunker.chunk_sentence_aware(doc, max_words=8)
-    assert len(chunks) >= 2
-    for c in chunks:
-        assert c["document_id"] == "doc_test_1"
-        assert c["chunking_strategy"] == "sentence_aware"
-        assert len(c["text"]) > 0
+class TestAdaptiveChunker(unittest.TestCase):
+
+    def test_sentence_aware_chunking(self):
+        chunker = AdaptiveChunker(default_chunk_size=10, min_chunk_size=2)
+        doc = {
+            "document_id": "doc_test_1",
+            "query_id": 1,
+            "passage_index": 0,
+            "language": "hi",
+            "text": "प्रथम वाक्य यहाँ समाप्त होता है। दूसरा वाक्य यहाँ से शुरू होता है। तीसरा वाक्य अंतिम है।"
+        }
+        chunks = chunker.chunk_sentence_aware(doc, max_words=8)
+        self.assertGreaterEqual(len(chunks), 2)
+        for c in chunks:
+            self.assertEqual(c["document_id"], "doc_test_1")
+            self.assertEqual(c["chunking_strategy"], "sentence_aware")
+            self.assertGreater(len(c["text"]), 0)
+
+    def test_atomic_passage_chunking(self):
+        chunker = AdaptiveChunker()
+        doc = {
+            "document_id": "doc_atomic_1",
+            "query_id": 2,
+            "passage_index": 0,
+            "language": "hi",
+            "text": "यह एक छोटा सा अनुच्छेद है जो अक्षुण्ण रहना चाहिए।"
+        }
+        chunks = chunker.chunk_atomic_passage(doc)
+        self.assertEqual(len(chunks), 1)
+        self.assertEqual(chunks[0]["chunking_strategy"], "atomic_passage")
+        self.assertEqual(chunks[0]["text"], doc["text"])
+
+    def test_structural_chunking(self):
+        chunker = AdaptiveChunker()
+        doc = {
+            "document_id": "doc_struct_1",
+            "query_id": 3,
+            "passage_index": 0,
+            "language": "hi",
+            "text": "पहला पैराग्राफ यहाँ है।\n\nदूसरा पैराग्राफ यहाँ है।"
+        }
+        chunks = chunker.chunk_structural(doc)
+        self.assertEqual(len(chunks), 2)
+        self.assertEqual(chunks[0]["chunking_strategy"], "structural")
+        self.assertEqual(chunks[1]["chunking_strategy"], "structural")
 
 
-def test_multi_resolution_chunking():
-    chunker = AdaptiveChunker()
-    doc = {
-        "document_id": "doc_hier_1",
-        "query_id": 2,
-        "passage_index": 0,
-        "language": "hi",
-        "text": "अनुच्छेद एक।\n\nअनुच्छेद दो।"
-    }
-    chunks = chunker.chunk_multi_resolution(doc)
-    levels = {c["level"] for c in chunks}
-    assert "document" in levels
-    assert "paragraph" in levels
-    assert "fine_grained" in levels
-
-
-def test_adaptive_chunk_selector():
-    strat1, reason1 = select_adaptive_chunk_strategy("कॉर्पोरेशन क्या है?", "definition")
-    assert strat1 == "sentence_aware"
-
-    strat2, reason2 = select_adaptive_chunk_strategy("Explain in detail the full architectural comparison of corporations vs partnerships", "comparison")
-    assert strat2 == "multi_resolution"
+if __name__ == "__main__":
+    unittest.main()

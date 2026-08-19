@@ -96,3 +96,10 @@ class HealthResponse(BaseModel):
     reranker_model: str
     llm_provider: str
     llm_model: str
+
+
+class TTSRequest(BaseModel):
+    text: str
+    language: str
+    speaker: Optional[str] = "shubh"
+

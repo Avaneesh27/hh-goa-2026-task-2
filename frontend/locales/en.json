@@ -94,6 +94,12 @@
   "trace.steps": "steps executed",
 
   "settings.title": "Application Preferences",
+  "pageLanguage": "Page Language",
+  "pageLanguageDesc": "Controls the language of the entire website interface, navigation, settings, and documentation.",
+  "voiceLanguage": "Voice Language",
+  "voiceLanguageDesc": "Controls speech-to-text recognition, RAG retrieval index, and voice narration audio.",
+  "syncLanguage": "Use page language for voice interaction",
+  "syncLanguageDesc": "Automatically sync voice language whenever page language changes",
   "settings.language": "Application Language",
   "settings.languageDesc": "Controls UI language, STT recognition, answer synthesis, and voice narration.",
   "settings.autoplay": "Auto-play Voice Narration",
