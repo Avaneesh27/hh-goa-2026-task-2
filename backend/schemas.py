@@ -79,6 +79,7 @@ class RAGResponse(BaseModel):
     evidence: List[EvidenceChunk]
     latency: LatencyBreakdown
     execution_trace: List[str]
+    audio_base64: Optional[str] = None
 
 
 class TextQueryRequest(BaseModel):

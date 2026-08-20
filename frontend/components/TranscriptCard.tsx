@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mic, Copy, Check, MessageSquare } from "lucide-react";
+import { Copy, Check, MessageSquare } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
 interface TranscriptCardProps {
@@ -25,10 +25,10 @@ export const TranscriptCard: React.FC<TranscriptCardProps> = ({
   };
 
   return (
-    <div className="rounded-2xl p-5 sm:p-6 bg-[#FFFFFF] dark:bg-[#161F30] border border-[#EBE5D8] dark:border-[#232E42] shadow-warm-sm transition-all duration-300 relative">
+    <div className="rounded-xl p-5 sm:p-6 bg-[#FFFFFF] dark:bg-[#161F30] border border-[#EBE5D8] dark:border-[#232E42] shadow-sm transition-colors relative">
       <div className="flex items-center justify-between gap-2 mb-3">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-lg bg-[#FFEDE8] dark:bg-[#FFEDE8]/10 flex items-center justify-center text-[#E85D42] dark:text-[#F8876B]">
+          <div className="w-6 h-6 rounded-md bg-[#FFEDE8] dark:bg-[#FFEDE8]/10 flex items-center justify-center text-[#E85D42] dark:text-[#F8876B]">
             <MessageSquare className="w-3.5 h-3.5" />
           </div>
           <span className="text-xs font-extrabold uppercase tracking-wider text-[#5A6478] dark:text-[#94A3B8]">
@@ -37,7 +37,7 @@ export const TranscriptCard: React.FC<TranscriptCardProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#FAF8F3] dark:bg-[#0B0F19] text-[#5A6478] dark:text-[#94A3B8] border border-[#EBE5D8] dark:border-[#232E42]">
+          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-[#FAF8F3] dark:bg-[#0B0F19] text-[#5A6478] dark:text-[#94A3B8] border border-[#EBE5D8] dark:border-[#232E42]">
             {language.toUpperCase()}
           </span>
           <button
@@ -55,7 +55,7 @@ export const TranscriptCard: React.FC<TranscriptCardProps> = ({
         </div>
       </div>
 
-      <p className="text-base sm:text-lg font-medium text-[#172033] dark:text-[#F8FAFC] leading-relaxed pl-1 border-l-2 border-[#E85D42]/40">
+      <p className="text-base sm:text-lg font-medium text-[#172033] dark:text-[#F8FAFC] leading-relaxed pl-3 border-l-2 border-[#E85D42]/40">
         "{transcript}"
       </p>
     </div>

@@ -17,9 +17,12 @@ frontend/out/
 scratch/
 data/checkpoint_*.json
 data/ingestion_checkpoint.json
-data/qdrant_db/
+data/qdrant_*/
+data/test_qdrant_*/
 data/*.pkl
 data/*.bin
+data/*.index
+data/*.sqlite
 
 # Large model artifacts & training checkpoints
 checkpoints/

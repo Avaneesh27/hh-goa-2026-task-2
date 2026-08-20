@@ -45,7 +45,7 @@ export function useTTS(initialText: string = "", initialLanguage: string = "en")
   }, []);
 
   const play = useCallback(
-    (textToSpeak?: string, langCode?: string) => {
+    (textToSpeak?: string, langCode?: string, preloadedAudioBase64?: string) => {
       const targetText = textToSpeak !== undefined ? textToSpeak : currentText;
       const targetLang = langCode !== undefined ? langCode : currentLang;
 
@@ -67,7 +67,7 @@ export function useTTS(initialText: string = "", initialLanguage: string = "en")
         },
       };
 
-      const started = ttsService.speak(targetText, targetLang, options);
+      const started = ttsService.speak(targetText, targetLang, options, preloadedAudioBase64);
       if (started) {
         setStatus("playing");
       } else {
@@ -98,7 +98,7 @@ export function useTTS(initialText: string = "", initialLanguage: string = "en")
 
   // Handler for automatic narration when an answer is delivered
   const narrateAnswer = useCallback(
-    (answerText: string, lang: string) => {
+    (answerText: string, lang: string, preloadedAudioBase64?: string) => {
       setCurrentText(answerText);
       setCurrentLang(lang);
 
@@ -110,7 +110,7 @@ export function useTTS(initialText: string = "", initialLanguage: string = "en")
         return;
       }
 
-      play(answerText, lang);
+      play(answerText, lang, preloadedAudioBase64);
     },
     [autoPlayEnabled, hasInteracted, play]
   );

@@ -1,19 +1,14 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   Mic,
   Activity,
   Layers,
-  Cpu,
+  Search,
   ShieldCheck,
   Volume2,
-  Sparkles,
-  Search,
   CheckCircle2,
-  ArrowRight,
-  Database,
-  Award,
 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 
@@ -150,18 +145,17 @@ export const PipelineStory: React.FC = () => {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  // Scroll-driven continuous card focus & interpolation engine (GPU compositor optimized)
+  // Ultra-Smooth C2-Continuous Scroll Interpolation Engine (GPU compositor optimized)
   useEffect(() => {
     const prefersReducedMotion =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (prefersReducedMotion) {
-      // Simple fallback for reduced motion
       const handleSimpleScroll = () => {
         let closestIdx = 0;
         let minDistance = Infinity;
-        const viewportCenter = window.innerHeight * 0.45;
+        const viewportCenter = window.innerHeight * 0.46;
 
         cardRefs.current.forEach((el, idx) => {
           if (!el) return;
@@ -190,7 +184,7 @@ export const PipelineStory: React.FC = () => {
     const updateCardTransforms = () => {
       const viewportHeight = window.innerHeight || 800;
       const targetFocusY = viewportHeight * 0.46; // Focal plane ~46% of viewport
-      const focalZone = viewportHeight * 0.42;
+      const focalZone = viewportHeight * 0.48; // Smooth blending radius
 
       let closestIdx = 0;
       let minDistance = Infinity;
@@ -208,23 +202,24 @@ export const PipelineStory: React.FC = () => {
           closestIdx = idx;
         }
 
-        // Normalized scroll delta (-1.0 above focal point, 0.0 at focus, +1.0 below focal point)
-        const normDist = Math.max(-1.5, Math.min(1.5, distFromCenter / focalZone));
-        const distanceRatio = Math.min(1.0, Math.abs(normDist));
+        // C2-Continuous Cosine Smoothstep interpolation:
+        // When absDist == 0 (dead center), smoothFactor = 1.0
+        // When absDist >= focalZone, smoothFactor = 0.0
+        // Zero derivative at both endpoints for velvety continuous motion
+        const normalizedDist = Math.min(1.0, absDist / focalZone);
+        const smoothFactor = 0.5 * (1 + Math.cos(Math.PI * normalizedDist));
 
-        // Continuous smooth interpolation curves with prominent enlargement:
-        // Active card at focus: scale ~1.06, opacity 1.0, translateY 0, elevated focus
-        // Inactive cards (scrolled past or approaching): scale down to ~0.84, opacity ~0.48
-        const scale = 1.06 - distanceRatio * 0.22; // 1.06 (active) down to 0.84 (inactive)
-        const opacity = 1.0 - distanceRatio * 0.52; // 1.00 down to 0.48
-        const translateY = normDist * 20; // Natural parallax vertical travel
+        // Smooth physical scaling & opacity without jarring jumps
+        const scale = 0.95 + smoothFactor * 0.05; // 0.95 (idle) to 1.00 (active)
+        const opacity = 0.50 + smoothFactor * 0.50; // 0.50 (dimmed) to 1.00 (crisp)
+        const translateY = (distFromCenter / focalZone) * 10; // 10px subtle organic parallax travel
 
-        // Direct DOM update via GPU transform - zero React state renders per scroll frame!
+        // Direct hardware-accelerated transform injection
         cardEl.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`;
-        cardEl.style.opacity = Math.max(0.40, opacity).toFixed(3);
+        cardEl.style.opacity = opacity.toFixed(3);
       });
 
-      // Update active stage on left panel only when focal dominant card switches
+      // Update active stage on left panel with debounced focal switch
       if (closestIdx !== activeStepRef.current) {
         activeStepRef.current = closestIdx;
         setActiveStepIndex(closestIdx);
@@ -241,7 +236,7 @@ export const PipelineStory: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    // Initial layout compute on mount
+    // Initial compute on mount
     updateCardTransforms();
 
     return () => {
@@ -249,24 +244,43 @@ export const PipelineStory: React.FC = () => {
     };
   }, []);
 
+  // Smooth programmatic scroll to target stage
+  const handleStepClick = useCallback((idx: number) => {
+    setActiveStepIndex(idx);
+    activeStepRef.current = idx;
+    const targetEl = cardRefs.current[idx];
+    if (targetEl) {
+      const viewportHeight = window.innerHeight || 800;
+      const rect = targetEl.getBoundingClientRect();
+      const targetScrollY =
+        window.scrollY + rect.top - (viewportHeight * 0.46 - rect.height / 2);
+      window.scrollTo({
+        top: targetScrollY,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
   const activeStep = PIPELINE_STEPS[activeStepIndex] || PIPELINE_STEPS[0];
 
   return (
     <section
       ref={sectionRef}
-      className="w-full py-16 sm:py-28 border-t border-[#EBE5D8] dark:border-[#232E42] bg-[#FAF8F3] dark:bg-[#0B0F19] relative z-10 transition-colors duration-300"
+      className="w-full py-16 sm:py-24 border-t border-[#EBE5D8] dark:border-[#232E42] bg-[#FAF8F3] dark:bg-[#0B0F19] relative z-10 transition-colors duration-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-24 space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FFFFFF] dark:bg-[#161F30] border border-[#EBE5D8] dark:border-[#232E42] shadow-warm-sm text-xs sm:text-sm font-bold text-[#E85D42] dark:text-[#F06A50]">
-            <Sparkles className="w-4 h-4" />
-            <span>Interactive RAG Pipeline Journey</span>
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#FFFFFF] dark:bg-[#161F30] border border-[#EBE5D8] dark:border-[#232E42] text-xs font-semibold text-[#5A6478] dark:text-[#94A3B8] shadow-sm">
+            <span className="h-2 w-2 rounded-full bg-[#E85D42] dark:bg-[#F06A50]" />
+            <span>Deterministic RAG Execution Timeline</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-[#172033] dark:text-[#F8FAFC] tracking-[-0.015em] leading-[1.3] max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-[#172033] dark:text-[#F8FAFC] tracking-[-0.015em] leading-snug sm:leading-snug max-w-3xl mx-auto">
             How a Voice Query Becomes a{" "}
-            <span className="editorial-highlight">{t("answer.groundedBadge") || "Grounded Answer"}</span>
+            <span className="text-[#E85D42] dark:text-[#F06A50] underline decoration-[#FED7AA] dark:decoration-[#E85D42]/40 underline-offset-4 decoration-2">
+              Grounded Answer
+            </span>
           </h2>
 
           <p className="text-sm sm:text-base text-[#5A6478] dark:text-[#94A3B8] leading-relaxed max-w-xl mx-auto pt-1">
@@ -276,20 +290,20 @@ export const PipelineStory: React.FC = () => {
 
         {/* Desktop Sticky 2-Column Story Layout / Mobile Linear Stack */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Column: Sticky Interactive Pipeline Visualizer (Desktop - Decreased width by ~10%) */}
-          <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-5">
-            <div className="p-5 sm:p-6 rounded-3xl bg-[#FFFFFF] dark:bg-[#161F30] border border-[#EBE5D8] dark:border-[#232E42] shadow-warm-md">
+          {/* Left Column: Sticky Interactive Pipeline Visualizer */}
+          <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-4">
+            <div className="p-5 sm:p-6 rounded-xl bg-[#FFFFFF] dark:bg-[#161F30] border border-[#EBE5D8] dark:border-[#232E42] shadow-sm">
               <div className="flex items-center justify-between border-b border-[#EBE5D8] dark:border-[#232E42] pb-3 mb-4">
                 <span className="text-xs font-extrabold uppercase tracking-wider text-[#172033] dark:text-[#F8FAFC]">
                   Active Architecture
                 </span>
-                <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-md bg-[#FFEDE8] dark:bg-[#FFEDE8]/10 text-[#D14328] dark:text-[#F8876B] border border-[#FFD7CD] dark:border-[#FFD7CD]/20">
+                <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0B0F19] text-[#E85D42] dark:text-[#F06A50] border border-[#EBE5D8] dark:border-[#232E42]">
                   STAGE {activeStep.number} / 06
                 </span>
               </div>
 
-              {/* Connected SVG Pipeline Track */}
-              <div className="space-y-3.5 relative">
+              {/* Connected Pipeline Track */}
+              <div className="space-y-2 relative">
                 {PIPELINE_STEPS.map((stg, idx) => {
                   const isActive = activeStepIndex === idx;
                   const isPassed = activeStepIndex > idx;
@@ -297,32 +311,25 @@ export const PipelineStory: React.FC = () => {
                   return (
                     <div
                       key={stg.id}
-                      onClick={() => {
-                        setActiveStepIndex(idx);
-                        activeStepRef.current = idx;
-                        cardRefs.current[idx]?.scrollIntoView({
-                          behavior: "smooth",
-                          block: "center",
-                        });
-                      }}
-                      className={`flex items-center gap-3.5 p-3 sm:p-3.5 rounded-2xl cursor-pointer transition-all duration-200 ${
+                      onClick={() => handleStepClick(idx)}
+                      className={`flex items-center gap-3 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-200 ${
                         isActive
-                          ? "bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#DDD5C4] dark:border-[#334155] shadow-warm-sm translate-x-1"
+                          ? "bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#DDD5C4] dark:border-[#334155] shadow-sm translate-x-1"
                           : "hover:bg-[#FAF8F3]/60 dark:hover:bg-[#0B0F19]/40 border border-transparent"
                       }`}
                     >
                       {/* Node Icon Circle */}
                       <div
-                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center font-bold text-xs sm:text-sm shrink-0 transition-all duration-200 ${
+                        className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 transition-colors duration-150 ${
                           isActive
-                            ? "bg-[#FFFFFF] dark:bg-[#161F30] text-[#E85D42] dark:text-[#F06A50] border-2 border-[#E85D42] dark:border-[#F06A50] shadow-sm scale-105"
+                            ? "bg-[#FFFFFF] dark:bg-[#161F30] text-[#E85D42] dark:text-[#F06A50] border-2 border-[#E85D42] dark:border-[#F06A50] shadow-sm"
                             : isPassed
                             ? "bg-[#DCFCE7] dark:bg-[#14532D]/30 text-[#16A34A] dark:text-[#4ADE80] border border-[#BBF7D0] dark:border-[#14532D]"
                             : "bg-[#FAF8F3] dark:bg-[#0B0F19] text-[#8B95A5] dark:text-[#64748B] border border-[#EBE5D8] dark:border-[#232E42]"
                         }`}
                       >
                         {isPassed ? (
-                          <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#16A34A] dark:text-[#4ADE80]" />
+                          <CheckCircle2 className="w-4 h-4 text-[#16A34A] dark:text-[#4ADE80]" />
                         ) : (
                           stg.number
                         )}
@@ -330,36 +337,34 @@ export const PipelineStory: React.FC = () => {
 
                       {/* Node Label */}
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between">
-                          <span
-                            className={`text-xs sm:text-sm font-bold truncate ${
-                              isActive ? "text-[#172033] dark:text-[#F8FAFC]" : "text-[#5A6478] dark:text-[#94A3B8]"
-                            }`}
-                          >
-                            {stg.title}
-                          </span>
-                        </div>
+                        <span
+                          className={`text-xs sm:text-sm font-bold truncate block ${
+                            isActive ? "text-[#172033] dark:text-[#F8FAFC]" : "text-[#5A6478] dark:text-[#94A3B8]"
+                          }`}
+                        >
+                          {stg.title}
+                        </span>
                         <span className="text-[11px] text-[#8B95A5] dark:text-[#64748B] block truncate font-medium">
                           {stg.subtitle}
                         </span>
                       </div>
 
                       {isActive && (
-                        <span className="h-2.5 w-2.5 rounded-full bg-[#E85D42] dark:bg-[#F06A50] animate-pulse shrink-0" />
+                        <span className="h-2 w-2 rounded-full bg-[#E85D42] dark:bg-[#F06A50] shrink-0" />
                       )}
                     </div>
                   );
                 })}
               </div>
 
-              {/* Retrieval Chunk Selection Visualizer (Section 47) */}
-              <div className="mt-6 pt-5 border-t border-[#EBE5D8] dark:border-[#232E42]">
-                <span className="block text-[11px] sm:text-xs font-bold text-[#5A6478] dark:text-[#94A3B8] mb-2.5">
+              {/* Retrieval Chunk Selection Visualizer */}
+              <div className="mt-5 pt-4 border-t border-[#EBE5D8] dark:border-[#232E42]">
+                <span className="block text-[11px] font-bold text-[#5A6478] dark:text-[#94A3B8] mb-2">
                   Retrieval Selection Visualizer:
                 </span>
                 <div className="grid grid-cols-2 gap-2 text-center text-[10px] sm:text-xs font-mono">
                   <div
-                    className={`p-2 sm:p-2.5 rounded-xl border transition-all ${
+                    className={`p-2 rounded-lg border transition-colors duration-200 ${
                       activeStepIndex >= 2
                         ? "bg-[#EFF6FF] dark:bg-[#1E3A8A]/30 border-[#BFDBFE] dark:border-[#1E3A8A] text-[#1D4ED8] dark:text-[#93C5FD] font-bold"
                         : "bg-[#FAF8F3] dark:bg-[#0B0F19] border-[#EBE5D8] dark:border-[#232E42] text-[#8B95A5] dark:text-[#64748B]"
@@ -368,7 +373,7 @@ export const PipelineStory: React.FC = () => {
                     Dense Vector Search
                   </div>
                   <div
-                    className={`p-2 sm:p-2.5 rounded-xl border transition-all ${
+                    className={`p-2 rounded-lg border transition-colors duration-200 ${
                       activeStepIndex >= 2
                         ? "bg-[#F0FDFA] dark:bg-[#134E4A]/30 border-[#99F6E4] dark:border-[#134E4A] text-[#0F766E] dark:text-[#5EEAD4] font-bold"
                         : "bg-[#FAF8F3] dark:bg-[#0B0F19] border-[#EBE5D8] dark:border-[#232E42] text-[#8B95A5] dark:text-[#64748B]"
@@ -377,7 +382,7 @@ export const PipelineStory: React.FC = () => {
                     BM25 Keyword Match
                   </div>
                   <div
-                    className={`col-span-2 p-2 sm:p-2.5 rounded-xl border transition-all ${
+                    className={`col-span-2 p-2 rounded-lg border transition-colors duration-200 ${
                       activeStepIndex >= 3
                         ? "bg-[#FEF3C7] dark:bg-[#78350F]/30 border-[#FDE68A] dark:border-[#78350F] text-[#B45309] dark:text-[#FCD34D] font-bold"
                         : "bg-[#FAF8F3] dark:bg-[#0B0F19] border-[#EBE5D8] dark:border-[#232E42] text-[#8B95A5] dark:text-[#64748B]"
@@ -391,7 +396,7 @@ export const PipelineStory: React.FC = () => {
           </div>
 
           {/* Right Column: Prominent Large Storytelling Cards */}
-          <div className="lg:col-span-8 space-y-20 sm:space-y-32 py-6">
+          <div className="lg:col-span-8 space-y-16 sm:space-y-24 pt-4 pb-[38vh]">
             {PIPELINE_STEPS.map((stg, idx) => {
               const isActive = activeStepIndex === idx;
 
@@ -404,49 +409,50 @@ export const PipelineStory: React.FC = () => {
                   style={{
                     willChange: "transform, opacity",
                     transformOrigin: "center center",
+                    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
                   }}
-                  className={`p-8 sm:p-11 md:p-12 rounded-[2rem] bg-[#FFFFFF] dark:bg-[#161F30] border transition-all duration-300 ${
+                  className={`p-7 sm:p-9 md:p-10 rounded-xl bg-[#FFFFFF] dark:bg-[#161F30] border ${
                     isActive
-                      ? "border-[#DDD5C4] dark:border-[#475569] shadow-warm-xl ring-2 ring-[#E85D42]/15 dark:ring-[#F06A50]/15"
-                      : "border-[#EBE5D8] dark:border-[#232E42] shadow-warm-sm"
+                      ? "border-[#DDD5C4] dark:border-[#475569] shadow-md ring-1 ring-[#E85D42]/20 dark:ring-[#F06A50]/20"
+                      : "border-[#EBE5D8] dark:border-[#232E42] shadow-sm"
                   }`}
                 >
-                  <div className="flex items-center justify-between gap-4 mb-6">
-                    <span className={`text-xs sm:text-sm font-bold px-3.5 py-1.5 rounded-lg border ${stg.tagColor}`}>
+                  <div className="flex items-center justify-between gap-4 mb-5">
+                    <span className={`text-xs font-bold px-3 py-1 rounded-md border ${stg.tagColor}`}>
                       STAGE {stg.number} • {stg.badge}
                     </span>
-                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42] flex items-center justify-center shadow-sm shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42] flex items-center justify-center shadow-sm shrink-0">
                       {stg.icon}
                     </div>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl md:text-3.5xl font-extrabold text-[#172033] dark:text-[#F8FAFC] mb-3 tracking-tight leading-snug">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-[#172033] dark:text-[#F8FAFC] mb-3 tracking-tight leading-snug">
                     {stg.title}
                   </h3>
 
-                  <p className="text-sm sm:text-base text-[#5A6478] dark:text-[#94A3B8] leading-relaxed mb-8 font-normal">
+                  <p className="text-sm sm:text-base text-[#5A6478] dark:text-[#94A3B8] leading-relaxed mb-6 font-normal">
                     {stg.description}
                   </p>
 
                   {/* Bullet Highlights */}
-                  <div className="space-y-3.5 mb-8">
+                  <div className="space-y-2.5 mb-6">
                     {stg.details.map((detail, dIdx) => (
-                      <div key={dIdx} className="flex items-start sm:items-center gap-3 text-xs sm:text-sm text-[#2D3748] dark:text-[#CBD5E1]">
-                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#16A34A] dark:text-[#4ADE80] shrink-0 mt-0.5 sm:mt-0" />
+                      <div key={dIdx} className="flex items-start sm:items-center gap-2.5 text-xs sm:text-sm text-[#2D3748] dark:text-[#CBD5E1]">
+                        <CheckCircle2 className="w-4 h-4 text-[#16A34A] dark:text-[#4ADE80] shrink-0 mt-0.5 sm:mt-0" />
                         <span className="font-medium">{detail}</span>
                       </div>
                     ))}
                   </div>
 
                   {/* Technology Badges */}
-                  <div className="flex flex-wrap items-center gap-2 pt-5 border-t border-[#EBE5D8] dark:border-[#232E42]">
+                  <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-[#EBE5D8] dark:border-[#232E42]">
                     <span className="text-xs uppercase font-bold text-[#8B95A5] dark:text-[#64748B] mr-1">
                       Engine:
                     </span>
                     {stg.techPills.map((pill, pIdx) => (
                       <span
                         key={pIdx}
-                        className="px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-[#FAF8F3] dark:bg-[#0B0F19] text-[#5A6478] dark:text-[#94A3B8] border border-[#EBE5D8] dark:border-[#232E42]"
+                        className="px-2.5 py-0.5 rounded-md text-xs font-mono font-semibold bg-[#FAF8F3] dark:bg-[#0B0F19] text-[#5A6478] dark:text-[#94A3B8] border border-[#EBE5D8] dark:border-[#232E42]"
                       >
                         {pill}
                       </span>

@@ -105,5 +105,11 @@
   "howItWorks.step4.desc": "جوابات کو سخت حوالہ گراؤنڈنگ، زیرو ہیلوسینیشن چیکس، خودکار ترجمہ اور صوتی بیان کے ساتھ ترکیب کیا جاتا ہے۔",
   "howItWorks.close": "سمجھ گیا",
   "footer.task": "HH Goa 2026 شارٹ لسٹنگ ٹاسک 2 — آواز سے چلنے والا RAG سسٹم",
-  "footer.dataset": "Indexed Dataset: AI4Bharat MSMARCO-XI (38k+ Indic Chunks)"
+  "footer.dataset": "Indexed Dataset: AI4Bharat MSMARCO-XI (38k+ Indic Chunks)",
+  "pageLanguage": "صفحہ کی زبان",
+  "pageLanguageDesc": "ویب سائٹ کے پورے انٹرفیس، نیویگیشن، سیٹنگز اور دستاویزات کی زبان کو کنٹرول کرتا ہے۔",
+  "voiceLanguage": "آواز کی زبان",
+  "voiceLanguageDesc": "اسپیچ ٹو ٹیکسٹ ریکگنیشن، RAG بازیافت انڈیکس اور صوتی بیان آڈیو کو کنٹرول کرتا ہے۔",
+  "syncLanguage": "صوتی تعامل کے لیے صفحہ کی زبان استعمال کریں۔",
+  "syncLanguageDesc": "جب بھی صفحہ کی زبان تبدیل ہوتی ہے تو آواز کی زبان کو خودکار طور پر مطابقت پذیر بنائیں"
 }

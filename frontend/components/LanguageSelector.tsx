@@ -39,19 +39,19 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   disabled = false,
 }) => {
   return (
-    <div className="flex items-center gap-2 bg-slate-900/80 border border-slate-800 rounded-xl px-3 py-1.5 backdrop-blur-md">
-      <Globe className="w-4 h-4 text-brand-400 shrink-0" />
+    <div className="flex items-center gap-2 bg-[#FFFFFF] dark:bg-[#161F30] border border-[#EBE5D8] dark:border-[#232E42] rounded-lg px-3 py-1.5 shadow-sm text-xs">
+      <Globe className="w-3.5 h-3.5 text-[#E85D42] shrink-0" />
       <select
         value={selectedLanguage}
         onChange={(e) => onLanguageChange(e.target.value)}
         disabled={disabled}
-        className="bg-transparent text-xs sm:text-sm text-slate-200 font-medium focus:outline-none cursor-pointer pr-2"
+        className="bg-transparent text-xs text-[#172033] dark:text-[#F8FAFC] font-medium focus:outline-none cursor-pointer pr-1"
       >
         {SUPPORTED_LANGUAGES.map((lang) => (
           <option
             key={lang.code}
             value={lang.code}
-            className="bg-slate-900 text-slate-100 py-1"
+            className="bg-[#FFFFFF] dark:bg-[#161F30] text-[#172033] dark:text-[#F8FAFC] py-1"
           >
             {lang.name} {lang.code ? `(${lang.nativeName})` : ""}
           </option>

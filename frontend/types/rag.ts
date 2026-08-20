@@ -48,6 +48,7 @@ export interface RAGResponse {
   evidence: EvidenceChunk[];
   latency: LatencyBreakdown;
   execution_trace: string[];
+  audio_base64?: string;
 }
 
 export interface HealthInfo {

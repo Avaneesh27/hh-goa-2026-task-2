@@ -105,5 +105,11 @@
   "howItWorks.step4.desc": "Answers are synthesized with strict citation grounding, zero hallucination checks, automatic translation, and voice narration.",
   "howItWorks.close": "అర్థమైంది",
   "footer.task": "HH గోవా 2026 షార్ట్‌లిస్టింగ్ టాస్క్ 2 — వాయిస్-ఎనేబుల్డ్ RAG సిస్టమ్",
-  "footer.dataset": "సూచిక చేయబడిన డేటాసెట్: AI4Bharat MSMARCO-XI (38k+ ఇండిక్ భాగాలు)"
+  "footer.dataset": "సూచిక చేయబడిన డేటాసెట్: AI4Bharat MSMARCO-XI (38k+ ఇండిక్ భాగాలు)",
+  "pageLanguage": "పేజీ భాష",
+  "pageLanguageDesc": "మొత్తం వెబ్‌సైట్ ఇంటర్‌ఫేస్, నావిగేషన్, సెట్టింగ్‌లు మరియు డాక్యుమెంటేషన్ యొక్క భాషను నియంత్రిస్తుంది.",
+  "voiceLanguage": "వాయిస్ లాంగ్వేజ్",
+  "voiceLanguageDesc": "స్పీచ్-టు-టెక్స్ట్ రికగ్నిషన్, RAG రిట్రీవల్ ఇండెక్స్ మరియు వాయిస్ నేరేషన్ ఆడియోను నియంత్రిస్తుంది.",
+  "syncLanguage": "వాయిస్ ఇంటరాక్షన్ కోసం పేజీ భాషను ఉపయోగించండి",
+  "syncLanguageDesc": "పేజీ భాష మారినప్పుడల్లా వాయిస్ భాషను స్వయంచాలకంగా సమకాలీకరించండి"
 }

@@ -28,10 +28,11 @@ SARVAM_LANG_MAP = {
     "ml": "ml-IN",
     "pa": "pa-IN",
     "or": "od-IN",
-    "as": "as-IN",
-    "ur": "ur-IN",
-    "sa": "sa-IN",
-    "ne": "ne-NP",
+    # Languages not directly enumerated in saarika:v2.5 use auto-detection ("unknown")
+    "as": "unknown",
+    "ur": "unknown",
+    "sa": "unknown",
+    "ne": "unknown",
 }
 
 

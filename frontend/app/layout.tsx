@@ -1,13 +1,31 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { I18nProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
-import { ThemeTransition } from "@/components/ThemeTransition";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FAF8F3" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B0F19" },
+  ],
+};
 
 export const metadata: Metadata = {
   title: "HH Goa 2026 — Voice-Enabled Multilingual Indic RAG",
   description:
     "Low-latency deterministic Voice-Enabled RAG model for Hindi, English, and 14 Indian languages with Sarvam STT, Qdrant, BM25, and MSMARCO-XI.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Voice RAG Studio",
+  },
+  formatDetection: {
+    telephone: false,
+  },
 };
 
 export default function RootLayout({
@@ -25,10 +43,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans bg-[#FAF8F3] dark:bg-[#0B0F19] text-[#172033] dark:text-[#F8FAFC] min-h-screen flex flex-col justify-between selection:bg-[#FFD7CD] selection:text-[#752516] antialiased transition-colors duration-300">
+      <body className="font-sans bg-[#FAF8F3] dark:bg-[#0B0F19] text-[#172033] dark:text-[#F8FAFC] min-h-screen flex flex-col justify-between selection:bg-[#FFD7CD] selection:text-[#752516] antialiased">
         <ThemeProvider>
           <I18nProvider>
-            <ThemeTransition />
             {children}
           </I18nProvider>
         </ThemeProvider>

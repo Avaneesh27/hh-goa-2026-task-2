@@ -70,18 +70,47 @@ class EmbeddingManager:
     def embed_documents(self, documents: List[str], batch_size: int = 64) -> np.ndarray:
         """
         Embeds a batch of document strings for offline ingestion with normalization.
-        Returns a NumPy array of shape (N, dim).
+        Uses CUDA acceleration with automatic error recovery and memory management.
         """
         if not documents:
             return np.empty((0, settings.EMBEDDING_DIM), dtype=np.float32)
 
-        return self.model.encode(
-            documents,
-            batch_size=batch_size,
-            show_progress_bar=True,
-            convert_to_numpy=True,
-            normalize_embeddings=True
-        )
+        safe_batch_size = min(batch_size, 256)
+        if self.device == "cuda":
+            torch.backends.cudnn.benchmark = True
+
+        try:
+            return self.model.encode(
+                documents,
+                batch_size=safe_batch_size,
+                show_progress_bar=False,
+                convert_to_numpy=True,
+                normalize_embeddings=True
+            )
+        except Exception as e:
+            if "cuda" in str(e).lower() or "accelerator" in str(e).lower():
+                print(f"[!] CUDA exception caught: {e}. Clearing cache and recovering model...", flush=True)
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                try:
+                    self.model = SentenceTransformer(self.model_name_or_path, device="cuda")
+                    return self.model.encode(
+                        documents,
+                        batch_size=128,
+                        show_progress_bar=False,
+                        convert_to_numpy=True,
+                        normalize_embeddings=True
+                    )
+                except Exception:
+                    self.model = SentenceTransformer(self.model_name_or_path, device="cpu")
+                    return self.model.encode(
+                        documents,
+                        batch_size=64,
+                        show_progress_bar=False,
+                        convert_to_numpy=True,
+                        normalize_embeddings=True
+                    )
+            raise e
 
 
 # Global singleton instance

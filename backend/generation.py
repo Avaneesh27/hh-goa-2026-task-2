@@ -26,7 +26,12 @@ class AnswerGenerator:
         self.model = model or settings.LLM_MODEL
         self.api_key = api_key or settings.LLM_API_KEY
         self.base_url = settings.LLM_BASE_URL
-        self.timeout_seconds = 15.0
+        self.timeout_seconds = 10.0
+        # Persistent high-performance async client with keep-alive connection pooling
+        self._http_client = httpx.AsyncClient(
+            timeout=httpx.Timeout(self.timeout_seconds, connect=4.0),
+            limits=httpx.Limits(max_keepalive_connections=20, max_connections=50)
+        )
 
     def _build_system_prompt(self, language: str) -> str:
         lang_map = {
@@ -97,7 +102,7 @@ Provide your grounded answer below:"""
                 "provider": "deterministic_fallback"
             }
 
-        # 1. Check for Groq API
+        # 1. Check for Groq API (Ultra-low latency LPU, ~150ms)
         if self.provider == "groq" and self.api_key:
             return await self._call_openai_compatible(
                 url="https://api.groq.com/openai/v1/chat/completions",
@@ -127,7 +132,7 @@ Provide your grounded answer below:"""
                 start_time=start_time
             )
 
-        # 4. Check for Ollama (local)
+        # 4. Check for Ollama (local GPU)
         if self.provider == "ollama":
             url = f"{self.base_url or 'http://localhost:11434'}/api/generate"
             return await self._call_ollama(
@@ -138,7 +143,7 @@ Provide your grounded answer below:"""
                 start_time=start_time
             )
 
-        # 5. Deterministic extractive synthesis fallback (works with zero external API keys offline)
+        # 5. Deterministic extractive synthesis fallback (Instant <5ms offline)
         return self._deterministic_extractive_answer(
             query=query,
             context_text=context_text,
@@ -153,7 +158,7 @@ Provide your grounded answer below:"""
         language: str,
         start_time: float
     ) -> Dict[str, Any]:
-        """Calls Google Gemini API via REST."""
+        """Calls Google Gemini API via persistent REST connection pool."""
         endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={self.api_key}"
         sys_instruction = self._build_system_prompt(language)
         user_prompt = self._build_user_prompt(query, context_text)
@@ -167,28 +172,28 @@ Provide your grounded answer below:"""
                 }
             ],
             "generationConfig": {
-                "temperature": 0.1,
-                "maxOutputTokens": 500
+                "temperature": 0.0,
+                "maxOutputTokens": 150,
+                "stopSequences": ["\n\nUser Question:", "\n\nRetrieved Sources:"]
             }
         }
 
         try:
-            async with httpx.AsyncClient(timeout=self.timeout_seconds) as client:
-                resp = await client.post(endpoint, json=payload)
-                if resp.status_code == 200:
-                    data = resp.json()
-                    candidates = data.get("candidates", [])
-                    if candidates:
-                        text = candidates[0].get("content", {}).get("parts", [{}])[0].get("text", "").strip()
-                        elapsed_ms = (time.perf_counter() - start_time) * 1000
-                        is_abstained = "ABSTAIN" in text.upper() or len(text) < 5
-                        return {
-                            "answer": text,
-                            "is_abstained": is_abstained,
-                            "confidence": 0.94 if not is_abstained else 0.0,
-                            "latency_ms": round(elapsed_ms, 2),
-                            "provider": "gemini"
-                        }
+            resp = await self._http_client.post(endpoint, json=payload)
+            if resp.status_code == 200:
+                data = resp.json()
+                candidates = data.get("candidates", [])
+                if candidates:
+                    text = candidates[0].get("content", {}).get("parts", [{}])[0].get("text", "").strip()
+                    elapsed_ms = (time.perf_counter() - start_time) * 1000
+                    is_abstained = "ABSTAIN" in text.upper() or len(text) < 5
+                    return {
+                        "answer": text,
+                        "is_abstained": is_abstained,
+                        "confidence": 0.94 if not is_abstained else 0.0,
+                        "latency_ms": round(elapsed_ms, 2),
+                        "provider": "gemini"
+                    }
         except Exception as e:
             print(f"[!] Gemini generation error: {e}")
 
@@ -214,25 +219,25 @@ Provide your grounded answer below:"""
                 {"role": "system", "content": self._build_system_prompt(language)},
                 {"role": "user", "content": self._build_user_prompt(query, context_text)}
             ],
-            "temperature": 0.1,
-            "max_tokens": 400
+            "temperature": 0.0,
+            "max_tokens": 150,
+            "stop": ["\n\nUser Question:", "\n\nRetrieved Sources:"]
         }
 
         try:
-            async with httpx.AsyncClient(timeout=self.timeout_seconds) as client:
-                resp = await client.post(url, headers=headers, json=payload)
-                if resp.status_code == 200:
-                    data = resp.json()
-                    content = data["choices"][0]["message"]["content"].strip()
-                    elapsed_ms = (time.perf_counter() - start_time) * 1000
-                    is_abstained = "ABSTAIN" in content.upper()
-                    return {
-                        "answer": content,
-                        "is_abstained": is_abstained,
-                        "confidence": 0.95 if not is_abstained else 0.0,
-                        "latency_ms": round(elapsed_ms, 2),
-                        "provider": self.provider
-                    }
+            resp = await self._http_client.post(url, headers=headers, json=payload)
+            if resp.status_code == 200:
+                data = resp.json()
+                content = data["choices"][0]["message"]["content"].strip()
+                elapsed_ms = (time.perf_counter() - start_time) * 1000
+                is_abstained = "ABSTAIN" in content.upper()
+                return {
+                    "answer": content,
+                    "is_abstained": is_abstained,
+                    "confidence": 0.95 if not is_abstained else 0.0,
+                    "latency_ms": round(elapsed_ms, 2),
+                    "provider": self.provider
+                }
         except Exception as e:
             print(f"[!] OpenAI/Groq generation error: {e}")
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Zap, Layers, Cpu, Activity } from "lucide-react";
+import { Activity } from "lucide-react";
 import { LatencyBreakdown, RetrievalStats } from "@/types/rag";
 import { useTranslation } from "@/lib/i18n";
 
@@ -32,25 +32,25 @@ export const LatencyMetrics: React.FC<LatencyMetricsProps> = ({
   const totalMs = latency.end_to_end_ms || latency.total_rag_ms || 1;
 
   return (
-    <div className="rounded-3xl p-6 sm:p-7 bg-[#FFFFFF] dark:bg-[#161F30] border border-[#EBE5D8] dark:border-[#232E42] shadow-warm-md transition-all duration-300">
+    <div className="rounded-xl p-6 sm:p-7 bg-[#FFFFFF] dark:bg-[#161F30] border border-[#EBE5D8] dark:border-[#232E42] shadow-sm transition-colors">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[#EBE5D8] dark:border-[#232E42] pb-3 mb-4">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-xl bg-[#FFEDE8] dark:bg-[#FFEDE8]/10 flex items-center justify-center text-[#E85D42] dark:text-[#F8876B]">
-            <Zap className="w-4 h-4" />
+          <div className="w-7 h-7 rounded-lg bg-[#FFEDE8] dark:bg-[#FFEDE8]/10 flex items-center justify-center text-[#E85D42] dark:text-[#F8876B]">
+            <Activity className="w-4 h-4" />
           </div>
           <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#172033] dark:text-[#F8FAFC]">
             {t("latency.title")}
           </h3>
         </div>
-        <span className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#E85D42] dark:text-[#F8876B] px-3 py-1 rounded-full bg-[#FFEDE8] dark:bg-[#FFEDE8]/10 border border-[#FFD7CD] dark:border-[#FFD7CD]/20">
-          ⚡ {latency.end_to_end_ms} ms {t("latency.total")}
+        <span className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#E85D42] dark:text-[#F06A50] px-2.5 py-0.5 rounded-md bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42]">
+          {latency.end_to_end_ms} ms {t("latency.total")}
         </span>
       </div>
 
       {/* Retrieval Counts Banner */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-5">
-        <div className="p-3 rounded-2xl bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42] text-center">
+        <div className="p-3 rounded-lg bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42] text-center">
           <span className="block text-[10px] uppercase font-bold text-[#5A6478] dark:text-[#94A3B8] mb-0.5">
             {t("latency.dense")}
           </span>
@@ -58,7 +58,7 @@ export const LatencyMetrics: React.FC<LatencyMetricsProps> = ({
             {retrieval.dense_count}
           </span>
         </div>
-        <div className="p-3 rounded-2xl bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42] text-center">
+        <div className="p-3 rounded-lg bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42] text-center">
           <span className="block text-[10px] uppercase font-bold text-[#5A6478] dark:text-[#94A3B8] mb-0.5">
             {t("latency.bm25")}
           </span>
@@ -66,7 +66,7 @@ export const LatencyMetrics: React.FC<LatencyMetricsProps> = ({
             {retrieval.bm25_count}
           </span>
         </div>
-        <div className="p-3 rounded-2xl bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42] text-center">
+        <div className="p-3 rounded-lg bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42] text-center">
           <span className="block text-[10px] uppercase font-bold text-[#5A6478] dark:text-[#94A3B8] mb-0.5">
             {t("latency.fused")}
           </span>
@@ -74,7 +74,7 @@ export const LatencyMetrics: React.FC<LatencyMetricsProps> = ({
             {retrieval.fused_count}
           </span>
         </div>
-        <div className="p-3 rounded-2xl bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42] text-center">
+        <div className="p-3 rounded-lg bg-[#FAF8F3] dark:bg-[#0B0F19] border border-[#EBE5D8] dark:border-[#232E42] text-center">
           <span className="block text-[10px] uppercase font-bold text-[#5A6478] dark:text-[#94A3B8] mb-0.5">
             {t("latency.reranked")}
           </span>
@@ -96,7 +96,7 @@ export const LatencyMetrics: React.FC<LatencyMetricsProps> = ({
               </div>
               <div className="w-full h-1.5 rounded-full bg-[#FAF8F3] dark:bg-[#0B0F19] overflow-hidden border border-[#EBE5D8] dark:border-[#232E42]">
                 <div
-                  className={`h-full rounded-full ${stg.color} transition-all duration-500`}
+                  className={`h-full rounded-full ${stg.color} transition-all duration-300`}
                   style={{ width: `${pct}%` }}
                 />
               </div>

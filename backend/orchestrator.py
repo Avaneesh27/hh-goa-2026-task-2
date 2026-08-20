@@ -362,7 +362,8 @@ class RAGOrchestrator:
         retrieval_stats: RetrievalStats,
         evidence: List[EvidenceChunk],
         timer: StageTimer,
-        execution_trace: List[str]
+        execution_trace: List[str],
+        audio_base64: Optional[str] = None
     ) -> RAGResponse:
         latency = timer.get_breakdown()
         return RAGResponse(
@@ -377,7 +378,8 @@ class RAGOrchestrator:
             retrieval=retrieval_stats,
             evidence=evidence,
             latency=latency,
-            execution_trace=execution_trace
+            execution_trace=execution_trace,
+            audio_base64=audio_base64
         )
 
 
