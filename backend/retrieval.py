@@ -63,12 +63,13 @@ class MultilingualTokenizer:
 # 2. BM25 Search Engine
 # =============================================================================
 class BM25SearchEngine:
-    def __init__(self, index_path: Optional[str] = None):
+    def __init__(self, index_path: Optional[str] = None, auto_load: bool = False):
         self.tokenizer = MultilingualTokenizer()
         self.index_path = index_path or settings.BM25_INDEX_PATH
         self.corpus_chunks: List[Dict[str, Any]] = []
         self.bm25: Optional[BM25Okapi] = None
-        self._load_index()
+        if auto_load:
+            self._load_index()
 
     def _load_index(self):
         if os.path.exists(self.index_path):
@@ -78,9 +79,9 @@ class BM25SearchEngine:
                     data = pickle.load(f)
                     self.corpus_chunks = data.get("chunks", [])
                     self.bm25 = data.get("bm25")
-                print(f"[+] Loaded BM25 index ({len(self.corpus_chunks)} chunks) in {(time.perf_counter() - start)*1000:.2f}ms")
+                print(f"[+] Loaded BM25 index ({len(self.corpus_chunks)} chunks) in {(time.perf_counter() - start)*1000:.2f}ms", flush=True)
             except Exception as e:
-                print(f"[!] Warning: Failed to load BM25 index from {self.index_path}: {e}")
+                print(f"[!] Warning: Failed to load BM25 index from {self.index_path}: {e}", flush=True)
                 self.bm25 = None
         else:
             self.bm25 = None
@@ -95,7 +96,7 @@ class BM25SearchEngine:
         else:
             all_chunks = chunks
 
-        print(f"[*] Building BM25 index for {len(all_chunks)} chunks...")
+        print(f"[*] Building BM25 index for {len(all_chunks)} chunks...", flush=True)
         try:
             self.corpus_chunks = all_chunks
             tokenized_corpus = [self.tokenizer.tokenize(c.get("text", "")) for c in all_chunks]
@@ -105,7 +106,7 @@ class BM25SearchEngine:
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
             with open(save_path, "wb") as f:
                 pickle.dump({"chunks": self.corpus_chunks, "bm25": self.bm25}, f)
-            print(f"[+] Built and saved BM25 index ({len(all_chunks)} total chunks) to {save_path} in {(time.perf_counter() - start):.2f}s")
+            print(f"[+] Built and saved BM25 index ({len(all_chunks)} total chunks) to {save_path} in {(time.perf_counter() - start):.2f}s", flush=True)
         except Exception as e:
             print(f"[!] Warning: BM25 monolithic save skipped ({e}). FAISS vector store holds all dense vectors.", flush=True)
 
@@ -116,6 +117,9 @@ class BM25SearchEngine:
         filter_language: Optional[str] = None
     ) -> List[Dict[str, Any]]:
         """Performs BM25 search with optional language filtering."""
+        if not self.bm25 and os.path.exists(self.index_path):
+            self._load_index()
+
         if not self.bm25 or not self.corpus_chunks or not query.strip():
             return []
 
@@ -366,8 +370,11 @@ class FaissLanguageVectorStore:
         else:
             index = faiss.IndexFlatIP(self.dim)
 
-        # Connect SQLite payload store
+        # Connect SQLite payload store with high-performance PRAGMAs
         conn = sqlite3.connect(str(db_file), check_same_thread=False)
+        conn.execute("PRAGMA journal_mode = WAL;")
+        conn.execute("PRAGMA synchronous = NORMAL;")
+        conn.execute("PRAGMA cache_size = 10000;")
         with conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS payloads (
@@ -389,7 +396,7 @@ class FaissLanguageVectorStore:
         self._connections[norm_lang] = conn
         return index, conn
 
-    def add_chunks(self, lang_code: str, chunks: List[Dict[str, Any]], embeddings: np.ndarray):
+    def add_chunks(self, lang_code: str, chunks: List[Dict[str, Any]], embeddings: np.ndarray, save_disk: bool = False):
         """Adds chunks & dense vectors to language FAISS index & SQLite payload table."""
         if not FAISS_AVAILABLE or len(chunks) == 0:
             return
@@ -425,9 +432,17 @@ class FaissLanguageVectorStore:
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, rows)
 
-        # Save index to disk periodically
-        idx_file = self.data_dir / f"faiss_{norm_lang}.index"
-        faiss.write_index(index, str(idx_file))
+        if save_disk:
+            self.save_index_to_disk(norm_lang)
+
+    def save_index_to_disk(self, lang_code: str):
+        """Flushes in-memory FAISS index to disk."""
+        if not FAISS_AVAILABLE:
+            return
+        norm_lang = (lang_code or "hi").lower().strip()
+        if norm_lang in self._indices:
+            idx_file = self.data_dir / f"faiss_{norm_lang}.index"
+            faiss.write_index(self._indices[norm_lang], str(idx_file))
 
     def search(self, query_vector: List[float], top_k: int = 20, filter_language: Optional[str] = None) -> List[Dict[str, Any]]:
         """Executes sub-millisecond cosine similarity search using FAISS."""

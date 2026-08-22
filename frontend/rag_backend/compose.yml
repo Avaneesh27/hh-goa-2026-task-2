@@ -1,0 +1,40 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.13.2
+    restart: unless-stopped
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    ports:
+      - "127.0.0.1:6333:6333"
+      - "127.0.0.1:6334:6334"
+
+  rag-api:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      LEXICAL_DB_PATH: /var/lib/hh-rag/lexical.sqlite3
+    depends_on:
+      - qdrant
+    volumes:
+      - rag_state:/var/lib/hh-rag
+    ports:
+      - "127.0.0.1:8080:8080"
+
+  ingest:
+    build: .
+    profiles: ["ingest"]
+    env_file: .env
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      LEXICAL_DB_PATH: /var/lib/hh-rag/lexical.sqlite3
+    depends_on:
+      - qdrant
+    volumes:
+      - rag_state:/var/lib/hh-rag
+    command: ["python", "-m", "app.ingest", "--source", "parquet", "--batch-size", "128"]
+
+volumes:
+  qdrant_storage:
+  rag_state:

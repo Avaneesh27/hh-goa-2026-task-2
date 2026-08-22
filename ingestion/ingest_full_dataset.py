@@ -251,6 +251,7 @@ class FullDatasetIngestionEngine:
             if processed_so_far % (self.batch_size * 2) == 0 or processed_so_far >= max_rows:
                 print(f"  [{lang_code.upper()}] Rows: {processed_so_far:,}/{max_rows:,} ({processed_so_far/max_rows*100:.1f}%) | "
                       f"Chunks: {total_chunks_indexed:,} | Speed: {rate:.1f} rows/s | ETA: {eta_sec/60:.1f}m", flush=True)
+                faiss_vector_store.save_index_to_disk(lang_code)
                 self.save_checkpoint(shard_path, processed_so_far, total_chunks_indexed, status="in_progress")
 
             if current_row >= max_rows:
@@ -261,6 +262,7 @@ class FullDatasetIngestionEngine:
             print(f"[*] Appending {len(accumulated_bm25_chunks):,} chunks to BM25 index...", flush=True)
             self.bm25_engine.build_index(accumulated_bm25_chunks, save_path=settings.BM25_INDEX_PATH, append=True)
 
+        faiss_vector_store.save_index_to_disk(lang_code)
         self.save_checkpoint(shard_path, max_rows, total_chunks_indexed, status="completed")
         total_shard_time = time.perf_counter() - shard_start_time
         print(f"[✓] Completed {shard_path} in {total_shard_time:.1f}s ({total_chunks_indexed:,} total chunks indexed).", flush=True)

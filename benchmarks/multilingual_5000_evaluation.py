@@ -40,7 +40,7 @@ if sys.stdout.encoding != 'utf-8':
 from backend.config import settings
 from backend.embeddings import EmbeddingManager
 from backend.generation import answer_generator
-
+ 
 EVAL_LANGUAGE_SHARDS = {
     "hi": ("validation/hinval.parquet", "Hindi"),
     "bn": ("validation/benval.parquet", "Bengali"),

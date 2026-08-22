@@ -88,29 +88,31 @@ class EmbeddingManager:
                 normalize_embeddings=True
             )
         except Exception as e:
-            if "cuda" in str(e).lower() or "accelerator" in str(e).lower():
-                print(f"[!] CUDA exception caught: {e}. Clearing cache and recovering model...", flush=True)
+            print(f"[!] Embedding exception caught: {e}. Recovering...", flush=True)
+            try:
                 if torch.cuda.is_available():
                     torch.cuda.empty_cache()
-                try:
-                    self.model = SentenceTransformer(self.model_name_or_path, device="cuda")
-                    return self.model.encode(
-                        documents,
-                        batch_size=128,
-                        show_progress_bar=False,
-                        convert_to_numpy=True,
-                        normalize_embeddings=True
-                    )
-                except Exception:
-                    self.model = SentenceTransformer(self.model_name_or_path, device="cpu")
-                    return self.model.encode(
-                        documents,
-                        batch_size=64,
-                        show_progress_bar=False,
-                        convert_to_numpy=True,
-                        normalize_embeddings=True
-                    )
-            raise e
+            except Exception:
+                pass
+            model_target = "models/msmarco-xi-multilingual-biencoder" if os.path.exists("models/msmarco-xi-multilingual-biencoder") else settings.EMBEDDING_MODEL
+            try:
+                self._model = SentenceTransformer(model_target, device=self.device)
+                return self._model.encode(
+                    documents,
+                    batch_size=min(safe_batch_size, 128),
+                    show_progress_bar=False,
+                    convert_to_numpy=True,
+                    normalize_embeddings=True
+                )
+            except Exception:
+                self._model = SentenceTransformer(model_target, device="cpu")
+                return self._model.encode(
+                    documents,
+                    batch_size=64,
+                    show_progress_bar=False,
+                    convert_to_numpy=True,
+                    normalize_embeddings=True
+                )
 
 
 # Global singleton instance
