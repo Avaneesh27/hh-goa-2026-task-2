@@ -40,7 +40,7 @@ async function startServer() {
   const RAG_BACKEND = process.env.RAG_BACKEND_URL || "http://localhost:8000";
 
   const proxyToBackend = (req: express.Request, res: express.Response) => {
-    const targetUrl = new URL(req.url, RAG_BACKEND);
+    const targetUrl = new URL(req.originalUrl, RAG_BACKEND);
     const options: import("http").RequestOptions = {
       hostname: targetUrl.hostname,
       port: Number(targetUrl.port) || 8000,
