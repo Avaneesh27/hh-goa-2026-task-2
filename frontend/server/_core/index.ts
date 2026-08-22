@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
-import { createServer } from "http";
+import http, { createServer } from "http";
+
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
@@ -8,6 +9,7 @@ import { registerStorageProxy } from "./storageProxy";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -31,7 +33,49 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
-  // Configure body parser with larger size limit for file uploads
+
+  // ── Python RAG Backend Proxy ─────────────────────────────────────────────────
+  // IMPORTANT: Registered BEFORE body parsers so the raw stream is intact
+  // for piping multipart/form-data (voice queries) and JSON to FastAPI.
+  const RAG_BACKEND = process.env.RAG_BACKEND_URL || "http://localhost:8000";
+
+  const proxyToBackend = (req: express.Request, res: express.Response) => {
+    const targetUrl = new URL(req.url, RAG_BACKEND);
+    const options: import("http").RequestOptions = {
+      hostname: targetUrl.hostname,
+      port: Number(targetUrl.port) || 8000,
+      path: targetUrl.pathname + targetUrl.search,
+      method: req.method,
+      headers: { ...req.headers, host: targetUrl.host },
+    };
+    const proxyReq = http.request(options, (proxyRes) => {
+      res.writeHead(proxyRes.statusCode ?? 502, proxyRes.headers);
+      proxyRes.pipe(res, { end: true });
+    });
+    proxyReq.on("error", (err) => {
+      console.error("[RAG proxy error]", err.message);
+      if (!res.headersSent) {
+        res.status(502).json({ error: "RAG backend unavailable", detail: err.message });
+      }
+    });
+    if (req.method !== "GET" && req.method !== "HEAD") {
+      req.pipe(proxyReq, { end: true });
+    } else {
+      proxyReq.end();
+    }
+  };
+
+  // Proxy /health → FastAPI backend
+  app.all("/health", proxyToBackend);
+
+  // Proxy /api/* except /api/trpc → FastAPI backend
+  app.use("/api", (req, res, next) => {
+    if (req.path.startsWith("/trpc")) return next(); // let tRPC handle it
+    proxyToBackend(req, res);
+  });
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  // Configure body parser with larger size limit for file uploads (after proxy)
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   registerStorageProxy(app);
@@ -44,6 +88,7 @@ async function startServer() {
       createContext,
     })
   );
+
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
@@ -70,6 +115,7 @@ async function startServer() {
 
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
+    console.log(`[RAG Proxy] /api/* and /health → ${RAG_BACKEND}`);
   });
 }
 

@@ -521,6 +521,9 @@ h1 em { color: var(--coral-deep); font-style: italic; }
   gap: 1rem;
   padding: 1.35rem 1.45rem;
   border-bottom: 1px solid rgba(255, 253, 247, 0.18);
+  overflow: visible;
+  position: relative;
+  z-index: 10;
 }
 
 .station-id { display: grid; gap: 0.45rem; }
@@ -529,7 +532,7 @@ h1 em { color: var(--coral-deep); font-style: italic; }
 .station-state-dot { width: 0.4rem; height: 0.4rem; background: rgba(255, 253, 247, 0.42); }
 .station-state-dot.live { background: var(--coral); box-shadow: 0 0 0 0.3rem rgba(255, 95, 69, 0.15); animation: statusPulse 1.3s infinite var(--ease-out); }
 
-.language-picker { position: relative; }
+.language-picker { position: relative; z-index: 100; }
 
 .language-trigger {
   display: inline-flex;

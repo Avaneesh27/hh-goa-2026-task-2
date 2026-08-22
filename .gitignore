@@ -8,12 +8,27 @@ venv/
 ENV/
 .pytest_cache/
 reports/*.tmp
-frontend/.next/
+
+# Node / frontend build artifacts — never commit these
+node_modules/
 frontend/node_modules/
+frontend/.next/
 frontend/out/
+frontend/dist/
+frontend-approved-vite/node_modules/
+frontend-approved-vite/dist/
+dist/
+
+# Lock files (optional — keep pnpm-lock if you want reproducible installs)
+# *.lock
+
+# OS / editor
 .git/
 .DS_Store
-*.lock
+.vscode/
+*.swp
+
+# Data / model artifacts
 scratch/
 data/checkpoint_*.json
 data/ingestion_checkpoint.json
@@ -29,4 +44,9 @@ checkpoints/
 models/
 *.pt
 *.safetensors
-*.bin
+
+# Zip archives
+*.zip
+
+# Manus session logs (auto-generated, not source)
+frontend-approved-vite/.manus-logs/
